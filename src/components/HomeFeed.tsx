@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { ThumbsUp, MessageSquare, Bookmark, ArrowRight, UserPlus, CheckCircle2, LayoutGrid, FileText, Target, Wallet } from 'lucide-react';
+import { ThumbsUp, MessageSquare, Bookmark, ArrowRight, UserPlus, CheckCircle2, LayoutGrid, FileText, Target, Wallet, Share2, Image as ImageIcon, Link as LinkIcon, Video, Send } from 'lucide-react';
 
 const mockFeed = [
   {
@@ -15,6 +15,8 @@ const mockFeed = [
     imageUrl: '/post_nanotube.png',
     likes: 142,
     comments: 28,
+    matchScore: 'Matches 4 of your skills',
+    savedCount: '8 researchers saved this',
   },
   {
     id: 2,
@@ -27,6 +29,10 @@ const mockFeed = [
     summary: 'Seeking innovative, low-cost diagnostic tools for rapid field deployment in resource-limited settings. Current solutions require refrigeration and trained technicians, severely limiting reach.',
     tags: ['Diagnostics', 'Global Health', 'Engineering'],
     imageUrl: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=800',
+    likes: 89,
+    comments: 12,
+    matchScore: 'Strategic match for your lab',
+    savedCount: '24 people interested',
   },
   {
     id: 3,
@@ -40,6 +46,10 @@ const mockFeed = [
     deadline: 'Oct 15, 2024',
     maxAward: '$500k',
     imageUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800',
+    likes: 210,
+    comments: 34,
+    matchScore: 'Matches your current project',
+    savedCount: '56 institutions tracking',
   },
   {
     id: 4,
@@ -53,6 +63,8 @@ const mockFeed = [
     likes: 315,
     comments: 42,
     imageUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800',
+    matchScore: 'Highly relevant to your profile',
+    savedCount: '112 citations',
   },
   {
     id: 5,
@@ -65,6 +77,10 @@ const mockFeed = [
     summary: 'Looking for computer vision experts to collaborate on an edge-computing solution for real-time traffic light optimization. Must handle low-visibility conditions and pedestrian tracking.',
     tags: ['Edge AI', 'Computer Vision', 'Smart Cities'],
     imageUrl: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800',
+    likes: 156,
+    comments: 19,
+    matchScore: 'Top 5% Match',
+    savedCount: '8 collaborators applied',
   },
   {
     id: 6,
@@ -78,6 +94,10 @@ const mockFeed = [
     deadline: 'Nov 01, 2024',
     maxAward: '$1.2M',
     imageUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=800',
+    likes: 423,
+    comments: 56,
+    matchScore: 'High Match Probability',
+    savedCount: '201 teams tracking',
   }
 ];
 
@@ -95,6 +115,9 @@ interface HomeFeedProps {
 
 const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
   const [filter, setFilter] = useState('All Content');
+  const [activeComments, setActiveComments] = useState<number | null>(null);
+  const [commentText, setCommentText] = useState('');
+  const [selectedPostType, setSelectedPostType] = useState('Update');
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
@@ -125,6 +148,51 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
 
       {/* Main Feed */}
       <main className="lg:col-span-7 space-y-6">
+        
+        {/* Start a Post Input */}
+        <div className="bg-white border border-secondary/10 rounded-2xl p-4 shadow-sm">
+          <div className="flex gap-4 items-center">
+            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-secondary/10">
+              <img src="/avatar_aris.png" alt="You" className="w-full h-full object-cover" />
+            </div>
+            <input 
+              type="text"
+              placeholder={
+                selectedPostType === 'Paper' ? "Upload a publication or draft..." :
+                selectedPostType === 'Problem' ? "Define a research problem or challenge..." :
+                selectedPostType === 'Media' ? "Share a technical visualization or image..." :
+                "Share an update, open problem, or publication..."
+              }
+              className="flex-1 bg-secondary/5 hover:bg-secondary/10 text-secondary/70 placeholder:text-secondary/40 px-5 py-2.5 rounded-full text-sm font-semibold transition-colors focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/20"
+            />
+          </div>
+          <div className="flex justify-between items-center mt-4 pt-3 border-t border-secondary/5">
+            <div className="flex gap-1">
+              <button 
+                onClick={() => setSelectedPostType(selectedPostType === 'Media' ? 'Update' : 'Media')}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Media' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+              >
+                <ImageIcon className="w-4 h-4" /> Media
+              </button>
+              <button 
+                onClick={() => setSelectedPostType(selectedPostType === 'Paper' ? 'Update' : 'Paper')}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Paper' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+              >
+                <FileText className="w-4 h-4" /> Paper
+              </button>
+              <button 
+                onClick={() => setSelectedPostType(selectedPostType === 'Problem' ? 'Update' : 'Problem')}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Problem' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+              >
+                <Target className="w-4 h-4" /> Problem
+              </button>
+            </div>
+            <button className="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold hover:bg-primary/90 transition-all">
+              Post Update
+            </button>
+          </div>
+        </div>
+
         {mockFeed
           .filter(post => {
             if (filter === 'All Content') return true;
@@ -156,7 +224,18 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             </div>
 
             <div className="cursor-pointer" onClick={() => onViewDetail(post.id)}>
-              <h2 className="text-xl font-bold font-serif mb-2 leading-snug">{post.title}</h2>
+              <h2 className="text-xl font-bold font-serif mb-1 leading-snug">{post.title}</h2>
+              {post.matchScore && (
+                <div className="flex items-center gap-1.5 mb-3">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded">
+                    {post.matchScore}
+                  </span>
+                  <span className="text-[10px] font-bold text-secondary/30">•</span>
+                  <span className="text-[10px] font-bold text-secondary/40">
+                    {post.savedCount}
+                  </span>
+                </div>
+              )}
               <p className="text-sm text-secondary/70 leading-relaxed mb-4">{post.summary}</p>
               
               {post.imageUrl && (
@@ -180,24 +259,72 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl mb-4 border border-secondary/10">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-secondary/40">Deadline</p>
-                  <p className="font-bold">{post.deadline}</p>
+                  <p className="font-bold text-sm">{post.deadline}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-secondary/40">Max Award</p>
-                  <p className="font-bold text-lg">{post.maxAward}</p>
+                  <p className="font-bold text-base text-primary">{post.maxAward}</p>
                 </div>
               </div>
             )}
 
-            {post.type === 'PUBLICATION' && (
-              <div className="flex items-center gap-4 text-sm font-semibold text-secondary/60 pt-2 pb-4 border-t border-secondary/5">
-                <button className="flex items-center gap-1.5 hover:text-primary transition-colors"><ThumbsUp className="w-4 h-4" /> {post.likes}</button>
-                <button className="flex items-center gap-1.5 hover:text-primary transition-colors"><MessageSquare className="w-4 h-4" /> {post.comments}</button>
-                <button className="flex items-center gap-1.5 hover:text-primary transition-colors ml-auto"><Bookmark className="w-4 h-4" /> Save</button>
+            {/* Engagement Bar */}
+            <div className="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-secondary/60 pt-3 border-t border-secondary/5 mb-3">
+              <button className="flex items-center gap-2 hover:text-primary transition-colors group">
+                <ThumbsUp className="w-4 h-4 group-hover:fill-primary/10" /> 
+                <span>{post.likes}</span>
+              </button>
+              <button 
+                onClick={() => setActiveComments(activeComments === post.id ? null : post.id)}
+                className={`flex items-center gap-2 transition-colors group ${activeComments === post.id ? 'text-primary' : 'hover:text-primary'}`}
+              >
+                <MessageSquare className={`w-4 h-4 group-hover:fill-primary/10 ${activeComments === post.id ? 'fill-primary/10' : ''}`} /> 
+                <span>{post.comments}</span>
+              </button>
+              <button className="flex items-center gap-2 hover:text-primary transition-colors group">
+                <Share2 className="w-4 h-4" /> 
+                <span>Share</span>
+              </button>
+              <button className="flex items-center gap-2 hover:text-primary transition-colors group ml-auto">
+                <Bookmark className="w-4 h-4 group-hover:fill-primary/10" /> 
+                <span>Save</span>
+              </button>
+            </div>
+
+            {/* Comment Section */}
+            {activeComments === post.id && (
+              <div className="space-y-4 mb-4 animate-in slide-in-from-top-2 duration-300">
+                <div className="flex gap-3 items-start bg-secondary/[0.02] p-3 rounded-xl border border-secondary/5">
+                  <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-secondary/10">
+                    <img src="/avatar_aris.png" alt="You" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 relative">
+                    <textarea 
+                      placeholder="Write a technical comment..."
+                      className="w-full bg-transparent text-sm focus:outline-none min-h-[40px] pt-1.5 resize-none"
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                    />
+                    <button className="absolute right-0 bottom-0 p-1.5 text-primary hover:scale-110 transition-transform">
+                      <Send className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Mock Comments */}
+                <div className="space-y-3 pl-2">
+                  <div className="flex gap-3 items-start">
+                    <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">M</div>
+                    <div className="flex-1 bg-secondary/5 p-2.5 rounded-2xl rounded-tl-none">
+                      <p className="text-[10px] font-black text-secondary/80 mb-1">Dr. Marcus Chen <span className="font-normal text-secondary/40 ml-1">• 1h ago</span></p>
+                      <p className="text-xs text-secondary/70 leading-relaxed">Impressive structural consistency. Have you considered the impact on cycle stability over 1000+ charges?</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
-            <button className="w-full border border-primary/40 text-primary font-bold text-sm py-2.5 rounded-md hover:bg-primary/5 transition-colors mt-2">
+            <button className="w-full border border-primary/40 text-primary font-bold text-sm py-2.5 rounded-md hover:bg-primary/5 transition-colors">
               {post.type === 'PUBLICATION' ? 'Read Publication' : 
                post.type === 'PROBLEM' ? 'Propose Solution' : 'View Details'}
             </button>
