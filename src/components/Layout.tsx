@@ -12,12 +12,15 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
-  // If path is root (/), auth, or onboarding, consider it unauthenticated/public view
-  const isPublicPage = pathname === '/' || pathname === '/auth' || pathname === '/onboarding';
-  const isAuthenticated = !isPublicPage;
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => setIsTransitioning(false), 1000); // 1s transition
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +30,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // If path is root (/), auth, or onboarding, consider it unauthenticated/public view
+  const isPublicPage = pathname === '/' || pathname === '/auth' || pathname === '/onboarding';
+  const isAuthenticated = !isPublicPage;
+
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20 selection:text-primary">
+      {/* Page Transition Overlay */}
+      {isTransitioning && (
+        <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center animate-in fade-in duration-300">
+          <div className="flex flex-col items-center">
+            <OrbitalLogo className="w-20 h-20 animate-[spin_1.5s_linear_infinite]" />
+            <div className="mt-8 text-secondary/30 text-[10px] font-black uppercase tracking-[0.3em] animate-pulse">
+              Resonating
+            </div>
+          </div>
+        </div>
+      )}
       {/* Navigation */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-white via-white to-primary/[0.08] backdrop-blur-xl border-b-[1.5px] border-secondary/5 ${
