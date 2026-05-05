@@ -20,7 +20,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-secondary antialiased;
+    @apply text-secondary antialiased bg-gradient-to-br from-[#FFF5F2] via-white to-white min-h-screen;
     font-family: var(--font-sans);
   }
   

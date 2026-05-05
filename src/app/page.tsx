@@ -7,7 +7,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 w-full">
         <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] -z-10" />
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[80px] -z-10" />
+        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[80px] -z-10" />
 
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -79,8 +79,8 @@ export default function Home() {
             </div>
 
             <div className="card-premium bg-secondary/[0.02] border border-secondary/10 hover:-translate-y-2 hover:shadow-elevated transition-all">
-              <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8">
-                <LayoutDashboard className="w-8 h-8 text-accent" strokeWidth={1.5} />
+              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8">
+                <LayoutDashboard className="w-8 h-8 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-bold mb-4 font-serif">Problem Boards</h3>
               <p className="text-secondary/70 leading-relaxed">
