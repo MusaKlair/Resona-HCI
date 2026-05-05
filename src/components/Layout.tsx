@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search, Bell } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import OrbitalLogo from './OrbitalLogo';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -36,8 +37,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Resona Logo" className="h-10 w-auto object-contain rounded-lg shadow-sm" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <OrbitalLogo className="h-10 w-10 transition-transform duration-700 group-hover:rotate-180" />
             <span className="text-2xl font-bold font-serif tracking-tight">Resona</span>
           </Link>
 
@@ -186,7 +187,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
               <div className="col-span-1 md:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <img src="/logo.png" alt="Resona Logo" className="h-6 w-auto object-contain rounded-md shadow-sm" />
+                  <OrbitalLogo className="h-6 w-6" />
                   <span className="text-lg font-bold font-serif tracking-tight">Resona</span>
                 </div>
                 <p className="text-secondary/60 text-xs leading-relaxed">
