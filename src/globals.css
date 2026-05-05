@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.ts";
+
+@theme {
+  --font-serif: "Canela", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-primary: #EE7052;
+  --color-secondary: #0A1128;
+  --color-background: #FFFFFF;
+  --color-accent: #94A3B8;
+  
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
+  
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  --shadow-elevated: 0 20px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-secondary antialiased;
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .card-premium {
+    @apply bg-white rounded-4xl border border-white/20 shadow-soft p-8 transition-all hover:shadow-elevated hover:scale-[1.01];
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white px-8 py-3 rounded-md font-bold transition-all hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-lg shadow-primary/20;
+  }
+  
+  .btn-outline {
+    @apply border border-secondary/20 text-secondary px-8 py-3 rounded-md font-bold transition-all hover:bg-secondary/5 hover:scale-105 active:scale-95;
+  }
+}
