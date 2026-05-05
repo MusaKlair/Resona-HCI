@@ -118,12 +118,28 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
   const [activeComments, setActiveComments] = useState<number | null>(null);
   const [commentText, setCommentText] = useState('');
   const [selectedPostType, setSelectedPostType] = useState('Update');
+  const [savedPosts, setSavedPosts] = useState<Set<number>>(new Set());
+  const [showSaveToast, setShowSaveToast] = useState(false);
+
+  const handleSave = (id: number) => {
+    setSavedPosts(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+        setShowSaveToast(true);
+        setTimeout(() => setShowSaveToast(false), 3000);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Sidebar - Filters */}
-      <aside className="lg:col-span-2 space-y-6">
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
         <h3 className="font-black font-serif text-lg tracking-tight">Feed Filters</h3>
         <nav className="flex flex-col gap-1">
           {[
@@ -285,9 +301,12 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 <Share2 className="w-4 h-4" /> 
                 <span>Share</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-primary transition-colors group ml-auto">
-                <Bookmark className="w-4 h-4 group-hover:fill-primary/10" /> 
-                <span>Save</span>
+              <button 
+                onClick={() => handleSave(post.id)}
+                className={`flex items-center gap-2 transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'hover:text-primary'}`}
+              >
+                <Bookmark className={`w-4 h-4 group-hover:fill-primary/10 ${savedPosts.has(post.id) ? 'fill-primary' : ''}`} /> 
+                <span>{savedPosts.has(post.id) ? 'Saved' : 'Save'}</span>
               </button>
             </div>
 
@@ -333,7 +352,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
       </main>
 
       {/* Right Sidebar */}
-      <aside className="lg:col-span-3 space-y-10">
+      <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         <div>
           <h3 className="font-black text-xs uppercase tracking-widest text-secondary/50 mb-4">Trending Tags</h3>
           <div className="flex flex-wrap gap-2">
@@ -367,6 +386,18 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
           </div>
         </div>
       </aside>
+
+      {/* Save Toast Notification */}
+      {showSaveToast && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-in slide-in-from-bottom-4 duration-500">
+          <div className="bg-secondary text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10 ring-4 ring-primary/5">
+            <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+              <CheckCircle2 className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-[11px] font-black uppercase tracking-widest">Saved to Workspace</span>
+          </div>
+        </div>
+      )}
 
     </div>
   );
