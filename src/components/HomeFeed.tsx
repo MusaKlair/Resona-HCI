@@ -20,24 +20,64 @@ const mockFeed = [
     id: 2,
     type: 'PROBLEM',
     author: 'Global Health Initiative',
-    avatar: '',
+    avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=GlobalHealth',
     field: 'Public Health',
     time: '5h ago',
     title: 'Scalable Diagnostics for Rural Endemic Pathogens',
     summary: 'Seeking innovative, low-cost diagnostic tools for rapid field deployment in resource-limited settings. Current solutions require refrigeration and trained technicians, severely limiting reach.',
     tags: ['Diagnostics', 'Global Health', 'Engineering'],
+    imageUrl: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 3,
     type: 'GRANT',
     author: 'NSF Grants Board',
-    avatar: '',
+    avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=NSF',
     field: 'Funding',
     time: '1d ago',
     title: 'Advanced Computational Methods in Climate Modeling',
     summary: 'Funding available for interdisciplinary teams developing next-generation predictive models for localized climate anomalies. Total pool: $2.5M.',
     deadline: 'Oct 15, 2024',
     maxAward: '$500k',
+    imageUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 4,
+    type: 'PUBLICATION',
+    author: 'Elena Rostova',
+    avatar: '/avatar_elena.png',
+    field: 'Bioinformatics',
+    time: '1d ago',
+    title: 'Predictive Protein Folding using Graph Neural Networks',
+    summary: 'We propose a novel graph-based approach to protein folding prediction that outperforms current state-of-the-art models in edge-case structural anomalies. Our dataset and training weights are open-sourced.',
+    likes: 315,
+    comments: 42,
+    imageUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 5,
+    type: 'PROBLEM',
+    author: 'UrbanTech Solutions',
+    avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=UrbanTech',
+    field: 'Urban Planning',
+    time: '2d ago',
+    title: 'Edge AI for Real-Time Traffic Flow Optimization',
+    summary: 'Looking for computer vision experts to collaborate on an edge-computing solution for real-time traffic light optimization. Must handle low-visibility conditions and pedestrian tracking.',
+    tags: ['Edge AI', 'Computer Vision', 'Smart Cities'],
+    imageUrl: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 6,
+    type: 'GRANT',
+    author: 'Department of Energy',
+    avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=DOE',
+    field: 'Funding',
+    time: '3d ago',
+    title: 'Renewable Energy Transition Seed Fund',
+    summary: 'Early-stage funding for startups and research teams developing grid-scale storage solutions for solar and wind energy. Emphasis on non-lithium alternatives.',
+    deadline: 'Nov 01, 2024',
+    maxAward: '$1.2M',
+    imageUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=800',
   }
 ];
 
@@ -64,10 +104,10 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
         <h3 className="font-black font-serif text-lg tracking-tight">Feed Filters</h3>
         <nav className="flex flex-col gap-1">
           {[
-            { name: 'All Content', icon: <LayoutGrid className="w-4 h-4" /> },
-            { name: 'Publications', icon: <FileText className="w-4 h-4" /> },
-            { name: 'Problems', icon: <Target className="w-4 h-4" /> },
-            { name: 'Grants', icon: <Wallet className="w-4 h-4" /> }
+            { name: 'All Content', icon: <LayoutGrid className="w-4 h-4 text-primary" /> },
+            { name: 'Publications', icon: <FileText className="w-4 h-4 text-primary" /> },
+            { name: 'Problems', icon: <Target className="w-4 h-4 text-primary" /> },
+            { name: 'Grants', icon: <Wallet className="w-4 h-4 text-primary" /> }
           ].map(item => (
             <button 
               key={item.name}
@@ -85,7 +125,15 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
 
       {/* Main Feed */}
       <main className="lg:col-span-7 space-y-6">
-        {mockFeed.map(post => (
+        {mockFeed
+          .filter(post => {
+            if (filter === 'All Content') return true;
+            if (filter === 'Publications') return post.type === 'PUBLICATION';
+            if (filter === 'Problems') return post.type === 'PROBLEM';
+            if (filter === 'Grants') return post.type === 'GRANT';
+            return true;
+          })
+          .map(post => (
           <div key={post.id} className="bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all">
             
             <div className="flex justify-between items-start mb-4">
@@ -142,24 +190,17 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             )}
 
             {post.type === 'PUBLICATION' && (
-              <div className="flex items-center gap-4 text-sm font-semibold text-secondary/60 pt-2 border-t border-secondary/5">
+              <div className="flex items-center gap-4 text-sm font-semibold text-secondary/60 pt-2 pb-4 border-t border-secondary/5">
                 <button className="flex items-center gap-1.5 hover:text-primary transition-colors"><ThumbsUp className="w-4 h-4" /> {post.likes}</button>
                 <button className="flex items-center gap-1.5 hover:text-primary transition-colors"><MessageSquare className="w-4 h-4" /> {post.comments}</button>
                 <button className="flex items-center gap-1.5 hover:text-primary transition-colors ml-auto"><Bookmark className="w-4 h-4" /> Save</button>
               </div>
             )}
 
-            {post.type === 'PROBLEM' && (
-              <button className="w-full bg-primary text-white font-bold text-sm py-2.5 rounded-md hover:bg-primary/90 transition-colors mt-2 shadow-sm">
-                Propose Solution
-              </button>
-            )}
-
-            {post.type === 'GRANT' && (
-              <button className="w-full border border-secondary/20 text-secondary font-bold text-sm py-2.5 rounded-md hover:bg-secondary/5 transition-colors mt-2">
-                View Details
-              </button>
-            )}
+            <button className="w-full border border-primary/40 text-primary font-bold text-sm py-2.5 rounded-md hover:bg-primary/5 transition-colors mt-2">
+              {post.type === 'PUBLICATION' ? 'Read Publication' : 
+               post.type === 'PROBLEM' ? 'Propose Solution' : 'View Details'}
+            </button>
           </div>
         ))}
       </main>
@@ -191,7 +232,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                     <p className="text-xs text-secondary/50">{peer.field}</p>
                   </div>
                 </div>
-                <button className="border border-secondary/20 text-secondary font-bold text-xs px-3 py-1 rounded-md hover:bg-secondary/5 transition-colors">
+                <button className="border border-primary/40 text-primary font-bold text-xs px-3 py-1 rounded-md hover:bg-primary/5 transition-colors">
                   Connect
                 </button>
               </div>

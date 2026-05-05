@@ -44,7 +44,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-10">
             {isAuthenticated ? (
-              ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace', 'Profile'].map((item) => {
+              ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace'].map((item) => {
                 const viewMap: Record<string, string> = {
                   'Home': '/home',
                   'Match Hub': '/matching',
@@ -82,9 +82,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="hidden md:flex items-center gap-4">
             {isAuthenticated ? (
               <>
-                <button className="p-2.5 rounded-full hover:bg-secondary/5 transition-colors">
-                  <Search className="w-5 h-5 text-secondary/60" />
-                </button>
+                <div className="relative group">
+                  <Search className="w-4 h-4 text-secondary/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    className="pl-9 pr-4 py-2 bg-secondary/5 border border-transparent rounded-full text-sm focus:outline-none focus:border-primary/30 focus:bg-white transition-all w-40 focus:w-64"
+                  />
+                </div>
                 <Link 
                   href="/mentorship"
                   className="p-2.5 rounded-full hover:bg-secondary/5 transition-colors relative"
@@ -93,9 +98,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </Link>
                 <Link 
                   href="/upload"
-                  className="bg-primary text-white text-sm font-bold px-6 py-2.5 rounded-md hover:bg-primary/90 transition-colors shadow-sm"
+                  className="bg-primary text-white text-sm font-bold px-6 py-2.5 rounded-md hover:bg-primary/90 transition-colors shadow-sm mx-2"
                 >
                   Create / Post
+                </Link>
+                <Link href="/profile" className="w-10 h-10 rounded-full overflow-hidden border-2 border-transparent hover:border-primary transition-all shadow-sm">
+                  <img src="/avatar_aris.png" alt="Profile" className="w-full h-full object-cover" />
                 </Link>
               </>
             ) : (
@@ -123,7 +131,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-secondary/5 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 duration-300">
             {isAuthenticated ? (
-              ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace', 'Profile'].map((item) => {
+              ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace'].map((item) => {
                 const viewMap: Record<string, string> = {
                   'Home': '/home',
                   'Match Hub': '/matching',

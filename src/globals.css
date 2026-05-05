@@ -40,6 +40,6 @@
   }
   
   .btn-outline {
-    @apply border border-secondary/20 text-secondary px-8 py-3 rounded-md font-bold transition-all hover:bg-secondary/5 hover:scale-105 active:scale-95;
+    @apply border border-primary/40 text-primary px-8 py-3 rounded-md font-bold transition-all hover:bg-primary/5 hover:scale-105 active:scale-95;
   }
 }
