@@ -25,105 +25,224 @@ const managedContent = [
 
 const ProfileDashboard: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in duration-500">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 pt-0 pb-12 animate-in fade-in duration-500">
       
-      {/* Main Content Column */}
-      <div className="lg:col-span-8 space-y-16">
-        
-        {/* Profile Header */}
-        <section className="flex flex-col md:flex-row gap-8">
-          <div className="w-48 h-48 bg-secondary/5 border-2 border-secondary/10 rounded-full flex items-center justify-center shrink-0">
-             <span className="text-secondary/30 font-black text-4xl">AK</span>
+      <section className="relative bg-white border border-secondary/10 rounded-t-3xl overflow-hidden shadow-sm mb-12">
+        {/* Professional Research Banner - Reliable Source */}
+        <div className="h-64 w-full relative overflow-hidden bg-secondary">
+          <img 
+            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070" 
+            alt="Research Banner" 
+            className="w-full h-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/80 to-primary/30 mix-blend-multiply" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
+
+        <div className="px-8 md:px-12 pb-12 flex flex-col md:flex-row gap-8 -mt-20 relative z-10">
+          {/* Circular Professional Profile Picture */}
+          <div className="w-48 h-48 bg-white border-8 border-white rounded-full overflow-hidden shadow-2xl shrink-0">
+             <img src="/avatar_sarah.png" alt="Dr. Arya Khan" className="w-full h-full object-cover scale-110" />
           </div>
           
-          <div className="flex-1 space-y-6">
-            <div className="flex justify-between items-start">
-              <div>
-                <h1 className="text-4xl font-black font-serif uppercase tracking-tight flex items-center gap-3">
+          <div className="flex-1 pt-24 space-y-6">
+            <div className="flex flex-col xl:flex-row justify-between items-start gap-8">
+              <div className="space-y-3">
+                <h1 className="text-5xl font-black font-serif tracking-tight text-secondary flex items-center gap-3">
                   Dr. Arya Khan
-                  <ShieldCheck className="w-8 h-8 text-primary" />
+                  <ShieldCheck className="w-10 h-10 text-primary" />
                 </h1>
-                <a href="#" className="inline-flex items-center gap-2 mt-2 px-3 py-1 bg-secondary/5 rounded-md text-xs font-bold text-secondary/60 hover:text-secondary transition-colors">
-                  <LinkIcon className="w-3 h-3" /> orcid.org/0000-0002-1825-0097
-                </a>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                  <p className="text-sm font-bold text-secondary/50">Lead Researcher, Cognitive Architecture Institute</p>
+                  <span className="hidden sm:block text-secondary/20">•</span>
+                  <a href="#" className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline">
+                    orcid.org/0000-0002-1825-0097
+                  </a>
+                </div>
               </div>
               
-              <div className="text-center p-4 bg-white border-2 border-secondary rounded-xl shadow-[4px_4px_0px_rgba(27,27,27,1)]">
-                <div className="text-5xl font-black font-serif leading-none text-secondary">850</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-secondary/60 mt-2">Credibility Index</div>
-                <div className="text-xs font-bold text-primary mt-1">TOP 2% GLOBALLY</div>
+              {/* Profile Actions - Self View */}
+              <div className="flex gap-3 w-full sm:w-auto">
+                <button className="flex-1 sm:flex-none bg-secondary/5 border border-secondary/20 text-secondary px-8 py-2.5 rounded-md font-bold text-sm hover:bg-secondary/10 transition-all flex items-center gap-2">
+                  Edit Profile
+                </button>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {['QUANTUM ETHICS', 'NEURAL MAPPING', 'PYTORCH', 'OPEN SCIENCE'].map(tag => (
-                <span key={tag} className="px-3 py-1 bg-muted rounded-full text-[10px] font-bold uppercase tracking-wider text-secondary/70">
+              {['Quantum Ethics', 'Neural Mapping', 'PyTorch', 'Open Science'].map(tag => (
+                <span key={tag} className="px-3 py-1 bg-secondary/5 border border-secondary/5 rounded-full text-[10px] font-black uppercase tracking-wider text-secondary/70">
                   {tag}
                 </span>
               ))}
             </div>
 
-            <p className="text-lg text-secondary/80 leading-relaxed max-w-2xl">
-              Lead Researcher at the Institute for Cognitive Architecture. Specializing in the intersection of biological neural paths and synthetic decision-making frameworks.
+            <p className="text-xl text-secondary/70 leading-relaxed max-w-3xl font-medium">
+              Pioneering the intersection of biological neural paths and synthetic decision-making frameworks. Specializing in ethical AI deployment and decentralized peer review systems.
             </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Contribution Graph */}
-        <section>
-          <div className="flex items-center justify-between border-b-4 border-secondary pb-4 mb-8">
-            <h2 className="text-2xl font-black uppercase tracking-tight">Contribution Graph</h2>
-            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest border border-secondary/20 text-secondary px-4 py-2 rounded-md hover:bg-secondary/5 transition-colors">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Main Content Column */}
+        <div className="lg:col-span-8 space-y-16">
+          
+          {/* Credibility Index & Quick Stats */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-soft flex items-center justify-between group transition-all">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 mb-1">Current Standing</div>
+                <div className="text-4xl font-black font-serif text-secondary mb-1">850</div>
+                <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Top 2% Globally</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 mb-1">Metric</div>
+                <div className="text-sm font-bold text-secondary">Credibility Index</div>
+                <div className="text-[10px] font-bold text-secondary/30 mt-1 italic">Verified</div>
+              </div>
+            </div>
+            
+            <div className="p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-soft flex items-center justify-between group transition-all">
+              <div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 mb-1">Academic Reach</div>
+                <div className="text-4xl font-black font-serif text-secondary mb-1">14.2k</div>
+                <div className="text-xs font-bold text-secondary/60 uppercase tracking-widest">Global Citations</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 mb-1">Growth</div>
+                <div className="text-sm font-bold text-primary">+12% YoY</div>
+                <div className="text-[10px] font-bold text-secondary/30 mt-1 italic">Last 12 Months</div>
+              </div>
+            </div>
+          </section>
+
+        {/* Contribution Graph - Unified Card */}
+        <section className="bg-white border border-[#E5E7EB] rounded-2xl shadow-soft overflow-hidden">
+          <div className="p-8 border-b border-secondary/10 flex items-center justify-between">
+            <h2 className="text-xl font-black font-serif tracking-tight text-secondary">Contribution Graph</h2>
+            <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-secondary/20 text-secondary px-4 py-2 rounded-md hover:bg-secondary/5 transition-colors">
               <Download className="w-4 h-4" /> Export PDF
             </button>
           </div>
           
-          <div className="bg-white border-2 border-secondary/10 rounded-2xl p-8 h-80 relative overflow-hidden group">
-            {/* Mock Graph Visualization */}
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-            
-            <div className="absolute top-8 left-8 bg-white border border-secondary/10 p-3 rounded shadow-sm z-10">
-              <div className="text-[8px] font-mono text-secondary/60">SYS_REF: NODE_CLUSTER_041</div>
-              <div className="text-[8px] font-mono text-secondary/60">ACTIVE_NODES: 1,402</div>
-              <div className="text-[8px] font-mono text-primary">INTEGRITY: 99.4%</div>
+          <div className="p-8 relative group bg-white">
+            {/* Summary Metrics */}
+            <div className="mb-8">
+              <div className="text-xl font-bold text-secondary tracking-tight">412 Contributions in the last year</div>
+              <div className="text-xs text-secondary/40 font-medium">Includes publications, peer reviews, and problem-solving.</div>
             </div>
 
-            {/* SVG Graph Mockup */}
-            <svg className="w-full h-full absolute inset-0 z-0" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice">
-              <path d="M 200 150 L 400 200 L 600 120 L 750 180" fill="none" stroke="#1B1B1B" strokeWidth="2" strokeDasharray="4 4" className="opacity-30" />
-              <path d="M 400 200 L 500 280" fill="none" stroke="#1B1B1B" strokeWidth="2" className="opacity-30" />
-              <circle cx="200" cy="150" r="8" fill="#1B1B1B" />
-              <circle cx="400" cy="200" r="14" fill="#1B1B1B" />
-              <circle cx="600" cy="120" r="10" fill="#1B1B1B" />
-              <circle cx="750" cy="180" r="6" fill="#1B1B1B" />
-              <circle cx="500" cy="280" r="6" fill="#1B1B1B" />
-              <ellipse cx="480" cy="210" rx="20" ry="8" fill="#EE7052" className="opacity-20" />
-            </svg>
+            {/* Heatmap Matrix - Responsive & Edge-to-Edge */}
+            <div className="w-full">
+                {/* Month Labels */}
+                <div className="flex justify-between mb-3 text-[9px] font-black text-secondary/20 uppercase tracking-[0.2em] px-1">
+                  {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month) => (
+                    <div key={month}>{month}</div>
+                  ))}
+                </div>
+
+                {/* Grid Container with Day Labels */}
+                <div className="flex gap-3">
+                  {/* Day Labels */}
+                  <div className="flex flex-col gap-[3px] text-[9px] font-bold text-secondary/30 mt-[2px]">
+                    <div className="h-[10px] flex items-center"></div>
+                    <div className="h-[10px] flex items-center">Mon</div>
+                    <div className="h-[10px] flex items-center"></div>
+                    <div className="h-[10px] flex items-center">Wed</div>
+                    <div className="h-[10px] flex items-center"></div>
+                    <div className="h-[10px] flex items-center">Fri</div>
+                    <div className="h-[10px] flex items-center"></div>
+                  </div>
+
+                  <div className="flex flex-col gap-[3px] flex-1">
+                    {[...Array(7)].map((_, day) => (
+                      <div key={day} className="flex gap-[3px] w-full">
+                        {[...Array(52)].map((_, week) => {
+                          const randomSeed = Math.random();
+                          let level = 0;
+                          let contributions = 0;
+                          
+                          if (randomSeed > 0.9) { level = 3; contributions = Math.floor(Math.random() * 5) + 6; }
+                          else if (randomSeed > 0.75) { level = 2; contributions = Math.floor(Math.random() * 3) + 3; }
+                          else if (randomSeed > 0.5) { level = 1; contributions = Math.floor(Math.random() * 2) + 1; }
+                          
+                          if ((week > 10 && week < 14) || (week > 25 && week < 29) || (week > 40 && week < 44)) {
+                            if (randomSeed > 0.3) { level = Math.max(level, 2); contributions = Math.max(contributions, 4); }
+                            if (randomSeed > 0.6) { level = 3; contributions = Math.max(contributions, 7); }
+                          }
+
+                          const colors = [
+                            'bg-[#F3F4F6]',          // L0: Empty
+                            'bg-primary/20',         // L1: Low
+                            'bg-primary/60',         // L2: Medium
+                            'bg-primary'             // L3: High
+                          ];
+
+                          // Date Calculation Logic
+                          const startDate = new Date(2023, 4, 1); // Start from May 1st
+                          const currentDate = new Date(startDate);
+                          currentDate.setDate(startDate.getDate() + (week * 7) + day);
+                          const dateString = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                          
+                          return (
+                            <div 
+                              key={`${week}-${day}`} 
+                              className={`flex-1 aspect-square min-w-[4px] rounded-[1.5px] ${colors[level]} transition-all hover:scale-150 hover:z-10 cursor-pointer relative group/cell`}
+                            >
+                              {/* Detailed Tooltip Popover */}
+                              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-max opacity-0 group-hover/cell:opacity-100 transition-all duration-300 pointer-events-none translate-y-2 group-hover/cell:translate-y-0">
+                                <div className="bg-[#1B1B1F] text-white text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap">
+                                  {contributions > 0 ? `${contributions} contributions` : 'No contributions'} on {dateString}
+                                </div>
+                                {/* Tooltip Arrow */}
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-[4px] border-transparent border-t-[#1B1B1F]" />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+            </div>
+
+            {/* Legend - Restored Peach Scale */}
+            <div className="flex items-center justify-end gap-3 mt-8">
+              <span className="text-[9px] font-black text-secondary/30 uppercase tracking-widest">Less Activity</span>
+              <div className="flex gap-[3px]">
+                <div className="w-3 h-3 rounded-[1.5px] bg-[#F3F4F6]" />
+                <div className="w-3 h-3 rounded-[1.5px] bg-primary/20" />
+                <div className="w-3 h-3 rounded-[1.5px] bg-primary/60" />
+                <div className="w-3 h-3 rounded-[1.5px] bg-primary" />
+              </div>
+              <span className="text-[9px] font-black text-secondary/30 uppercase tracking-widest">More</span>
+            </div>
           </div>
         </section>
 
         {/* Managed Content */}
         <section>
-          <div className="border-b-4 border-secondary pb-4 mb-8">
-            <h2 className="text-2xl font-black uppercase tracking-tight">Managed Content & Publications</h2>
+          <div className="border-b border-secondary/10 pb-4 mb-8">
+            <h2 className="text-xl font-black font-serif tracking-tight text-secondary">Managed Content & Publications</h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {managedContent.map(item => (
-              <div key={item.id} className="bg-white border-2 border-secondary/10 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 rounded-xl hover:border-secondary/30 transition-colors">
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold font-serif mb-2">{item.title}</h3>
-                  <p className="text-sm text-secondary/60">{item.desc}</p>
+              <div key={item.id} className="bg-white border border-secondary/10 p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 rounded-2xl hover:shadow-soft transition-all group">
+                <div className="flex-1 space-y-2">
+                  <h3 className="text-xl font-bold font-serif text-secondary group-hover:text-primary transition-colors leading-snug">{item.title}</h3>
+                  <p className="text-sm text-secondary/60 leading-relaxed max-w-3xl">{item.desc}</p>
                 </div>
                 
-                <div className="flex border-2 border-secondary rounded-lg overflow-hidden shrink-0">
+                <div className="flex bg-secondary/5 p-1 rounded-xl overflow-hidden shrink-0 border border-secondary/5">
                   {['PUBLIC', 'VERIFIED', 'PRIVATE'].map(priv => (
                     <button 
                       key={priv}
-                      className={`px-4 py-2 text-[10px] font-black uppercase tracking-widest transition-colors ${
+                      className={`px-5 py-2 text-[9px] font-black uppercase tracking-[0.15em] rounded-lg transition-all ${
                         item.privacy === priv 
-                          ? 'bg-primary text-white' 
-                          : 'bg-white text-secondary hover:bg-secondary/5'
+                          ? 'bg-secondary text-white shadow-sm' 
+                          : 'text-secondary/40 hover:text-secondary hover:bg-white/50'
                       }`}
                     >
                       {priv}
@@ -137,20 +256,53 @@ const ProfileDashboard: React.FC = () => {
 
       </div>
 
-      {/* Right Sidebar */}
-      <aside className="lg:col-span-4 space-y-12 lg:pl-8 lg:border-l border-secondary/10">
+      {/* Right Sidebar - Academic Authority Hub */}
+      <aside className="lg:col-span-4 space-y-12 lg:pl-12 lg:border-l border-secondary/10">
         
+        {/* Impact Metrics Section - Deduplicated */}
+        <div>
+          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 mb-6 pb-2 border-b border-secondary/10">Collaboration Impact</h3>
+          <div className="space-y-4">
+            <div className="p-5 bg-white border border-secondary/10 rounded-2xl shadow-sm group hover:border-secondary/30 transition-all">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-2xl font-black font-serif text-secondary group-hover:text-primary transition-colors">4</div>
+                  <div className="text-[9px] font-bold text-secondary/40 uppercase tracking-widest mt-1">Open Problems Solved</div>
+                </div>
+                <div className="w-10 h-10 bg-secondary/5 rounded-xl flex items-center justify-center">
+                  <ShieldCheck className="w-6 h-6 text-secondary/40" />
+                </div>
+              </div>
+            </div>
+
+            <div className="p-5 bg-white border border-secondary/10 rounded-2xl shadow-sm group hover:border-secondary/30 transition-all">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-2xl font-black font-serif text-secondary group-hover:text-primary transition-colors">12</div>
+                  <div className="text-[9px] font-bold text-secondary/40 uppercase tracking-widest mt-1">Total Co-Authors</div>
+                </div>
+                <div className="w-10 h-10 bg-secondary/5 rounded-xl flex items-center justify-center">
+                  <Network className="w-6 h-6 text-secondary/40" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div>
           <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/50 mb-6 pb-2 border-b border-secondary/10">Recent Collaborators</h3>
           <div className="space-y-6">
-            {[1, 2].map(i => (
-              <div key={i} className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-12 h-12 bg-secondary/5 rounded-full flex items-center justify-center shrink-0 border border-secondary/10 group-hover:border-primary/50 transition-colors">
-                  <span className="text-[12px] font-bold text-secondary/40">FZ</span>
+            {[
+              { name: 'Dr. Fatima Zahra', field: 'Neural Systems', avatar: '/avatar_elena.png' },
+              { name: 'Marcus Chen', field: 'Data Integrity', avatar: '/avatar_marcus.png' }
+            ].map(collab => (
+              <div key={collab.name} className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-secondary/10 group-hover:border-primary/50 transition-colors shadow-sm">
+                  <img src={collab.avatar} alt={collab.name} className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">Fatima Zahra, PhD</h4>
-                  <p className="text-xs text-secondary/60">Neural Systems</p>
+                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">{collab.name}</h4>
+                  <p className="text-xs text-secondary/60">{collab.field}</p>
                 </div>
               </div>
             ))}
@@ -158,26 +310,45 @@ const ProfileDashboard: React.FC = () => {
         </div>
 
         <div>
-          <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/50 mb-6 pb-2 border-b border-secondary/10">Co-Authors</h3>
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/50 mb-6 pb-2 border-b border-secondary/10">Frequent Co-Authors</h3>
           <div className="space-y-6">
-            {[1, 2].map(i => (
-              <div key={i} className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-12 h-12 bg-secondary/5 rounded-full flex items-center justify-center shrink-0 border border-secondary/10 group-hover:border-primary/50 transition-colors">
-                  <span className="text-[12px] font-bold text-secondary/40">SJ</span>
+            {[
+              { name: 'Sarah Jenkins', count: '12 Joint Papers', avatar: '/avatar_sarah.png' },
+              { name: 'Dr. Aris Thorne', count: '8 Joint Papers', avatar: '/avatar_aris.png' }
+            ].map(author => (
+              <div key={author.name} className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-secondary/10 group-hover:border-primary/50 transition-colors shadow-sm">
+                  <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">Sarah Jenkins</h4>
-                  <p className="text-xs text-secondary/60">12 Joint Papers</p>
+                  <h4 className="font-bold text-sm group-hover:text-primary transition-colors">{author.name}</h4>
+                  <p className="text-xs text-secondary/60">{author.count}</p>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Institutional Affiliations */}
+        <div>
+          <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/50 mb-6 pb-2 border-b border-secondary/10">Affiliations</h3>
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 p-4 bg-white border border-secondary/5 rounded-xl shadow-sm">
+               <div className="w-10 h-10 bg-secondary/[0.03] rounded-lg flex items-center justify-center border border-secondary/5 font-black text-[10px] text-secondary/40 shrink-0">ICA</div>
+               <p className="text-xs font-bold text-secondary/80 leading-snug">Institute for Cognitive Architecture</p>
+            </div>
+            <div className="flex items-center gap-4 p-4 bg-white border border-secondary/5 rounded-xl shadow-sm">
+               <div className="w-10 h-10 bg-secondary/[0.03] rounded-lg flex items-center justify-center border border-secondary/5 font-black text-[10px] text-secondary/40 shrink-0">MIT</div>
+               <p className="text-xs font-bold text-secondary/80 leading-snug">Massachusetts Institute of Technology</p>
+            </div>
           </div>
         </div>
 
       </aside>
 
     </div>
-  );
+  </div>
+);
 };
 
 export default ProfileDashboard;

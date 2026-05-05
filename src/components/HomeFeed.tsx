@@ -241,17 +241,15 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
 
             <div className="cursor-pointer" onClick={() => onViewDetail(post.id)}>
               <h2 className="text-xl font-bold font-serif mb-1 leading-snug">{post.title}</h2>
-              {post.matchScore && (
                 <div className="flex items-center gap-1.5 mb-3">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/5 px-2 py-0.5 rounded">
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
                     {post.matchScore}
                   </span>
-                  <span className="text-[10px] font-bold text-secondary/30">•</span>
-                  <span className="text-[10px] font-bold text-secondary/40">
+                  <span className="text-[10px] font-bold text-secondary/20">•</span>
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-secondary/30">
                     {post.savedCount}
                   </span>
                 </div>
-              )}
               <p className="text-sm text-secondary/70 leading-relaxed mb-4">{post.summary}</p>
               
               {post.imageUrl && (
@@ -285,25 +283,25 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             )}
 
             {/* Engagement Bar */}
-            <div className="flex items-center gap-6 text-[11px] font-black uppercase tracking-widest text-secondary/60 pt-3 border-t border-secondary/5 mb-3">
-              <button className="flex items-center gap-2 hover:text-primary transition-colors group">
+            <div className="flex items-center gap-6 pt-3 border-t border-secondary/5 mb-3">
+              <button className="flex items-center gap-2 text-xs font-bold text-secondary/60 hover:text-primary transition-colors group">
                 <ThumbsUp className="w-4 h-4 group-hover:fill-primary/10" /> 
                 <span>{post.likes}</span>
               </button>
               <button 
                 onClick={() => setActiveComments(activeComments === post.id ? null : post.id)}
-                className={`flex items-center gap-2 transition-colors group ${activeComments === post.id ? 'text-primary' : 'hover:text-primary'}`}
+                className={`flex items-center gap-2 text-xs font-bold transition-colors group ${activeComments === post.id ? 'text-primary' : 'text-secondary/60 hover:text-primary'}`}
               >
                 <MessageSquare className={`w-4 h-4 group-hover:fill-primary/10 ${activeComments === post.id ? 'fill-primary/10' : ''}`} /> 
                 <span>{post.comments}</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-primary transition-colors group">
+              <button className="flex items-center gap-2 text-xs font-bold text-secondary/60 hover:text-primary transition-colors group">
                 <Share2 className="w-4 h-4" /> 
                 <span>Share</span>
               </button>
               <button 
                 onClick={() => handleSave(post.id)}
-                className={`flex items-center gap-2 transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'hover:text-primary'}`}
+                className={`flex items-center gap-2 text-xs font-bold transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'text-secondary/60 hover:text-primary'}`}
               >
                 <Bookmark className={`w-4 h-4 group-hover:fill-primary/10 ${savedPosts.has(post.id) ? 'fill-primary' : ''}`} /> 
                 <span>{savedPosts.has(post.id) ? 'Saved' : 'Save'}</span>

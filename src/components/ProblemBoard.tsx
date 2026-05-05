@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Search, Bookmark, X } from 'lucide-react';
+import { Search, Bookmark, X, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
 
 const mockProblems = [
   {
@@ -51,136 +51,316 @@ const mockProblems = [
 ];
 
 const ProblemBoard: React.FC = () => {
+  const [problems, setProblems] = React.useState(mockProblems);
+  const [expandedSections, setExpandedSections] = React.useState<Set<string>>(new Set());
+  const [activeFilters, setActiveFilters] = React.useState<string[]>(['Biotech', 'Part-time']);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [bookmarkedIds, setBookmarkedIds] = React.useState<Set<number>>(new Set());
+  const [proposedSolutionIds, setProposedSolutionIds] = React.useState<Set<number>>(new Set());
+  const [toast, setToast] = React.useState<{ show: boolean, message: string }>({ show: false, message: '' });
+
+  const showFeedback = (message: string) => {
+    setToast({ show: true, message });
+    setTimeout(() => setToast({ show: false, message: '' }), 3000);
+  };
+
+  const toggleBookmark = (id: number) => {
+    setBookmarkedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else {
+        next.add(id);
+        showFeedback('Problem bookmarked');
+      }
+      return next;
+    });
+  };
+
+  const handleDismiss = (id: number) => {
+    setProblems(prev => prev.filter(p => p.id !== id));
+    showFeedback('Problem dismissed');
+  };
+
+  const handlePropose = (id: number) => {
+    setProposedSolutionIds(prev => {
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+    showFeedback('Solution proposal initiated');
+  };
+
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => {
+      const next = new Set(prev);
+      if (next.has(section)) next.delete(section);
+      else next.add(section);
+      return next;
+    });
+  };
+
+  const toggleFilter = (filter: string) => {
+    setActiveFilters(prev => {
+      if (prev.includes(filter)) return prev.filter(f => f !== filter);
+      return [...prev, filter];
+    });
+  };
+
   return (
     <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-3 border-r border-secondary/5 bg-secondary/[0.02] p-8 space-y-10">
-        <div>
-          <h2 className="font-black font-serif text-lg tracking-tight mb-8">Filters</h2>
+      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
+        <h2 className="font-black font-serif text-lg tracking-tight mb-8">Feed Filters</h2>
+        
+        {/* Discipline Section */}
+        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+          <button 
+            onClick={() => toggleSection('Discipline')}
+            className="w-full flex items-center justify-between py-2 group"
+          >
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Discipline</h3>
+            {expandedSections.has('Discipline') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+          </button>
           
-          <div className="space-y-4 mb-8">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Search</h3>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary/40" />
-              <input 
-                type="text" 
-                placeholder="Keywords..." 
-                className="w-full text-sm pl-10 p-3 rounded-lg border border-secondary/10 bg-white outline-none focus:border-primary/30"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-4 mb-8">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Discipline</h3>
-            <div className="flex flex-wrap gap-2">
+          {expandedSections.has('Discipline') && (
+            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
               {['Computer Science', 'Biotech', 'Materials', 'Physics', 'Data Science'].map(disc => (
-                <button 
-                  key={disc}
-                  className={`px-3 py-1.5 border rounded-full text-xs font-semibold transition-colors ${
-                    disc === 'Biotech' 
-                      ? 'bg-primary border-primary text-white' 
-                      : 'border-secondary/20 hover:border-secondary/50 bg-white text-secondary/70'
-                  }`}
+                <label 
+                  key={disc} 
+                  className="flex items-center gap-3 cursor-pointer group"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFilter(disc);
+                  }}
                 >
-                  {disc}
-                </button>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
+                    {activeFilters.includes(disc) && <CheckCircle2 className="w-3 h-3" />}
+                  </div>
+                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(disc) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
+                    {disc}
+                  </span>
+                </label>
               ))}
             </div>
-          </div>
-
-          <div className="space-y-4 mb-8">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Time Commitment</h3>
-            {['Full-time', 'Part-time', 'Contract / Bounty'].map(time => (
-              <label key={time} className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${time === 'Part-time' ? 'bg-primary border-primary text-white' : 'border-secondary/20 group-hover:border-secondary/50 bg-white'}`}>
-                  {time === 'Part-time' && <div className="w-2 h-2 bg-white rounded-sm" />}
-                </div>
-                <span className="text-sm font-semibold">{time}</span>
-              </label>
-            ))}
-          </div>
-
-          <div className="space-y-4 mb-8">
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Compensation</h3>
-            {['Equity', 'Grant Funded', 'Salaried'].map(comp => (
-              <label key={comp} className="flex items-center gap-3 cursor-pointer group">
-                <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${(comp === 'Equity' || comp === 'Salaried') ? 'bg-primary border-primary text-white' : 'border-secondary/20 group-hover:border-secondary/50 bg-white'}`}>
-                  {(comp === 'Equity' || comp === 'Salaried') && <div className="w-2 h-2 bg-white rounded-sm" />}
-                </div>
-                <span className="text-sm font-semibold">{comp}</span>
-              </label>
-            ))}
-          </div>
-
-          <button className="w-full py-3 border border-secondary/20 text-secondary font-bold text-sm rounded-md hover:bg-secondary/5 transition-colors">
-            RESET FILTERS
-          </button>
+          )}
         </div>
+
+        {/* Time Commitment Section */}
+        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+          <button 
+            onClick={() => toggleSection('Time Commitment')}
+            className="w-full flex items-center justify-between py-2 group"
+          >
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Time Commitment</h3>
+            {expandedSections.has('Time Commitment') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+          </button>
+          
+          {expandedSections.has('Time Commitment') && (
+            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+              {['Full-time', 'Part-time', 'Contract / Bounty'].map(time => (
+                <label 
+                  key={time} 
+                  className="flex items-center gap-3 cursor-pointer group"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFilter(time);
+                  }}
+                >
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(time) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
+                    {activeFilters.includes(time) && <CheckCircle2 className="w-3 h-3" />}
+                  </div>
+                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(time) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
+                    {time}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Compensation Section */}
+        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+          <button 
+            onClick={() => toggleSection('Compensation')}
+            className="w-full flex items-center justify-between py-2 group"
+          >
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Compensation</h3>
+            {expandedSections.has('Compensation') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+          </button>
+          
+          {expandedSections.has('Compensation') && (
+            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+              {['Equity', 'Grant Funded', 'Salaried'].map(comp => (
+                <label 
+                  key={comp} 
+                  className="flex items-center gap-3 cursor-pointer group"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFilter(comp);
+                  }}
+                >
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(comp) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
+                    {activeFilters.includes(comp) && <CheckCircle2 className="w-3 h-3" />}
+                  </div>
+                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(comp) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
+                    {comp}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+
       </aside>
 
       {/* Main Content */}
-      <main className="lg:col-span-9 p-8 md:p-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <main className="lg:col-span-10 p-8 md:p-12 animate-in fade-in duration-700">
         <div className="mb-8">
-          <h1 className="text-3xl font-black font-serif tracking-tight mb-2">Open Problems</h1>
-          <p className="text-secondary/60 max-w-2xl">Discover and collaborate on high-impact research challenges. Filter by discipline, commitment, and compensation.</p>
+          <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2 uppercase">Open Problems</h1>
+          <p className="text-sm text-secondary/50 font-semibold tracking-wide">Discover and collaborate on high-impact research challenges.</p>
         </div>
 
-        <div className="flex items-center gap-4 mb-10 pb-6 border-b border-secondary/10">
-          <span className="text-[10px] font-black uppercase tracking-widest text-secondary/50">Active Filters:</span>
-          <div className="flex gap-2">
-            {['Biotech', 'Part-time'].map(filter => (
-              <span key={filter} className="flex items-center gap-1 px-3 py-1 bg-primary/10 rounded-full text-xs font-bold text-primary">
+        {/* Omnibar */}
+        <div className="mb-6 relative group">
+          <div className="absolute inset-0 bg-primary/5 blur-2xl group-focus-within:bg-primary/10 transition-all opacity-0 group-focus-within:opacity-100" />
+          <div className="relative flex items-center bg-white border border-secondary/10 rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
+            <div className="pl-4 pr-3 flex items-center border-r border-secondary/5">
+              <Search className="w-4 h-4 text-secondary/30" />
+            </div>
+            <input 
+              type="text" 
+              placeholder="Search problem scopes, keywords, or required skills..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-secondary/30 font-medium h-12"
+            />
+          </div>
+        </div>
+
+        {/* Active Filters Row & Sort */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[#F3F4F6]">
+          <div className="flex flex-wrap items-center gap-2">
+            {activeFilters.map(filter => (
+              <div key={filter} className="flex items-center gap-2 px-3 py-1 bg-secondary text-white rounded-full text-[10px] font-black uppercase tracking-widest animate-in zoom-in-95 duration-200">
                 {filter}
-                <X className="w-3 h-3 cursor-pointer hover:text-primary transition-colors" />
-              </span>
+                <button onClick={() => toggleFilter(filter)} className="hover:text-primary transition-colors">
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
             ))}
+            {activeFilters.length > 0 && (
+              <button 
+                onClick={() => setActiveFilters([])}
+                className="text-[10px] font-bold text-secondary/40 hover:text-secondary transition-colors ml-2"
+              >
+                Clear All
+              </button>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-secondary/40">
+            <span>Sort by:</span>
+            <button className="flex items-center gap-1.5 text-secondary hover:text-primary transition-colors">
+              Closing Soon
+              <ChevronDown className="w-3 h-3" />
+            </button>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {mockProblems.map(prob => (
-            <div key={prob.id} className={`card-premium bg-white border border-secondary/10 flex flex-col hover:shadow-soft transition-all ${prob.closed ? 'opacity-50' : ''}`}>
+          {problems
+            .filter(prob => {
+              const matchesSearch = prob.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                   prob.desc.toLowerCase().includes(searchTerm.toLowerCase());
+              if (activeFilters.length === 0) return matchesSearch;
+              const matchesFilter = activeFilters.some(f => 
+                prob.tags.includes(f.toUpperCase()) || 
+                prob.commitment.includes(f) || 
+                prob.compensation.includes(f)
+              );
+              return matchesSearch && (activeFilters.length > 0 ? matchesFilter : true);
+            })
+            .map(prob => (
+            <div key={prob.id} className={`group relative bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all flex flex-col animate-in fade-out duration-300 zoom-in-95 ${prob.closed ? 'opacity-50' : ''}`}>
               
-              <div className="flex justify-between items-start mb-4">
+              {/* Utility Bar */}
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                <button 
+                  onClick={() => toggleBookmark(prob.id)}
+                  className={`p-1.5 rounded-full transition-all ${bookmarkedIds.has(prob.id) ? 'text-primary bg-primary/5' : 'text-secondary/20 hover:text-primary hover:bg-primary/5'}`} 
+                  title="Save to Shortlist"
+                >
+                  <Bookmark className={`w-4 h-4 ${bookmarkedIds.has(prob.id) ? 'fill-primary' : ''}`} />
+                </button>
+                <button 
+                  onClick={() => handleDismiss(prob.id)}
+                  className="p-1.5 rounded-full text-secondary/20 hover:text-primary hover:bg-primary/5 transition-all" 
+                  title="Dismiss"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="flex justify-between items-start mb-6">
                 <div className="flex gap-2">
                   {prob.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-secondary/70">
+                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-secondary/60">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <button className="text-secondary/40 hover:text-primary transition-colors">
-                  <Bookmark className="w-5 h-5" />
-                </button>
               </div>
 
-              <h3 className="text-xl font-bold font-serif mb-3 leading-snug">{prob.title}</h3>
-              <p className="text-sm text-secondary/70 leading-relaxed mb-8 flex-1">{prob.desc}</p>
+              <h3 className="text-xl font-bold font-serif mb-3 leading-snug text-secondary">{prob.title}</h3>
+              <p className="text-sm text-secondary/70 leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{prob.desc}</p>
 
-              <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-secondary/10">
+              <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-secondary/5">
                 <div>
                   <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Skills</h4>
-                  <p className="text-sm font-semibold">{prob.skills}</p>
+                  <p className="text-sm font-semibold text-secondary/80">{prob.skills}</p>
                 </div>
                 <div>
                   <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Commitment</h4>
-                  <p className="text-sm font-semibold">{prob.commitment}</p>
+                  <p className="text-sm font-semibold text-secondary/80">{prob.commitment}</p>
                 </div>
                 <div>
                   <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Deadline</h4>
-                  <p className="text-sm font-semibold">{prob.deadline}</p>
+                  <p className="text-sm font-semibold text-secondary/80">{prob.deadline}</p>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center text-sm font-bold">
+              <div className="flex justify-between items-center text-sm font-bold mb-6">
                 <span className="text-secondary/70">{prob.lab}</span>
-                <span>{prob.compensation}</span>
+                <span className="text-secondary">{prob.compensation}</span>
               </div>
+
+              <button 
+                onClick={() => !prob.closed && !proposedSolutionIds.has(prob.id) && handlePropose(prob.id)}
+                className={`w-full font-black text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-soft ${
+                  prob.closed || proposedSolutionIds.has(prob.id)
+                    ? 'bg-secondary/5 text-secondary/40 cursor-default' 
+                    : 'bg-secondary text-white hover:bg-secondary/90'
+                }`}
+              >
+                {prob.closed ? 'Closed' : (proposedSolutionIds.has(prob.id) ? 'Proposal Sent' : 'Propose Solution')}
+              </button>
             </div>
           ))}
         </div>
       </main>
+
+      {/* Feedback Toast */}
+      {toast.show && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] animate-in slide-in-from-bottom-4 duration-500">
+          <div className="bg-secondary text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10 ring-4 ring-primary/5">
+            <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+              <CheckCircle2 className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-[11px] font-black uppercase tracking-widest">{toast.message}</span>
+          </div>
+        </div>
+      )}
 
     </div>
   );

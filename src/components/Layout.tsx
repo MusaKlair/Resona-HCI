@@ -130,7 +130,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link href="/auth" className="text-sm font-bold text-secondary hover:text-primary transition-colors">
                   Log In
                 </Link>
-                <Link href="/auth" className="bg-primary text-white font-bold px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors text-sm">
+                <Link href="/auth" className="bg-primary text-white font-bold px-6 py-2.5 rounded-md hover:bg-primary/90 transition-all text-sm shadow-md shadow-primary/20">
                   Join Resona
                 </Link>
               </>

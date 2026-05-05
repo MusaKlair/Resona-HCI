@@ -7,6 +7,7 @@ interface AuthProps {
 }
 
 const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
+  const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [step, setStep] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -25,7 +26,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
 
   const handleSendOTP = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.includes('@') && email.toLowerCase().endsWith('.edu') || email.includes('inst')) {
+    if (email.includes('@') && (email.toLowerCase().endsWith('.edu') || email.includes('inst'))) {
       setStep('otp');
       setTimer(59);
     } else {
@@ -39,7 +40,6 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto-focus next input
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
@@ -59,71 +59,94 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center p-6">
-      <div className="max-w-md w-full card-premium p-10 space-y-8 animate-in fade-in zoom-in duration-500">
-        <div className="flex flex-col items-center text-center space-y-4">
-          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-            {step === 'email' ? <Mail className="w-8 h-8" /> : <ShieldCheck className="w-8 h-8" />}
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-3xl font-black font-serif uppercase tracking-tight">
-              {step === 'email' ? 'Sign In / Register' : 'Verify Identity'}
-            </h2>
-            <p className="text-secondary/60 text-sm font-medium">
-              {step === 'email' 
-                ? 'Enter your institutional credentials to access the research portal' 
-                : `We've sent a 6-digit code to ${email}`}
-            </p>
-          </div>
+    <div className="min-h-[90vh] flex items-center justify-center p-6 bg-white">
+      <div className="max-w-md w-full space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="text-center space-y-4 flex flex-col items-center">
+          {step === 'otp' && (
+            <div className="w-16 h-16 bg-secondary/5 border border-secondary/10 rounded-2xl flex items-center justify-center text-secondary/60 mb-2">
+              <Mail className="w-8 h-8" />
+            </div>
+          )}
+          <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">
+            {step === 'otp' ? 'Check your email' : (mode === 'login' ? 'Welcome back' : 'Create your Resona account')}
+          </h1>
+          <p className="text-secondary/60 text-sm leading-relaxed max-w-[280px] mx-auto">
+            {step === 'otp' 
+              ? `We've sent a 6-digit code to ${email}` 
+              : mode === 'login'
+                ? 'Enter your credentials to access your workspace and match hub.'
+                : 'Join the modern academic operating system to discover open problems and secure funding.'}
+          </p>
         </div>
 
         {step === 'email' ? (
-          <form onSubmit={handleSendOTP} className="space-y-6">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-secondary/40 ml-1">
-                Institutional Email Address
-              </label>
-              <div className="relative group">
-                <input
-                  type="email"
-                  required
-                  placeholder="name@university.edu"
-                  className="w-full bg-secondary/5 border-2 border-secondary/5 rounded-2xl px-6 py-4 outline-none focus:border-primary/30 focus:bg-white transition-all text-secondary font-semibold"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button 
-                  type="submit"
-                  className="absolute right-2 top-2 bottom-2 bg-primary text-white px-6 rounded-md font-bold text-xs hover:bg-primary/90 transition-colors uppercase tracking-widest"
-                >
-                  Send OTP
-                </button>
+          <div className="space-y-8">
+            {/* SSO Options */}
+            <div className="space-y-3">
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
+                <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" className="w-5 h-5" alt="ORCID" />
+                Continue with ORCID
+              </button>
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
+                Continue with Google
+              </button>
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
+                <ShieldCheck className="w-5 h-5 text-secondary/40" />
+                Continue with Institution
+              </button>
+            </div>
+
+            {/* OR Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-secondary/10"></div>
+              </div>
+              <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest">
+                <span className="bg-white px-4 text-secondary/30">or</span>
               </div>
             </div>
-            
-            <div className="pt-4 text-center">
-              <p className="text-[10px] text-secondary/30 font-bold uppercase tracking-tighter">
-                Why Institutional Email? <span className="text-primary/60 cursor-pointer hover:text-primary">Learn more</span>
-              </p>
+
+            <form onSubmit={handleSendOTP} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">
+                  Institutional Email Address
+                </label>
+                <div className="relative group">
+                  <input
+                    type="email"
+                    required
+                    placeholder="name@university.edu"
+                    className="w-full bg-secondary/5 border-2 border-transparent rounded-2xl px-6 py-4 outline-none focus:border-primary/30 focus:bg-white transition-all text-secondary font-bold"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+              </div>
+              
+              <button 
+                type="submit"
+                className="w-full bg-secondary text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-secondary/90 transition-all shadow-lg shadow-secondary/20"
+              >
+                {mode === 'login' ? 'Send Login Code' : 'Continue with Email'}
+              </button>
+            </form>
+
+            <div className="text-center pt-4">
+              <button 
+                onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
+                className="text-sm font-bold text-secondary/60 hover:text-primary transition-colors"
+              >
+                {mode === 'login' ? "New to Resona? Create an account" : "Already have an account? Log in"}
+              </button>
             </div>
-          </form>
+          </div>
         ) : (
           <div className="space-y-8">
             <div className="flex justify-between items-center px-1">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-secondary/40">
-                Enter OTP
+              <label className="text-[10px] font-black uppercase tracking-widest text-secondary/40">
+                Enter 6-Digit Code
               </label>
-              <span className="text-[10px] font-bold text-primary uppercase">
-                {timer > 0 ? `Resend in ${formatTime(timer)}` : (
-                  <button 
-                    onClick={() => { setTimer(59); setIsResending(true); setTimeout(() => setIsResending(false), 1000); }}
-                    className="flex items-center gap-1 hover:underline"
-                  >
-                    <RefreshCw className={`w-3 h-3 ${isResending ? 'animate-spin' : ''}`} />
-                    Resend Code
-                  </button>
-                )}
-              </span>
             </div>
             
             <div className="flex justify-between gap-2">
@@ -133,25 +156,39 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                   id={`otp-${i}`}
                   type="text"
                   maxLength={1}
-                  className="w-12 h-16 bg-secondary/5 border-2 border-secondary/5 rounded-xl text-center text-2xl font-black focus:border-primary/30 focus:bg-white outline-none transition-all"
+                  className="w-14 h-14 bg-white border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-secondary focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all shadow-sm"
                   value={digit}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                 />
               ))}
             </div>
 
+            <div className="text-center">
+              <span className="text-[11px] font-bold text-secondary/40">
+                {timer > 0 ? `Resend code in ${formatTime(timer)}` : (
+                  <button 
+                    onClick={() => { setTimer(59); setIsResending(true); setTimeout(() => setIsResending(false), 1000); }}
+                    className="flex items-center justify-center gap-1.5 mx-auto hover:text-secondary transition-colors"
+                  >
+                    <RefreshCw className={`w-3 h-3 ${isResending ? 'animate-spin' : ''}`} />
+                    Resend Code
+                  </button>
+                )}
+              </span>
+            </div>
+
             <button
               onClick={handleVerify}
               disabled={otp.some(d => d === '')}
-              className="w-full btn-primary py-4 rounded-md flex items-center justify-center gap-3 disabled:opacity-50 disabled:grayscale disabled:scale-100"
+              className="w-full bg-secondary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-black text-xs uppercase tracking-widest hover:bg-secondary/90 transition-all disabled:opacity-50"
             >
-              <Lock className="w-5 h-5" />
+              <Lock className="w-4 h-4" />
               Verify & Continue
             </button>
 
             <button 
               onClick={() => setStep('email')}
-              className="w-full text-[10px] font-bold uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors"
+              className="w-full text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors"
             >
               Back to Email
             </button>
