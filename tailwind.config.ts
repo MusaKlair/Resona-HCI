@@ -38,6 +38,7 @@ const config: Config = {
       boxShadow: {
         'soft': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
         'elevated': '0 20px 50px -12px rgba(0, 0, 0, 0.1)',
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       }
     },
   },

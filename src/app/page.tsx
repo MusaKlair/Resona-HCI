@@ -44,45 +44,50 @@ export default function Home() {
 
             <div className="relative animate-in fade-in slide-in-from-right-8 duration-700 delay-200">
               {/* Main Mockup Container */}
-              <div className="relative z-10 rounded-2xl overflow-hidden aspect-[4/5] md:aspect-square group shadow-2xl border border-secondary/10 bg-white p-2">
-                <div className="w-full h-full rounded-xl overflow-hidden border border-secondary/5">
+              <div className="relative z-10 rounded-3xl overflow-hidden aspect-square group shadow-3xl border border-secondary/5 bg-white p-3">
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-inner bg-muted">
                   <img 
-                    src="https://images.unsplash.com/photo-1551288049-bbbda536ad89?auto=format&fit=crop&q=80&w=2070" 
-                    alt="Intelligent Match Hub" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+                    src="/hero_mockup.png" 
+                    alt="Resona Platform Dashboard" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  {/* Internal Mockup Elements (Omnibar Overlay) */}
-                  <div className="absolute top-8 left-8 right-8 h-12 bg-white/95 backdrop-blur-md rounded-lg shadow-lg border border-secondary/5 flex items-center px-4 justify-between">
-                    <div className="text-[10px] font-black text-secondary/40 uppercase tracking-widest flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                      Search Omnibar
-                    </div>
-                    <div className="flex bg-secondary/5 p-1 rounded-md gap-1">
-                       <div className="px-3 py-1 bg-white shadow-sm rounded-sm text-[8px] font-black text-secondary uppercase">Similar</div>
-                       <div className="px-3 py-1 text-[8px] font-black text-secondary/40 uppercase">Complementary</div>
+                </div>
+              </div>
+
+              {/* Floating Element 1: Taxonomic Alignment */}
+              <div className="absolute -top-10 -left-10 z-20 bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-elevated border border-primary/10 animate-bounce-subtle">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Sparkles className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black text-secondary/40 uppercase tracking-widest mb-0.5">Taxonomic Match</div>
+                    <div className="flex items-center gap-2">
+                       <div className="text-3xl font-black font-serif text-secondary">98%</div>
+                       <div className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full uppercase">High Alignment</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Element 1: Structural Alignment Badge */}
-              <div className="absolute -top-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-elevated border border-secondary/5 animate-bounce-subtle">
-                <div className="text-[10px] font-black text-secondary/40 uppercase tracking-widest mb-1">Taxonomic Match</div>
-                <div className="flex items-center gap-3">
-                   <div className="text-3xl font-black font-serif text-secondary">92%</div>
-                   <div className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full uppercase">High Alignment</div>
-                </div>
-              </div>
-
-              {/* Floating Element 2: Availability Pill */}
-              <div className="absolute -bottom-6 -right-6 z-20 bg-secondary text-white p-4 rounded-2xl shadow-elevated border border-white/10 animate-float">
-                <div className="flex items-center gap-2 mb-2">
-                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                   <span className="text-[10px] font-black uppercase tracking-widest text-white/60">Available Now</span>
-                </div>
-                <div className="text-sm font-bold font-serif leading-tight">
-                  Dr. Aris Thorne <br />
-                  <span className="text-[10px] font-normal text-white/40 uppercase tracking-widest">Active 1d ago</span>
+              {/* Floating Element 2: Active Researcher */}
+              <div className="absolute -bottom-8 -right-8 z-20 bg-secondary text-white p-5 rounded-2xl shadow-elevated border border-white/10 animate-float">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <img 
+                      src="/avatar_aris.png" 
+                      alt="Dr. Aris Thorne" 
+                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/30"
+                    />
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-secondary flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Available Now</div>
+                    <div className="text-lg font-bold font-serif leading-none mb-1">Dr. Aris Thorne</div>
+                    <div className="text-[10px] font-medium text-primary/80 uppercase tracking-widest">Quantum Physics</div>
+                  </div>
                 </div>
               </div>
             </div>

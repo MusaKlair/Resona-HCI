@@ -147,149 +147,292 @@ const CollaborativeWorkspace: React.FC = () => {
       {/* Main Content Area */}
       <main className="lg:col-span-10 space-y-12">
         
-        {/* Workspace Header */}
-        <div className="animate-in fade-in slide-in-from-top-4 duration-700">
-          <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2 uppercase">Workspace Overview</h1>
-          <p className="text-sm text-secondary/50 font-semibold tracking-wide">Track progress and recent activity across all active collaborations.</p>
-        </div>
-
-        {/* Project Summary Cards */}
-        <section>
-          <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
-            <h2 className="text-xl font-black uppercase tracking-tight">Active Projects</h2>
-            <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-colors underline underline-offset-4">View All Projects</button>
+        {/* Header Area */}
+        {activeItem === 'TraceHunter Dev' ? (
+          <div className="animate-in fade-in slide-in-from-top-4 duration-700">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h1 className="text-4xl font-black font-serif tracking-tight text-secondary">TraceHunter Dev</h1>
+                <p className="text-sm text-secondary/50 font-semibold mt-2">Developing malware triage protocols and volatile memory capture methods.</p>
+              </div>
+              <button className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-primary/90 transition-all shadow-soft whitespace-nowrap">
+                + New Task
+              </button>
+            </div>
+            
+            {/* Horizontal Tab Navigation */}
+            <div className="mt-8 border-b border-secondary/10 flex gap-8">
+              {['Overview', 'Tasks', 'Files', 'Discussions'].map(tab => (
+                <button 
+                  key={tab}
+                  className={`pb-3 text-sm font-bold transition-colors relative ${tab === 'Overview' ? 'text-secondary font-black' : 'text-secondary/40 hover:text-secondary/70'}`}
+                >
+                  {tab}
+                  {tab === 'Overview' && (
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {workspaceProjects.map(project => (
-              <div key={project.id} className="bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer">
-                <div className="flex justify-between items-start mb-6">
-                  <h3 className="font-bold text-lg text-secondary group-hover:text-primary transition-colors">{project.name}</h3>
-                  <button className="text-secondary/20 hover:text-secondary transition-colors">⋮</button>
+        ) : (
+          <div className="animate-in fade-in slide-in-from-top-4 duration-700">
+            <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2">Workspace Overview</h1>
+            <p className="text-sm text-secondary/50 font-semibold tracking-wide">Track progress and recent activity across all active collaborations.</p>
+          </div>
+        )}
+
+        {/* Dynamic Content Based on activeItem */}
+        {activeItem === 'TraceHunter Dev' ? (
+          <div className="animate-in fade-in duration-500 mt-8 space-y-8">
+            {/* Top Row (Progress & Team) */}
+            <div className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
+              <div className="flex justify-between items-end mb-4">
+                <h2 className="text-xl font-bold text-secondary font-serif">Project Health</h2>
+                <div className="flex gap-4 items-center">
+                  <div className="flex flex-col items-end">
+                    <span className="text-[10px] font-bold text-secondary/40 uppercase tracking-widest">Top Contributor</span>
+                    <span className="text-sm font-bold text-secondary">Dr. Aris Thorne</span>
+                  </div>
+                  <div className="flex -space-x-2">
+                    {workspaceProjects[0].collaborators.map((avatar, i) => (
+                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                        <img src={avatar} alt="collaborator" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <span className="text-secondary/40">Progress</span>
-                    <span className="text-secondary">{project.progress}%</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-secondary/5 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-primary transition-all duration-1000" 
-                      style={{ width: `${project.progress}%` }} 
-                    />
-                  </div>
-                  
-                  <div className="flex items-center justify-between pt-4">
-                    <div className="flex -space-x-2">
-                      {project.collaborators.map((avatar, i) => (
-                        <div key={i} className="w-7 h-7 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                          <img src={avatar} alt="collaborator" className="w-full h-full object-cover" />
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm font-bold text-secondary">
+                  <span>Overall Progress</span>
+                  <span>64%</span>
+                </div>
+                <div className="w-full h-2.5 bg-secondary/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-primary rounded-full transition-all duration-1000" style={{ width: '64%' }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Split Column Layout (Bottom) */}
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+              {/* Left Column (Task Tracker) 60% */}
+              <div className="lg:col-span-3 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-secondary/5">
+                  <h2 className="text-lg font-bold text-secondary font-serif">Upcoming Tasks</h2>
+                </div>
+                <div className="p-6 space-y-6">
+                  <div>
+                    <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">To Do</h3>
+                    <div className="space-y-3">
+                      {tasks.filter(t => t.status !== 'DONE').map(task => (
+                        <div key={task.id} className="flex items-start gap-3">
+                          <div className="w-5 h-5 rounded-full border-2 border-secondary/20 flex-shrink-0 mt-0.5" />
+                          <span className="text-sm font-medium text-secondary">{task.title}</span>
                         </div>
                       ))}
                     </div>
-                    <span className="text-[9px] font-black uppercase tracking-[0.15em] text-secondary/30">Active Now</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">Done</h3>
+                    <div className="space-y-3">
+                      {tasks.filter(t => t.status === 'DONE').map(task => (
+                        <div key={task.id} className="flex items-start gap-3">
+                          <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                          </div>
+                          <span className="text-sm font-medium text-secondary/40 line-through">{task.title}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Global Activity Feed */}
-        <section>
-          <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
-            <h2 className="text-xl font-black uppercase tracking-tight">Urgent Tasks & Mentions</h2>
-            <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors">Mark All Read</button>
-          </div>
-          
-          <div className="bg-white border border-secondary/10 rounded-2xl shadow-sm overflow-hidden">
-            {urgentActivity.map((activity, i) => (
-              <div 
-                key={activity.id} 
-                onClick={() => activity.id === 1 && setIsDrawerOpen(true)}
-                className={`p-6 flex items-start gap-4 transition-colors ${
-                  activity.id === 1 ? 'hover:bg-[#F9FAFB] cursor-pointer' : 'hover:bg-secondary/[0.02]'
-                } ${i !== urgentActivity.length - 1 ? 'border-b border-secondary/5' : ''}`}
-              >
-                <div className={`w-10 h-10 rounded-xl shrink-0 flex items-center justify-center ${
-                  activity.type === 'MENTION' ? 'bg-primary/10 text-primary' : 
-                  activity.type === 'TASK' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-500'
-                }`}>
-                  {activity.type === 'MENTION' ? <MessageSquare className="w-5 h-5" /> : 
-                   activity.type === 'TASK' ? <CheckSquare className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-1">
-                    <p className="text-sm font-bold text-secondary">
-                      <span className="text-primary">{activity.user}</span> 
-                      <span className="text-secondary/60 font-medium"> in </span> 
-                      {activity.project}
-                    </p>
-                    <span className="text-[10px] font-bold text-secondary/30">{activity.time}</span>
+              {/* Right Column (Recent Files & Activity) 40% */}
+              <div className="lg:col-span-2 space-y-8">
+                <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-secondary/5">
+                    <h2 className="text-lg font-bold text-secondary font-serif">Recent Files</h2>
                   </div>
-                  <p className="text-sm text-secondary/70 leading-relaxed">{activity.text}</p>
+                  <div className="p-4 space-y-2">
+                    {documents.slice(0, 3).map(doc => (
+                      <div key={doc.id} className="flex items-center gap-3 p-2 hover:bg-secondary/5 rounded-lg transition-colors cursor-pointer">
+                        <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                          <FileText className="w-4 h-4" />
+                        </div>
+                        <div className="overflow-hidden">
+                          <p className="text-sm font-bold text-secondary truncate">{doc.name}</p>
+                          <p className="text-xs text-secondary/40">{doc.updated}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-secondary/5">
+                    <h2 className="text-lg font-bold text-secondary font-serif">Latest Activity</h2>
+                  </div>
+                  <div className="p-6 space-y-6">
+                    {urgentActivity.slice(0, 2).map((act, i) => (
+                      <div key={act.id} className="flex gap-3 relative">
+                        {i !== 1 && <div className="absolute top-8 bottom-[-24px] left-[15px] w-px bg-secondary/10" />}
+                        <div className="w-8 h-8 rounded-full bg-secondary/5 flex items-center justify-center shrink-0 z-10">
+                          <MessageSquare className="w-3.5 h-3.5 text-secondary/60" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-secondary">{act.user}</p>
+                          <p className="text-sm text-secondary/60 mt-0.5 leading-relaxed">{act.text}</p>
+                          <p className="text-xs text-secondary/30 mt-1">{act.time}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-        </section>
-
-        {/* Meeting Overview Section */}
-        <section>
-          <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
-            <h2 className="text-xl font-black uppercase tracking-tight">Upcoming Syncs</h2>
-            <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors underline underline-offset-4">Schedule New</button>
-          </div>
-          
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            {/* Calendar Mini-Widget */}
-            <div className="xl:col-span-1 bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm">
-              <div className="flex justify-between items-center text-center mb-6">
-                {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
-                  const date = 28 + i > 31 ? (28 + i) - 31 : 28 + i;
-                  const active = date === 31;
-                  return (
-                    <div key={i} className="flex flex-col gap-2">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#6B7280]">{day}</span>
-                      <div className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold transition-all ${active ? 'bg-secondary text-white shadow-md scale-110' : 'text-secondary/70 hover:bg-secondary/5'}`}>
-                        {date}
+        ) : (
+          <div className="space-y-12">
+            {/* Project Summary Cards */}
+            <section>
+              <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
+                <h2 className="text-xl font-black tracking-tight font-serif text-secondary">Active Projects</h2>
+                <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-colors underline underline-offset-4">View All Projects</button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {workspaceProjects.map(project => (
+                  <div key={project.id} className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer" onClick={() => setActiveItem(project.name)}>
+                    <div className="flex justify-between items-start mb-6">
+                      <h3 className="font-bold text-lg text-secondary group-hover:text-primary transition-colors">{project.name}</h3>
+                      <button className="text-secondary/20 hover:text-secondary transition-colors">⋮</button>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
+                        <span className="text-secondary/40">Progress</span>
+                        <span className="text-secondary">{project.progress}%</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-secondary/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-primary transition-all duration-1000" 
+                          style={{ width: `${project.progress}%` }} 
+                        />
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-4">
+                        <div className="flex -space-x-2">
+                          {project.collaborators.map((avatar, i) => (
+                            <div key={i} className="w-7 h-7 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                              <img src={avatar} alt="collaborator" className="w-full h-full object-cover" />
+                            </div>
+                          ))}
+                        </div>
+                        <span className="text-[9px] font-black uppercase tracking-[0.15em] text-secondary/30">Active Now</span>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-              <p className="text-[10px] font-bold text-[#6B7280] text-center uppercase tracking-widest italic">Thursday, October 31st</p>
-            </div>
-
-            {/* Meetings List */}
-            <div className="xl:col-span-2 space-y-4">
-              <div className="p-5 bg-white border border-secondary/10 rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group">
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
-                    <Clock className="w-3.5 h-3.5" /> 14:00 - 15:00
                   </div>
-                  <span className="px-2 py-0.5 bg-primary/5 text-primary text-[9px] font-black uppercase tracking-widest rounded">TraceHunter Dev</span>
-                </div>
-                <h4 className="font-bold text-base text-secondary group-hover:text-primary transition-colors">Blueprint Review Sync</h4>
-                <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Team Alpha, Lead Researcher</p>
+                ))}
               </div>
+            </section>
 
-              <div className="p-5 bg-white border border-secondary/10 rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group opacity-60 grayscale hover:grayscale-0 hover:opacity-100">
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
-                    <Clock className="w-3.5 h-3.5" /> TOMORROW, 09:30
-                  </div>
-                  <span className="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-black uppercase tracking-widest rounded">General Admin</span>
-                </div>
-                <h4 className="font-bold text-base text-secondary">Structural Audit Q3</h4>
-                <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Management Board</p>
+            {/* Global Activity Feed */}
+            <section>
+              <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
+                <h2 className="text-xl font-black tracking-tight font-serif text-secondary">Urgent Tasks & Mentions</h2>
+                <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors">Mark All Read</button>
               </div>
-            </div>
+              
+              <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+                {urgentActivity.map((activity, i) => (
+                  <div 
+                    key={activity.id} 
+                    onClick={() => activity.id === 1 && setIsDrawerOpen(true)}
+                    className={`p-6 flex items-start gap-4 transition-colors ${
+                      activity.id === 1 ? 'hover:bg-[#F9FAFB] cursor-pointer' : 'hover:bg-secondary/[0.02]'
+                    } ${i !== urgentActivity.length - 1 ? 'border-b border-secondary/5' : ''}`}
+                  >
+                    <div className={`w-10 h-10 rounded-xl shrink-0 flex items-center justify-center ${
+                      activity.type === 'MENTION' ? 'bg-primary/10 text-primary' : 
+                      activity.type === 'TASK' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-blue-500'
+                    }`}>
+                      {activity.type === 'MENTION' ? <MessageSquare className="w-5 h-5" /> : 
+                       activity.type === 'TASK' ? <CheckSquare className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <p className="text-sm font-bold text-secondary">
+                          <span className="text-primary">{activity.user}</span> 
+                          <span className="text-secondary/60 font-medium"> in </span> 
+                          {activity.project}
+                        </p>
+                        <span className="text-[10px] font-bold text-secondary/30">{activity.time}</span>
+                      </div>
+                      <p className="text-sm text-secondary/70 leading-relaxed">{activity.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Meeting Overview Section */}
+            <section>
+              <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
+                <h2 className="text-xl font-black tracking-tight font-serif text-secondary">Upcoming Syncs</h2>
+                <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors underline underline-offset-4">Schedule New</button>
+              </div>
+              
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                {/* Calendar Mini-Widget */}
+                <div className="xl:col-span-1 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
+                  <div className="flex justify-between items-center text-center mb-6">
+                    {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
+                      const date = 28 + i > 31 ? (28 + i) - 31 : 28 + i;
+                      const active = date === 31;
+                      return (
+                        <div key={i} className="flex flex-col gap-2">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-[#6B7280]">{day}</span>
+                          <div className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold transition-all ${active ? 'bg-secondary text-white shadow-md scale-110' : 'text-secondary/70 hover:bg-secondary/5'}`}>
+                            {date}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[10px] font-bold text-[#6B7280] text-center uppercase tracking-widest italic">Thursday, October 31st</p>
+                </div>
+
+                {/* Meetings List */}
+                <div className="xl:col-span-2 space-y-4">
+                  <div className="p-5 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
+                        <Clock className="w-3.5 h-3.5" /> 14:00 - 15:00
+                      </div>
+                      <span className="px-2 py-0.5 bg-primary/5 text-primary text-[9px] font-black uppercase tracking-widest rounded">TraceHunter Dev</span>
+                    </div>
+                    <h4 className="font-bold text-base text-secondary group-hover:text-primary transition-colors">Blueprint Review Sync</h4>
+                    <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Team Alpha, Lead Researcher</p>
+                  </div>
+
+                  <div className="p-5 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group opacity-60 grayscale hover:grayscale-0 hover:opacity-100">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
+                        <Clock className="w-3.5 h-3.5" /> TOMORROW, 09:30
+                      </div>
+                      <span className="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-black uppercase tracking-widest rounded">General Admin</span>
+                    </div>
+                    <h4 className="font-bold text-base text-secondary">Structural Audit Q3</h4>
+                    <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Management Board</p>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-
+        )}
       </main>
 
       {/* Slide-Over Chat Drawer */}
