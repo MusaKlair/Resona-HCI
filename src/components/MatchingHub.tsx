@@ -161,10 +161,13 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Role Type')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Role Type</h3>
-            {expandedSections.has('Role Type') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <Users className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Role Type</h3>
+            </div>
+            {expandedSections.has('Role Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Role Type') && (
@@ -198,10 +201,13 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Experience')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Experience</h3>
-            {expandedSections.has('Experience') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <BarChart className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Experience</h3>
+            </div>
+            {expandedSections.has('Experience') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Experience') && (
@@ -235,10 +241,13 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Institution')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Institution</h3>
-            {expandedSections.has('Institution') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <School className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Institution</h3>
+            </div>
+            {expandedSections.has('Institution') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Institution') && (

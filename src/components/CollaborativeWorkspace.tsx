@@ -62,10 +62,13 @@ const CollaborativeWorkspace: React.FC = () => {
           <div>
             <button 
               onClick={() => toggleSection('Overview')}
-              className="w-full flex items-center justify-between py-2 group"
+              className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
             >
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Overview</h3>
-              {expandedSections.has('Overview') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60" />}
+              <div className="flex items-center gap-3">
+                <LayoutGrid className="w-4 h-4 text-primary" />
+                <h3 className="text-sm font-bold">Overview</h3>
+              </div>
+              {expandedSections.has('Overview') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>
             {expandedSections.has('Overview') && (
               <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
@@ -91,10 +94,13 @@ const CollaborativeWorkspace: React.FC = () => {
           <div>
             <button 
               onClick={() => toggleSection('My Tasks')}
-              className="w-full flex items-center justify-between py-2 group"
+              className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
             >
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">My Tasks</h3>
-              {expandedSections.has('My Tasks') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60" />}
+              <div className="flex items-center gap-3">
+                <CheckSquare className="w-4 h-4 text-primary" />
+                <h3 className="text-sm font-bold">My Tasks</h3>
+              </div>
+              {expandedSections.has('My Tasks') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>
             {expandedSections.has('My Tasks') && (
               <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
@@ -120,10 +126,13 @@ const CollaborativeWorkspace: React.FC = () => {
           <div>
             <button 
               onClick={() => toggleSection('Active Projects')}
-              className="w-full flex items-center justify-between py-2 group"
+              className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
             >
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Active Projects</h3>
-              {expandedSections.has('Active Projects') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60" />}
+              <div className="flex items-center gap-3">
+                <Folder className="w-4 h-4 text-primary" />
+                <h3 className="text-sm font-bold">Active Projects</h3>
+              </div>
+              {expandedSections.has('Active Projects') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>
             {expandedSections.has('Active Projects') && (
               <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">

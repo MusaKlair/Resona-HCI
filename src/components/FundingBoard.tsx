@@ -96,10 +96,13 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Discipline</h3>
-            {expandedSections.has('Discipline') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <Microscope className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Discipline</h3>
+            </div>
+            {expandedSections.has('Discipline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Discipline') && (
@@ -133,10 +136,13 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Resource Type')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Resource Type</h3>
-            {expandedSections.has('Resource Type') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <Wallet className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Resource Type</h3>
+            </div>
+            {expandedSections.has('Resource Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Resource Type') && (
@@ -171,10 +177,13 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Eligibility')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Eligibility</h3>
-            {expandedSections.has('Eligibility') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Eligibility</h3>
+            </div>
+            {expandedSections.has('Eligibility') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Eligibility') && (
@@ -208,10 +217,13 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Deadline')}
-            className="w-full flex items-center justify-between py-2 group"
+            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
           >
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-secondary transition-colors">Deadline</h3>
-            {expandedSections.has('Deadline') ? <ChevronUp className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" /> : <ChevronDown className="w-3.5 h-3.5 text-secondary/60 group-hover:text-secondary transition-colors" />}
+            <div className="flex items-center gap-3">
+              <Calendar className="w-4 h-4 text-primary" />
+              <h3 className="text-sm font-bold">Deadline</h3>
+            </div>
+            {expandedSections.has('Deadline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Deadline') && (
