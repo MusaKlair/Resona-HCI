@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <div className="relative overflow-hidden pt-12 pb-24 md:pt-20 md:pb-32 w-full">
+      <div className="relative overflow-hidden pt-4 pb-24 md:pt-8 md:pb-32 w-full">
         <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] -z-10" />
         <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[80px] -z-10" />
 
@@ -14,15 +14,15 @@ export default function Home() {
             <div className="space-y-8 animate-in fade-in slide-in-from-left-8 duration-700">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold">
                 <Star className="w-4 h-4 fill-primary" />
-                <span>#1 Academic Networking Platform</span>
+                <span>#1 Research Collaboration Platform</span>
               </div>
               
               <h1 className="text-6xl md:text-7xl font-black font-serif leading-[1.1]">
-                Bring joy back to research.
+                Where Genius Meets Collaboration.
               </h1>
               
               <p className="text-lg md:text-xl text-secondary/60 leading-relaxed max-w-xl">
-                The unified workspace where researchers, students, and institutions connect. Discover urgent open problems, secure vital funding, and accelerate your academic impact.
+                The next-generation research ecosystem. Connect with brilliant minds, tackle humanity's toughest problems, and secure the funding your breakthroughs deserve.
               </p>
               
               <div className="flex flex-wrap items-center gap-4 pt-4">

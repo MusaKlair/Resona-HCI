@@ -22,6 +22,10 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   
   useEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+    
     if (currentStep === 5) {
       setIsProcessing(true);
       const timer = setTimeout(() => setIsProcessing(false), 3000);
@@ -67,9 +71,9 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto p-6 md:p-12">
+    <div className="max-w-5xl mx-auto p-4 md:p-8">
       {/* Progress Bar */}
-      <div className="flex justify-between items-center mb-16 relative">
+      <div className="flex justify-between items-center mb-10 relative">
         {/* Background Track */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-secondary/5 -z-10 rounded-full" />
         {/* Highlighted Track */}
@@ -89,10 +93,13 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
         ))}
       </div>
 
-      <div className="card-premium p-0 overflow-hidden flex flex-col md:flex-row min-h-[600px] animate-in slide-in-from-bottom-8 duration-700">
+      <div className="card-premium p-0 overflow-hidden flex flex-col md:flex-row min-h-[500px] animate-in slide-in-from-bottom-8 duration-700">
         {/* Content Side */}
-        <div className="flex-1 p-10 md:p-16 flex flex-col justify-between">
-          <div className="space-y-8">
+        <div className="flex-1 p-6 md:p-10 flex flex-col justify-between">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded">Step {currentStep} of {totalSteps}</span>
+            </div>
             {currentStep === 1 && (
               <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
                 <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
@@ -107,9 +114,9 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
             )}
 
             {currentStep === 2 && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">Define your research focus</h1>
-                <p className="text-secondary/60">Architectural precision begins with clear parameters.</p>
+              <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
+                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Define your research focus</h1>
+                <p className="text-sm text-secondary/60">Select areas that match your expertise or interest.</p>
                 
                 <div className="space-y-4 pt-4">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-secondary/40">Thematic Tags</label>
@@ -141,16 +148,16 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
             )}
 
             {currentStep === 3 && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">Select your academic level</h1>
-                <p className="text-secondary/60">Help us match you with peers and mentors at the right stage.</p>
+              <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
+                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Select your academic level</h1>
+                <p className="text-sm text-secondary/60">This helps us customize your feed and network.</p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                   {academicLevels.map(level => (
                     <button
                       key={level.id}
                       onClick={() => setFormData({ ...formData, level: level.id })}
-                      className={`relative p-6 rounded-3xl border-2 text-left transition-all duration-300 ${
+                      className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-300 ${
                         formData.level === level.id 
                           ? 'bg-secondary/5 border-secondary shadow-md scale-[1.02]' 
                           : 'bg-white border-secondary/10 hover:border-secondary/30 hover:bg-[#F3F4F6]'
@@ -161,8 +168,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                           <Check className="w-5 h-5" />
                         </div>
                       )}
-                      <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center transition-colors ${formData.level === level.id ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
-                        <GraduationCap className="w-5 h-5" />
+                      <div className={`w-8 h-8 rounded-lg mb-3 flex items-center justify-center transition-colors ${formData.level === level.id ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
+                        <GraduationCap className="w-4 h-4" />
                       </div>
                       <h4 className="font-bold text-secondary">{level.label}</h4>
                       <p className="text-xs text-secondary/60">{level.sub}</p>
@@ -173,9 +180,9 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
             )}
 
             {currentStep === 4 && (
-              <div className="space-y-6 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">Choose collaboration preferences</h1>
-                <p className="text-secondary/60">How do you prefer to interact with the community?</p>
+              <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
+                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Collaboration preferences</h1>
+                <p className="text-sm text-secondary/60">How would you like to contribute to the community?</p>
                 
                 <div className="space-y-4 pt-4">
                   {modalities.map(m => {
@@ -185,7 +192,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                     return (
                       <label 
                         key={m.id}
-                        className={`flex items-center gap-5 p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
+                        className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                           isSelected 
                             ? 'bg-secondary/5 border-secondary shadow-md scale-[1.01]' 
                             : 'bg-white border-secondary/10 hover:border-secondary/30 hover:bg-[#F3F4F6]'
@@ -202,8 +209,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                               : [...formData.modalities, m.id]
                           })}
                         />
-                        <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center transition-colors ${isSelected ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
-                          <Icon className="w-6 h-6" />
+                        <div className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center transition-colors ${isSelected ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
+                          <Icon className="w-5 h-5" />
                         </div>
                         <div className="flex-1">
                           <h4 className="font-bold text-secondary">{m.title}</h4>
@@ -260,7 +267,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between pt-12">
+          <div className="flex items-center justify-between pt-8 border-t border-secondary/5 mt-8">
             <button 
               onClick={prevStep}
               className={`flex items-center gap-2 font-bold text-secondary/40 hover:text-secondary transition-colors ${currentStep === 1 ? 'invisible' : ''}`}

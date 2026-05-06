@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,24 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: 'rgb(var(--background) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        border: 'rgb(var(--surface-border) / <alpha-value>)',
+        text: {
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+        },
         primary: {
-          DEFAULT: '#EE7052', // Coral/Peach
-          foreground: '#FFFFFF',
+          DEFAULT: 'rgb(var(--brand-primary) / <alpha-value>)',
         },
         secondary: {
-          DEFAULT: '#0A1128', // Deep Navy
-          foreground: '#FFFFFF',
+          DEFAULT: 'rgb(var(--brand-navy) / <alpha-value>)',
         },
-        background: '#FFFFFF', // Stark White
-        accent: '#94A3B8', // Muted Silver
-        card: {
-          DEFAULT: '#FFFFFF',
-          foreground: '#0A1128',
-        },
-        muted: {
-          DEFAULT: '#F1F5F9',
-          foreground: '#64748B',
-        }
       },
       fontFamily: {
         serif: ['Canela', 'Playfair Display', 'serif'],
@@ -38,7 +34,6 @@ const config: Config = {
       boxShadow: {
         'soft': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
         'elevated': '0 20px 50px -12px rgba(0, 0, 0, 0.1)',
-        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       }
     },
   },

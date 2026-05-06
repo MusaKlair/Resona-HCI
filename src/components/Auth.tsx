@@ -15,6 +15,13 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
   const [isResending, setIsResending] = useState(false);
 
   useEffect(() => {
+    // Use requestAnimationFrame to ensure the scroll happens after the step-related DOM update
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+  }, [step]);
+
+  useEffect(() => {
     let interval: NodeJS.Timeout;
     if (step === 'otp' && timer > 0) {
       interval = setInterval(() => {
@@ -43,6 +50,11 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
+    }
+
+    // Autoverify if all digits are filled
+    if (newOtp.every(val => val !== '')) {
+      onSuccess();
     }
   };
 
@@ -126,7 +138,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
               
               <button 
                 type="submit"
-                className="w-full bg-secondary text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-secondary/90 transition-all shadow-lg shadow-secondary/20"
+                className="w-full bg-primary text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all shadow-lg shadow-primary/20"
               >
                 {mode === 'login' ? 'Send Login Code' : 'Continue with Email'}
               </button>
@@ -156,7 +168,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                   id={`otp-${i}`}
                   type="text"
                   maxLength={1}
-                  className="w-14 h-14 bg-white border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-secondary focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all shadow-sm"
+                  className="w-14 h-14 bg-white border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"
                   value={digit}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                 />
@@ -180,7 +192,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             <button
               onClick={handleVerify}
               disabled={otp.some(d => d === '')}
-              className="w-full bg-secondary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-black text-xs uppercase tracking-widest hover:bg-secondary/90 transition-all disabled:opacity-50"
+              className="w-full bg-primary text-white py-4 rounded-xl flex items-center justify-center gap-3 font-black text-xs uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-50 shadow-lg shadow-primary/20"
             >
               <Lock className="w-4 h-4" />
               Verify & Continue

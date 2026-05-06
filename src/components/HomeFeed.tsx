@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import { ThumbsUp, MessageSquare, Bookmark, ArrowRight, UserPlus, CheckCircle2, LayoutGrid, FileText, Target, Wallet, Share2, Image as ImageIcon, Link as LinkIcon, Video, Send } from 'lucide-react';
+import Link from 'next/link';
+import { ThumbsUp, MessageSquare, Bookmark, CheckCircle2, LayoutGrid, FileText, Target, Wallet, Share2, Image as ImageIcon, Send } from 'lucide-react';
 
 const mockFeed = [
   {
@@ -11,6 +12,7 @@ const mockFeed = [
     field: 'Materials Science',
     time: '2h ago',
     title: 'Synthesis of Novel Carbon Nanotube Arrays for High-Efficiency Energy Storage',
+    href: '/publication',
     summary: 'We present a reproducible method for synthesizing highly ordered carbon nanotube arrays, demonstrating a 40% increase in specific capacitance compared to traditional random networks. This structural consistency opens new pathways for supercapacitor design.',
     imageUrl: '/post_nanotube.png',
     likes: 142,
@@ -239,8 +241,14 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               </span>
             </div>
 
-            <div className="cursor-pointer" onClick={() => onViewDetail(post.id)}>
-              <h2 className="text-xl font-bold font-serif mb-1 leading-snug">{post.title}</h2>
+            <div className="cursor-pointer">
+              {post.href ? (
+                <Link href={post.href}>
+                  <h2 className="text-xl md:text-2xl font-black font-serif mb-1 leading-tight hover:text-primary transition-colors">{post.title}</h2>
+                </Link>
+              ) : (
+                <h2 className="text-xl font-bold font-serif mb-1 leading-snug" onClick={() => onViewDetail(post.id)}>{post.title}</h2>
+              )}
                 <div className="flex items-center gap-1.5 mb-3">
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
                     {post.matchScore}

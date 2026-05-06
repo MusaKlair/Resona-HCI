@@ -1,6 +1,7 @@
 "use client";
-import React from 'react';
-import { Search, Bookmark, X, ChevronDown, CheckCircle2, Users, Target, Network, ChevronUp, Clock, School, Briefcase, BarChart, Check, Square } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
+import { Search, MapPin, Briefcase, GraduationCap, Clock, Check, CheckCircle2, ChevronDown, ChevronUp, Star, Filter, Bookmark, X, Users, MessageSquare, Network, School, Briefcase as WorkIcon, Target, BarChart, ArrowRight } from 'lucide-react';
 
 const initialMatchProfiles = [
   {
@@ -154,7 +155,8 @@ const MatchingHub: React.FC = () => {
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+      {/* Left Filters Sidebar */}
+      <aside className="lg:col-span-2 space-y-6 sticky top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-hide">
         <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
 
         <nav className="flex flex-col gap-1">
@@ -162,7 +164,7 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Role Type')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Users className="w-4 h-4 text-primary" />
@@ -181,7 +183,7 @@ const MatchingHub: React.FC = () => {
                 <button 
                   key={role.name}
                   onClick={() => toggleFilter(role.name)}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${
                     activeFilters.includes(role.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
                   }`}
                 >
@@ -202,7 +204,7 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Experience')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <BarChart className="w-4 h-4 text-primary" />
@@ -242,7 +244,7 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Institution')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <School className="w-4 h-4 text-primary" />
@@ -399,17 +401,19 @@ const MatchingHub: React.FC = () => {
                 </div>
 
               <div className="flex flex-col items-center text-center mb-6">
-                <div className="relative w-20 h-20 group/avatar cursor-pointer">
+                <Link href={`/profile/${profile.id}`} className="relative w-20 h-20 group/avatar cursor-pointer">
                   <div className="w-full h-full bg-secondary/5 rounded-full overflow-hidden border-2 border-white shadow-soft transition-transform group-hover/avatar:scale-105">
                     <img src={profile.avatar} alt={profile.name} className="w-full h-full object-cover" />
                   </div>
                   {/* Status Indicator */}
                   <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full shadow-sm" />
-                </div>
+                </Link>
                 
                 <div className="mt-4">
                   <div className="flex items-center justify-center gap-1.5 mb-1">
-                    <h3 className="text-xl font-bold font-serif text-secondary hover:text-primary transition-colors cursor-pointer">{profile.name}</h3>
+                    <Link href={`/profile/${profile.id}`}>
+                      <h3 className="text-xl font-bold font-serif text-secondary hover:text-primary transition-colors cursor-pointer">{profile.name}</h3>
+                    </Link>
                     {profile.isVerified && (
                       <div className="bg-primary/10 p-0.5 rounded-full" title="Verified Researcher">
                         <CheckCircle2 className="w-3.5 h-3.5 text-primary fill-primary/10" />
@@ -491,7 +495,7 @@ const MatchingHub: React.FC = () => {
         
         <div className="space-y-6 mb-12">
           {recentProfiles.map(profile => (
-            <div key={profile.id} className="flex items-center justify-between group cursor-pointer">
+            <Link key={profile.id} href={`/profile/${profile.id}`} className="flex items-center justify-between group cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-secondary/5 rounded-lg overflow-hidden border border-secondary/10">
                   <img src={profile.avatar} alt={profile.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
@@ -504,7 +508,7 @@ const MatchingHub: React.FC = () => {
               <button className="p-1.5 rounded-md text-secondary/20 hover:text-primary hover:bg-primary/5 transition-all opacity-0 group-hover:opacity-100">
                 <Users className="w-3.5 h-3.5" />
               </button>
-            </div>
+            </Link>
           ))}
         </div>
 

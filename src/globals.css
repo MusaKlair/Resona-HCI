@@ -6,10 +6,15 @@
   --font-serif: var(--font-serif), "Playfair Display", serif;
   --font-sans: var(--font-sans), "Inter", sans-serif;
   
-  --color-primary: #EE7052;
-  --color-secondary: #0A1128;
-  --color-background: #FFFFFF;
-  --color-accent: #94A3B8;
+  --color-primary: rgb(var(--brand-primary));
+  --color-secondary: rgb(var(--brand-navy));
+  
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-border: rgb(var(--surface-border));
+  
+  --color-text-primary: rgb(var(--text-primary));
+  --color-text-secondary: rgb(var(--text-secondary));
   
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;
@@ -19,9 +24,38 @@
 }
 
 @layer base {
+  :root {
+    /* LIGHT MODE (Default) */
+    --background: 255 255 255; 
+    --surface: 249 250 251; 
+    --surface-border: 229 231 235; 
+    
+    --text-primary: 10 17 40; 
+    --text-secondary: 71 85 105; 
+    
+    --brand-primary: 238 112 82; 
+    --brand-navy: 10 17 40; 
+  }
+
+  .dark {
+    /* DARK MODE */
+    --background: 10 15 30; 
+    --surface: 17 24 39; 
+    --surface-border: 31 41 55;
+    
+    --text-primary: 249 250 251; 
+    --text-secondary: 156 163 175; 
+    
+    --brand-primary: 255 140 100; 
+    --brand-navy: 147 197 253; 
+  }
+
   body {
-    @apply text-secondary antialiased bg-gradient-to-br from-[#FFF5F2] via-white to-white min-h-screen;
+    background-color: rgb(var(--background));
+    color: rgb(var(--text-primary));
+    @apply antialiased min-h-screen;
     font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -32,7 +66,8 @@
 
 @layer components {
   .card-premium {
-    @apply bg-white rounded-4xl border border-white/20 shadow-soft p-8 transition-all hover:shadow-elevated hover:scale-[1.01];
+    background-color: rgb(var(--surface));
+    @apply rounded-4xl border border-border shadow-soft p-8 transition-all hover:shadow-elevated hover:scale-[1.01];
   }
   
   .btn-primary {
@@ -40,6 +75,17 @@
   }
   
   .btn-outline {
-    @apply border border-primary/40 text-primary px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-primary/5 active:scale-95;
+    border: 1px solid rgba(var(--brand-primary), 0.4);
+    color: rgb(var(--brand-primary));
+    @apply px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-primary/5 active:scale-95;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

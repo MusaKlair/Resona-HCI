@@ -89,7 +89,8 @@ const FundingBoard: React.FC = () => {
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+      {/* Left Filters Sidebar */}
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide">
         <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
         
         <nav className="flex flex-col gap-1">
@@ -97,7 +98,7 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Microscope className="w-4 h-4 text-primary" />
@@ -116,7 +117,7 @@ const FundingBoard: React.FC = () => {
                 <button 
                   key={disc.name}
                   onClick={() => toggleFilter(disc.name)}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${
                     activeFilters.includes(disc.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
                   }`}
                 >
@@ -137,7 +138,7 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Resource Type')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Wallet className="w-4 h-4 text-primary" />
@@ -178,7 +179,7 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Eligibility')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -218,7 +219,7 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Deadline')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Calendar className="w-4 h-4 text-primary" />

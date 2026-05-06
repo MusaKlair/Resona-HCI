@@ -23,17 +23,21 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from '../components/ThemeProvider';
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${playfair.variable} ${inter.variable}`}>
-      <body suppressHydrationWarning className="font-sans">
-        <NavigationLayout>
-          {children}
-        </NavigationLayout>
+    <html lang="en" className={`scroll-smooth ${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className="font-sans">
+        <ThemeProvider defaultTheme="system">
+          <NavigationLayout>
+            {children}
+          </NavigationLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
