@@ -6,7 +6,7 @@ import { Search, MapPin, Briefcase, GraduationCap, Clock, Check, CheckCircle2, C
 const initialMatchProfiles = [
   {
     id: 1,
-    name: 'Dr. Alice Chen',
+    name: 'Dr. Sana Javed',
     avatar: '/avatar_aris.png',
     title: 'Senior Researcher',
     institution: 'TechCorp Institute',
@@ -38,7 +38,7 @@ const initialMatchProfiles = [
   },
   {
     id: 3,
-    name: 'Prof. Julian Thorne',
+    name: 'Prof. Bilal Hussain',
     avatar: '/avatar_elena.png',
     title: 'Principal Engineer',
     institution: 'Quantum AI Research',
@@ -54,7 +54,7 @@ const initialMatchProfiles = [
   },
   {
     id: 4,
-    name: 'Elena Rostova',
+    name: 'Hira Sheikh',
     avatar: '/avatar_sarah.png',
     title: 'Cognitive Science Dept.',
     institution: 'Stanford University',
@@ -71,9 +71,9 @@ const initialMatchProfiles = [
 ];
 
 const recentProfiles = [
-  { id: 1, name: 'Elena Rostova', title: 'Cognitive Science Dept.', avatar: '/avatar_elena.png' },
-  { id: 2, name: 'Marcus Chen', title: 'Data Scientist', avatar: '/avatar_marcus.png' },
-  { id: 3, name: 'Sarah Jenkins', title: 'Robotics Engineer', avatar: '/avatar_sarah.png' },
+  { id: 1, name: 'Hira Sheikh', title: 'Cognitive Science Dept.', avatar: '/avatar_elena.png' },
+  { id: 2, name: 'Hamza Tariq', title: 'Data Scientist', avatar: '/avatar_marcus.png' },
+  { id: 3, name: 'Fatima Nawaz', title: 'Robotics Engineer', avatar: '/avatar_sarah.png' },
 ];
 
 const MatchingHub: React.FC = () => {
@@ -338,7 +338,7 @@ const MatchingHub: React.FC = () => {
         </div>
 
         {/* Active Filters Row & Sort */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[#F3F4F6]">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
           <div className="flex flex-wrap items-center gap-2">
             {activeFilters.map(filter => (
               <div key={filter} className="flex items-center gap-2 px-3 py-1 bg-secondary text-white rounded-full text-[10px] font-black uppercase tracking-widest animate-in zoom-in-95 duration-200">
@@ -421,7 +421,7 @@ const MatchingHub: React.FC = () => {
                     )}
                   </div>
                   <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
-                    {profile.title} • {profile.institution}
+                    {profile.title} â€¢ {profile.institution}
                   </p>
                   <div className="flex flex-col items-center gap-2">
                     <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-text-secondary">
@@ -429,7 +429,7 @@ const MatchingHub: React.FC = () => {
                     </span>
                     <div className="flex items-center gap-1.5 text-[9px] font-semibold text-text-secondary italic">
                       <Clock className="w-2.5 h-2.5" />
-                      {profile.status} • {profile.lastActive}
+                      {profile.status} â€¢ {profile.lastActive}
                     </div>
                   </div>
                 </div>

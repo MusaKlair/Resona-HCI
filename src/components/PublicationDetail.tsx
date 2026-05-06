@@ -47,10 +47,10 @@ const PublicationDetail: React.FC = () => {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full border-2 border-white shadow-md overflow-hidden shrink-0">
-                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Dr. Aris Thorne" className="w-full h-full object-cover" />
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Dr. Ahmed Raza" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="text-base font-black text-text-primary">Dr. Aris Thorne</p>
+                  <p className="text-base font-black text-text-primary">Dr. Ahmed Raza</p>
                   <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Stanford University</p>
                 </div>
               </div>
@@ -77,9 +77,9 @@ const PublicationDetail: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="text-[9px] font-black text-text-secondary uppercase tracking-[0.2em] flex flex-wrap items-center gap-y-2">
                 <span>Published: Oct 12, 2024</span>
-                <span className="mx-2 opacity-20 hidden md:inline">•</span>
+                <span className="mx-2 opacity-20 hidden md:inline">â€¢</span>
                 <span>DOI: 10.1038/s41586-024-0000-0</span>
-                <span className="mx-2 opacity-20 hidden md:inline">•</span>
+                <span className="mx-2 opacity-20 hidden md:inline">â€¢</span>
                 <span className="text-text-secondary">Materials Science</span>
               </div>
               <span className="px-3 py-1 bg-surface-alt text-text-secondary text-[9px] font-black uppercase tracking-widest rounded border border-border whitespace-nowrap">
@@ -152,14 +152,14 @@ const PublicationDetail: React.FC = () => {
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-surface-alt flex items-center justify-center overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Dr. Marcus Chen" className="w-full h-full object-cover" />
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Dr. Hamza Tariq" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-text-primary">Dr. Marcus Chen</p>
-                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">MIT • 4h ago</p>
+                      <p className="text-sm font-bold text-text-primary">Dr. Hamza Tariq</p>
+                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">MIT â€¢ 4h ago</p>
                     </div>
                   </div>
-                  <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
+                  <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed font-medium">
                   Have you observed any degradation in cycle stability beyond 500 cycles? In our recent trials with CVD nanotube arrays, we noticed a sharp drop-off when the patterned catalyst wasn't uniform at the atomic scale. 
@@ -178,14 +178,14 @@ const PublicationDetail: React.FC = () => {
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-surface-alt flex items-center justify-center overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Sarah Jenkins" className="w-full h-full object-cover" />
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=facepad&face=2&w=256&h=256&q=80" alt="Fatima Nawaz" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-text-primary">Sarah Jenkins</p>
-                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Oxford Materials • 8h ago</p>
+                      <p className="text-sm font-bold text-text-primary">Fatima Nawaz</p>
+                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Oxford Materials â€¢ 8h ago</p>
                     </div>
                   </div>
-                  <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
+                  <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed font-medium">
                   The methodology section on CVD parameters is exceptionally detailed. This will be very helpful for our upcoming replication study on high-efficiency arrays.

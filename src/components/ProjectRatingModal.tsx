@@ -104,7 +104,7 @@ const ProjectRatingModal: React.FC<RatingModalProps> = ({ onClose }) => {
                   <textarea 
                     rows={6}
                     placeholder="Provide specific observations on collaboration, technical depth, and reliability..."
-                    className="w-full p-5 text-sm bg-surface-alt border border-[#E5E7EB] outline-none focus:border-border focus:ring-4 focus:ring-secondary/5 focus:bg-surface transition-all shadow-sm resize-none rounded-xl placeholder:text-text-secondary"
+                    className="w-full p-5 text-sm bg-surface-alt border border-border outline-none focus:border-border focus:ring-4 focus:ring-secondary/5 focus:bg-surface transition-all shadow-sm resize-none rounded-xl placeholder:text-text-secondary"
                   />
                 </div>
               </div>

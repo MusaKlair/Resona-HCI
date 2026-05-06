@@ -259,6 +259,7 @@ const FundingBoard: React.FC = () => {
               placeholder="Search grants, compute credits, datasets..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search grants and resources"
               className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-text-secondary font-medium h-12"
             />
             <div className="flex items-center p-1 bg-surface-alt rounded-xl ml-2 border border-border">
@@ -287,7 +288,7 @@ const FundingBoard: React.FC = () => {
         </div>
 
         {/* Active Filters Row & Sort */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[#F3F4F6]">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
           <div className="flex flex-wrap items-center gap-2">
             {activeFilters.map(filter => (
               <div key={filter} className="flex items-center gap-2 px-3 py-1 bg-secondary text-white rounded-full text-[10px] font-black uppercase tracking-widest animate-in zoom-in-95 duration-200">
@@ -377,7 +378,7 @@ const FundingBoard: React.FC = () => {
                         <div className="flex flex-col">
                           <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Value</span>
                           <span className="text-sm font-bold text-text-primary flex items-center gap-2">
-                            💰 {grant.value}
+                            ðŸ’° {grant.value}
                           </span>
                         </div>
                       </div>
@@ -411,8 +412,8 @@ const FundingBoard: React.FC = () => {
                     <p className="text-sm text-text-secondary leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{task.desc}</p>
                     
                     <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-text-secondary mb-10 pb-6 border-b border-border">
-                      <span className="flex items-center gap-1.5">⏱ {task.time}</span>
-                      <span className="flex items-center gap-1.5">🪙 {task.credits}</span>
+                      <span className="flex items-center gap-1.5">â± {task.time}</span>
+                      <span className="flex items-center gap-1.5">ðŸª™ {task.credits}</span>
                     </div>
                     
                     <button className="w-full btn-outline !py-4 !rounded-xl">

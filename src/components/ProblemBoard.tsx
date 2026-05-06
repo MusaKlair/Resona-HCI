@@ -255,13 +255,14 @@ const ProblemBoard: React.FC = () => {
               placeholder="Search problem scopes, keywords, or required skills..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              aria-label="Search open problems"
               className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-text-secondary font-medium h-12"
             />
           </div>
         </div>
 
         {/* Active Filters Row & Sort */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-[#F3F4F6]">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-border">
           <div className="flex flex-wrap items-center gap-2">
             {activeFilters.map(filter => (
               <div key={filter} className="flex items-center gap-2 px-3 py-1 bg-secondary text-white rounded-full text-[10px] font-black uppercase tracking-widest animate-in zoom-in-95 duration-200">

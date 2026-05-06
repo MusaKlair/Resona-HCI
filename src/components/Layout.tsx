@@ -140,6 +140,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <input 
                     type="text" 
                     placeholder="Search..." 
+                    aria-label="Search Resona"
                     className="pl-9 pr-4 py-2 bg-surface-alt border border-transparent rounded-full text-sm focus:outline-none focus:border-primary/30 focus:bg-surface transition-all w-32 focus:w-48"
                   />
                 </div>
@@ -147,6 +148,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   href="/mentorship"
                   className="p-2.5 rounded-full hover:bg-surface-alt transition-colors relative group"
                   title="Inbox"
+                  aria-label="Messages inbox"
                 >
                   <Mail className="w-5 h-5 text-text-secondary group-hover:text-primary transition-colors" />
                   <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface" />
@@ -156,6 +158,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <button 
                     onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
                     className={`p-2.5 rounded-full transition-all relative ${isNotificationsOpen ? 'bg-surface-alt text-primary' : 'hover:bg-surface-alt text-text-secondary'}`}
+                    aria-label="Notifications"
+                    aria-expanded={isNotificationsOpen}
                   >
                     <Bell className="w-5 h-5" />
                     <div className="absolute top-2 right-2.5 w-1.5 h-1.5 bg-primary rounded-full border-2 border-surface" />
@@ -172,11 +176,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         </div>
                         <div className="max-h-[350px] overflow-y-auto">
                           {[
-                            { id: 1, title: 'New Peer Review', desc: 'Dr. Aris Thorne commented on your publication.', time: '2m ago', unread: true },
+                            { id: 1, title: 'New Peer Review', desc: 'Dr. Ahmed Raza commented on your publication.', time: '2m ago', unread: true },
                             { id: 2, title: 'Match Alert', desc: 'A new researcher aligns with your Quantum Ethics project.', time: '1h ago', unread: true },
                             { id: 3, title: 'Grant Opportunity', desc: 'National Science Foundation released a new RFP.', time: '3h ago', unread: false },
                             { id: 4, title: 'Citation Spike', desc: 'Your 2023 paper received 5 new citations today.', time: '5h ago', unread: false },
-                            { id: 5, title: 'Collaboration Invite', desc: 'Sarah Jenkins wants to discuss a joint paper.', time: '8h ago', unread: false },
+                            { id: 5, title: 'Collaboration Invite', desc: 'Fatima Nawaz wants to discuss a joint paper.', time: '8h ago', unread: false },
                           ].map((notif) => (
                             <div key={notif.id} className={`p-4 border-b border-border hover:bg-surface-alt transition-colors cursor-pointer group relative ${notif.unread ? 'bg-primary/[0.02]' : ''}`}>
                               {notif.unread && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
@@ -204,6 +208,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   onClick={toggleTheme}
                   className="p-2.5 rounded-full hover:bg-surface-alt text-text-secondary transition-all"
                   title="Toggle Dark Mode"
+                  aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>
@@ -218,6 +223,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <button 
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className="w-10 h-10 rounded-full overflow-hidden border-2 border-transparent hover:border-primary transition-all shadow-sm block focus:outline-none"
+                    aria-label="Open profile menu"
+                    aria-expanded={isProfileOpen}
                   >
                     <img src="/avatar_aris.png" alt="Profile" className="w-full h-full object-cover" />
                   </button>
@@ -387,7 +394,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             
             <div className="border-t border-border pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-text-secondary uppercase tracking-wider font-bold">
-              <p>© 2026 Resona Academic Platform. All rights reserved.</p>
+              <p>Â© 2026 Resona Academic Platform. All rights reserved.</p>
               <div className="flex gap-6">
                 <a href="#" className="hover:text-text-primary transition-colors">Privacy Policy</a>
                 <a href="#" className="hover:text-text-primary transition-colors">Terms of Service</a>

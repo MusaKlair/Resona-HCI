@@ -136,7 +136,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                         className={`px-4 py-2.5 rounded-full text-xs font-bold border transition-all duration-200 flex items-center gap-1.5 ${
                           formData.tags.includes(tag) 
                             ? 'bg-secondary border-secondary text-white shadow-md scale-105' 
-                            : 'bg-surface border-border text-text-secondary hover:bg-[#F3F4F6] hover:text-text-primary hover:border-border'
+                            : 'bg-surface border-border text-text-secondary hover:bg-surface-alt hover:text-text-primary hover:border-border'
                         }`}
                       >
                         {tag} {formData.tags.includes(tag) && <X className="w-3.5 h-3.5" />}
@@ -160,7 +160,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                       className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-300 ${
                         formData.level === level.id 
                           ? 'bg-surface-alt border-secondary shadow-md scale-[1.02]' 
-                          : 'bg-surface border-border hover:border-border hover:bg-[#F3F4F6]'
+                          : 'bg-surface border-border hover:border-border hover:bg-surface-alt'
                       }`}
                     >
                       {formData.level === level.id && (
@@ -195,7 +195,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                         className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                           isSelected 
                             ? 'bg-surface-alt border-secondary shadow-md scale-[1.01]' 
-                            : 'bg-surface border-border hover:border-border hover:bg-[#F3F4F6]'
+                            : 'bg-surface border-border hover:border-border hover:bg-surface-alt'
                         }`}
                       >
                         <input 

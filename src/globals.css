@@ -42,6 +42,10 @@
     --border: #E5E7EB;
     --brand-coral: #EE7052;
     --brand-navy: #0A1128;
+    
+    /* SHADOWS */
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    --shadow-elevated: 0 20px 50px -12px rgba(0, 0, 0, 0.1);
   }
 
   .dark {
@@ -59,6 +63,10 @@
     --border: #1E293B;
     --brand-coral: #EE7052;
     --brand-navy: #60A5FA;
+    
+    /* SHADOWS — slightly stronger for depth on dark surfaces */
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
   }
 
   body {
@@ -69,6 +77,13 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     @apply font-semibold tracking-tight;
+  }
+
+  /* Global keyboard focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--brand-coral);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 

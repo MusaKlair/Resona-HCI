@@ -120,7 +120,7 @@ export default function Settings() {
                   onClick={() => {
                     sr.toggleEnabled();
                     if (!sr.isEnabled) {
-                      // Will be enabled after toggle — announce it
+                      // Will be enabled after toggle â€” announce it
                       setTimeout(() => {
                         const u = new SpeechSynthesisUtterance('Screen reader enabled. Navigate to your Home Feed to begin listening.');
                         u.rate = 0.95;
@@ -186,7 +186,7 @@ export default function Settings() {
               <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm space-y-6">
                 <div>
                   <label className="block text-[10px] font-black uppercase tracking-widest text-text-secondary mb-2">Display Name</label>
-                  <input type="text" defaultValue="Dr. Aris Thorne" className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" />
+                  <input type="text" defaultValue="Dr. Ahmed Raza" className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" />
                 </div>
                 
                 <div>

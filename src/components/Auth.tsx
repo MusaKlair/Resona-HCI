@@ -121,14 +121,16 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
 
             <form onSubmit={handleSendOTP} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary ml-1">
+                <label htmlFor="auth-email" className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary ml-1">
                   Institutional Email Address
                 </label>
                 <div className="relative group">
                   <input
+                    id="auth-email"
                     type="email"
                     required
                     placeholder="name@university.edu"
+                    aria-describedby="email-help"
                     className="w-full bg-surface-alt border-2 border-transparent rounded-2xl px-6 py-4 outline-none focus:border-primary/30 focus:bg-surface transition-all text-text-primary font-bold"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -167,8 +169,10 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                   key={i}
                   id={`otp-${i}`}
                   type="text"
+                  inputMode="numeric"
                   maxLength={1}
-                  className="w-14 h-14 bg-surface border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-text-primary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"
+                  aria-label={`Digit ${i + 1} of 6`}
+                  className="w-14 h-14 bg-surface border border-border rounded-xl text-center text-2xl font-semibold text-text-primary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"
                   value={digit}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                 />

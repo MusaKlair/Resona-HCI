@@ -76,7 +76,7 @@ export default function Home() {
                   <div className="relative">
                     <img 
                       src="/avatar_aris.png" 
-                      alt="Dr. Aris Thorne" 
+                      alt="Dr. Ahmed Raza" 
                       className="w-12 h-12 rounded-full object-cover border-2 border-primary/30"
                     />
                     <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-secondary flex items-center justify-center">
@@ -85,7 +85,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Available Now</div>
-                    <div className="text-lg font-bold font-serif leading-none mb-1">Dr. Aris Thorne</div>
+                    <div className="text-lg font-bold font-serif leading-none mb-1">Dr. Ahmed Raza</div>
                     <div className="text-[10px] font-medium text-primary/80 uppercase tracking-widest">Quantum Physics</div>
                   </div>
                 </div>

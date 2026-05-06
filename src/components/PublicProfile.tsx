@@ -46,19 +46,19 @@ const PublicProfile: React.FC = () => {
         <div className="px-8 md:px-12 pb-12 flex flex-col md:flex-row gap-8 -mt-20 relative z-10">
           {/* Circular Professional Profile Picture */}
           <div className="w-48 h-48 bg-surface border-8 border-white rounded-full overflow-hidden shadow-2xl shrink-0">
-             <img src="/avatar_sarah.png" alt="Dr. Arya Khan" className="w-full h-full object-cover scale-110" />
+             <img src="/avatar_sarah.png" alt="Dr. Ayesha Malik" className="w-full h-full object-cover scale-110" />
           </div>
           
           <div className="flex-1 pt-24 space-y-6">
             <div className="flex flex-col xl:flex-row justify-between items-start gap-8">
               <div className="space-y-3">
                 <h1 className="text-5xl font-black font-serif tracking-tight text-text-primary flex items-center gap-3">
-                  Dr. Arya Khan
+                  Dr. Ayesha Malik
                   <ShieldCheck className="w-10 h-10 text-primary" />
                 </h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <p className="text-sm font-bold text-text-secondary">Lead Researcher, Cognitive Architecture Institute</p>
-                  <span className="hidden sm:block text-text-secondary">•</span>
+                  <span className="hidden sm:block text-text-secondary">â€¢</span>
                   <a href="#" className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline">
                     orcid.org/0000-0002-1825-0097
                   </a>
@@ -99,7 +99,7 @@ const PublicProfile: React.FC = () => {
           
           {/* Credibility Index & Quick Stats */}
           <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-8 bg-surface border border-[#E5E7EB] rounded-[32px] shadow-soft flex items-center justify-between group transition-all">
+            <div className="p-8 bg-surface border border-border rounded-[32px] shadow-soft flex items-center justify-between group transition-all">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary mb-1">Current Standing</div>
                 <div className="text-4xl font-black font-serif text-text-primary mb-1">850</div>
@@ -112,7 +112,7 @@ const PublicProfile: React.FC = () => {
               </div>
             </div>
             
-            <div className="p-8 bg-surface border border-[#E5E7EB] rounded-[32px] shadow-soft flex items-center justify-between group transition-all">
+            <div className="p-8 bg-surface border border-border rounded-[32px] shadow-soft flex items-center justify-between group transition-all">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary mb-1">Academic Reach</div>
                 <div className="text-4xl font-black font-serif text-text-primary mb-1">14.2k</div>
@@ -127,7 +127,7 @@ const PublicProfile: React.FC = () => {
           </section>
 
           {/* Contribution Graph - Unified Card */}
-          <section className="bg-surface border border-[#E5E7EB] rounded-[32px] shadow-soft overflow-hidden">
+          <section className="bg-surface border border-border rounded-[32px] shadow-soft overflow-hidden">
             <div className="p-8 border-b border-border flex items-center justify-between">
               <h2 className="text-xl font-black font-serif tracking-tight text-text-primary">Contribution Graph</h2>
               <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-border text-text-primary px-4 py-2 rounded-xl hover:bg-surface-alt transition-colors">
@@ -168,7 +168,7 @@ const PublicProfile: React.FC = () => {
                             {[...Array(52)].map((_, week) => {
                               const level = Math.floor(Math.random() * 4);
                               const colors = [
-                                'bg-[#F3F4F6]',
+                                'bg-surface-alt',
                                 'bg-primary/20',
                                 'bg-primary/60',
                                 'bg-primary'
@@ -192,7 +192,7 @@ const PublicProfile: React.FC = () => {
               <div className="flex items-center justify-end gap-3 mt-8">
                 <span className="text-[9px] font-black text-text-secondary uppercase tracking-widest">Less Activity</span>
                 <div className="flex gap-[3px]">
-                  <div className="w-3 h-3 rounded-[1.5px] bg-[#F3F4F6]" />
+                  <div className="w-3 h-3 rounded-[1.5px] bg-surface-alt" />
                   <div className="w-3 h-3 rounded-[1.5px] bg-primary/20" />
                   <div className="w-3 h-3 rounded-[1.5px] bg-primary/60" />
                   <div className="w-3 h-3 rounded-[1.5px] bg-primary" />

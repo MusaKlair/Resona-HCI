@@ -42,19 +42,19 @@ const ProfileDashboard: React.FC = () => {
         <div className="px-8 md:px-12 pb-12 flex flex-col md:flex-row gap-8 -mt-20 relative z-10">
           {/* Circular Professional Profile Picture */}
           <div className="w-48 h-48 bg-surface border-8 border-white rounded-full overflow-hidden shadow-2xl shrink-0">
-             <img src="/avatar_sarah.png" alt="Dr. Arya Khan" className="w-full h-full object-cover scale-110" />
+             <img src="/avatar_sarah.png" alt="Dr. Ayesha Malik" className="w-full h-full object-cover scale-110" />
           </div>
           
           <div className="flex-1 pt-24 space-y-6">
             <div className="flex flex-col xl:flex-row justify-between items-start gap-8">
               <div className="space-y-3">
                 <h1 className="text-5xl font-black font-serif tracking-tight text-text-primary flex items-center gap-3">
-                  Dr. Arya Khan
+                  Dr. Ayesha Malik
                   <ShieldCheck className="w-10 h-10 text-primary" />
                 </h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <p className="text-sm font-bold text-text-secondary">Lead Researcher, Cognitive Architecture Institute</p>
-                  <span className="hidden sm:block text-text-secondary">•</span>
+                  <span className="hidden sm:block text-text-secondary">â€¢</span>
                   <a href="#" className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline">
                     orcid.org/0000-0002-1825-0097
                   </a>
@@ -90,7 +90,7 @@ const ProfileDashboard: React.FC = () => {
           
           {/* Credibility Index & Quick Stats */}
           <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-8 bg-surface border border-[#E5E7EB] rounded-2xl shadow-soft flex items-center justify-between group transition-all">
+            <div className="p-8 bg-surface border border-border rounded-2xl shadow-soft flex items-center justify-between group transition-all">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary mb-1">Current Standing</div>
                 <div className="text-4xl font-black font-serif text-text-primary mb-1">850</div>
@@ -103,7 +103,7 @@ const ProfileDashboard: React.FC = () => {
               </div>
             </div>
             
-            <div className="p-8 bg-surface border border-[#E5E7EB] rounded-2xl shadow-soft flex items-center justify-between group transition-all">
+            <div className="p-8 bg-surface border border-border rounded-2xl shadow-soft flex items-center justify-between group transition-all">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary mb-1">Academic Reach</div>
                 <div className="text-4xl font-black font-serif text-text-primary mb-1">14.2k</div>
@@ -118,7 +118,7 @@ const ProfileDashboard: React.FC = () => {
           </section>
 
         {/* Contribution Graph - Unified Card */}
-        <section className="bg-surface border border-[#E5E7EB] rounded-2xl shadow-soft overflow-hidden">
+        <section className="bg-surface border border-border rounded-2xl shadow-soft overflow-hidden">
           <div className="p-8 border-b border-border flex items-center justify-between">
             <h2 className="text-xl font-black font-serif tracking-tight text-text-primary">Contribution Graph</h2>
             <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-border text-text-primary px-4 py-2 rounded-md hover:bg-surface-alt transition-colors">
@@ -173,7 +173,7 @@ const ProfileDashboard: React.FC = () => {
                           }
 
                           const colors = [
-                            'bg-[#F3F4F6]',          // L0: Empty
+                            'bg-surface-alt',          // L0: Empty
                             'bg-primary/20',         // L1: Low
                             'bg-primary/60',         // L2: Medium
                             'bg-primary'             // L3: High
@@ -192,7 +192,7 @@ const ProfileDashboard: React.FC = () => {
                             >
                               {/* Detailed Tooltip Popover */}
                               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 w-max opacity-0 group-hover/cell:opacity-100 transition-all duration-300 pointer-events-none translate-y-2 group-hover/cell:translate-y-0">
-                                <div className="bg-[#1B1B1F] text-white text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap">
+                                <div className="bg-secondary text-white text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap">
                                   {contributions > 0 ? `${contributions} contributions` : 'No contributions'} on {dateString}
                                 </div>
                                 {/* Tooltip Arrow */}
@@ -211,7 +211,7 @@ const ProfileDashboard: React.FC = () => {
             <div className="flex items-center justify-end gap-3 mt-8">
               <span className="text-[9px] font-black text-text-secondary uppercase tracking-widest">Less Activity</span>
               <div className="flex gap-[3px]">
-                <div className="w-3 h-3 rounded-[1.5px] bg-[#F3F4F6]" />
+                <div className="w-3 h-3 rounded-[1.5px] bg-surface-alt" />
                 <div className="w-3 h-3 rounded-[1.5px] bg-primary/20" />
                 <div className="w-3 h-3 rounded-[1.5px] bg-primary/60" />
                 <div className="w-3 h-3 rounded-[1.5px] bg-primary" />
@@ -294,7 +294,7 @@ const ProfileDashboard: React.FC = () => {
           <div className="space-y-6">
             {[
               { name: 'Dr. Fatima Zahra', field: 'Neural Systems', avatar: '/avatar_elena.png' },
-              { name: 'Marcus Chen', field: 'Data Integrity', avatar: '/avatar_marcus.png' }
+              { name: 'Hamza Tariq', field: 'Data Integrity', avatar: '/avatar_marcus.png' }
             ].map(collab => (
               <div key={collab.name} className="flex items-center gap-4 group cursor-pointer">
                 <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-border group-hover:border-primary/50 transition-colors shadow-sm">
@@ -313,8 +313,8 @@ const ProfileDashboard: React.FC = () => {
           <h3 className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-6 pb-2 border-b border-border">Frequent Co-Authors</h3>
           <div className="space-y-6">
             {[
-              { name: 'Sarah Jenkins', count: '12 Joint Papers', avatar: '/avatar_sarah.png' },
-              { name: 'Dr. Aris Thorne', count: '8 Joint Papers', avatar: '/avatar_aris.png' }
+              { name: 'Fatima Nawaz', count: '12 Joint Papers', avatar: '/avatar_sarah.png' },
+              { name: 'Dr. Ahmed Raza', count: '8 Joint Papers', avatar: '/avatar_aris.png' }
             ].map(author => (
               <div key={author.name} className="flex items-center gap-4 group cursor-pointer">
                 <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-border group-hover:border-primary/50 transition-colors shadow-sm">

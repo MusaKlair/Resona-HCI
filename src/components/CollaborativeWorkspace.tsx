@@ -24,9 +24,9 @@ const workspaceProjects = [
 ];
 
 const urgentActivity = [
-  { id: 1, type: 'MENTION', user: 'Dr. Aris Thorne', project: 'TraceHunter Dev', text: 'mentioned you in a comment: "Should we use the new GNN model?"', time: '10m ago' },
+  { id: 1, type: 'MENTION', user: 'Dr. Ahmed Raza', project: 'TraceHunter Dev', text: 'mentioned you in a comment: "Should we use the new GNN model?"', time: '10m ago' },
   { id: 2, type: 'TASK', user: 'System', project: 'Quantum Pipeline', text: 'Task "Validation Script" is overdue by 2 days.', time: '2h ago' },
-  { id: 3, type: 'FILE', user: 'Elena Rostova', project: 'UI Overhaul', text: 'uploaded "v2_layout_specs.pdf" to the file hub.', time: '5h ago' },
+  { id: 3, type: 'FILE', user: 'Hira Sheikh', project: 'UI Overhaul', text: 'uploaded "v2_layout_specs.pdf" to the file hub.', time: '5h ago' },
 ];
 
 const CollaborativeWorkspace: React.FC = () => {
@@ -218,13 +218,13 @@ const CollaborativeWorkspace: React.FC = () => {
         {activeItem === 'TraceHunter Dev' ? (
           <div className="animate-in fade-in duration-500 mt-8 space-y-8">
             {/* Top Row (Progress & Team) */}
-            <div className="bg-surface border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
+            <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm">
               <div className="flex justify-between items-end mb-4">
                 <h2 className="text-xl font-bold text-text-primary font-serif">Project Health</h2>
                 <div className="flex gap-4 items-center">
                   <div className="flex flex-col items-end">
                     <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Top Contributor</span>
-                    <span className="text-sm font-bold text-text-primary">Dr. Aris Thorne</span>
+                    <span className="text-sm font-bold text-text-primary">Dr. Ahmed Raza</span>
                   </div>
                   <div className="flex -space-x-2">
                     {workspaceProjects[0].collaborators.map((avatar, i) => (
@@ -247,7 +247,7 @@ const CollaborativeWorkspace: React.FC = () => {
             </div>
 
             {/* Task Tracker */}
-            <div className="bg-surface border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-border rounded-2xl shadow-sm overflow-hidden">
               <div className="p-6 border-b border-border">
                 <h2 className="text-lg font-bold text-text-primary font-serif">Upcoming Tasks</h2>
               </div>
@@ -292,10 +292,10 @@ const CollaborativeWorkspace: React.FC = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {workspaceProjects.map(project => (
-                  <div key={project.id} className="bg-surface border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer" onClick={() => setActiveItem(project.name)}>
+                  <div key={project.id} className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer" onClick={() => setActiveItem(project.name)}>
                     <div className="flex justify-between items-start mb-6">
                       <h3 className="font-bold text-lg text-text-primary group-hover:text-primary transition-colors">{project.name}</h3>
-                      <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
+                      <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
                     </div>
                     
                     <div className="space-y-4">
@@ -335,13 +335,13 @@ const CollaborativeWorkspace: React.FC = () => {
                 </button>
               </div>
               
-              <div className="bg-surface border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+              <div className="bg-surface border border-border rounded-2xl shadow-sm overflow-hidden">
                 {urgentActivity.map((activity, i) => (
                   <div 
                     key={activity.id} 
                     onClick={() => activity.id === 1 && setIsDrawerOpen(true)}
                     className={`p-6 flex items-start gap-4 transition-colors ${
-                      activity.id === 1 ? 'hover:bg-[#F9FAFB] cursor-pointer' : 'hover:bg-surface-alt'
+                      activity.id === 1 ? 'hover:bg-surface-alt cursor-pointer' : 'hover:bg-surface-alt'
                     } ${i !== urgentActivity.length - 1 ? 'border-b border-border' : ''}`}
                   >
                     <div className={`w-10 h-10 rounded-xl shrink-0 flex items-center justify-center ${
@@ -377,7 +377,7 @@ const CollaborativeWorkspace: React.FC = () => {
               </div>
               
               <div className="space-y-4">
-                <div className="p-6 bg-surface border border-[#E5E7EB] rounded-2xl shadow-sm transition-all flex items-center justify-between gap-6">
+                <div className="p-6 bg-surface border border-border rounded-2xl shadow-sm transition-all flex items-center justify-between gap-6">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-surface-alt text-text-primary flex items-center justify-center shrink-0">
                       <Award className="w-5 h-5" />
@@ -522,9 +522,9 @@ const CollaborativeWorkspace: React.FC = () => {
               </button>
             </header>
 
-            <div className="flex-1 overflow-y-auto p-6 space-y-8 bg-[#FDFDFD]">
+            <div className="flex-1 overflow-y-auto p-6 space-y-8 bg-surface">
               <div className="flex flex-col items-end">
-                <div className="bg-[#F3F4F6] text-text-primary p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
+                <div className="bg-surface-alt text-text-primary p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
                   I've uploaded the preliminary results for the pipeline efficiency test.
                 </div>
                 <span className="text-[10px] font-bold text-text-secondary mt-2">10:45 AM</span>
@@ -538,7 +538,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   <div className="bg-primary/5 border border-primary/20 text-text-primary p-4 rounded-2xl rounded-tl-none text-sm shadow-sm ring-2 ring-primary/5">
                     Looks solid. Should we use the new GNN model for the next iteration to handle the larger dataset?
                   </div>
-                  <span className="text-[10px] font-bold text-text-secondary">10:46 AM • <span className="text-primary font-black">STAKED MENTION</span></span>
+                  <span className="text-[10px] font-bold text-text-secondary">10:46 AM â€¢ <span className="text-primary font-black">STAKED MENTION</span></span>
                 </div>
               </div>
             </div>
@@ -550,7 +550,7 @@ const CollaborativeWorkspace: React.FC = () => {
                 </button>
                 <input 
                   type="text" 
-                  placeholder="Reply to Dr. Aris Thorne..."
+                  placeholder="Reply to Dr. Ahmed Raza..."
                   className="flex-1 bg-transparent text-sm py-2 outline-none placeholder:text-text-secondary font-medium"
                 />
                 <button className="p-2 bg-secondary text-white rounded-xl shadow-soft hover:bg-surface-alt transition-all">

@@ -8,7 +8,7 @@ const mockFeed = [
   {
     id: 1,
     type: 'PUBLICATION',
-    author: 'Dr. Aris Thorne',
+    author: 'Dr. Ahmed Raza',
     avatar: '/avatar_aris.png',
     field: 'Materials Science',
     time: '2h ago',
@@ -57,7 +57,7 @@ const mockFeed = [
   {
     id: 4,
     type: 'PUBLICATION',
-    author: 'Elena Rostova',
+    author: 'Hira Sheikh',
     avatar: '/avatar_elena.png',
     field: 'Bioinformatics',
     time: '1d ago',
@@ -107,9 +107,9 @@ const mockFeed = [
 const trendingTags = ['#QuantumComputing', '#CRISPR', '#UrbanPlanning', '#BatteryTech', '#MachineLearning'];
 
 const suggestedPeers = [
-  { id: 1, name: 'Elena Rostova', field: 'Bioinformatics', avatar: '/avatar_elena.png' },
-  { id: 2, name: 'Marcus Chen', field: 'Data Science', avatar: '/avatar_marcus.png' },
-  { id: 3, name: 'Sarah Jenkins', field: 'Robotics', avatar: '/avatar_sarah.png' },
+  { id: 1, name: 'Hira Sheikh', field: 'Bioinformatics', avatar: '/avatar_elena.png' },
+  { id: 2, name: 'Hamza Tariq', field: 'Data Science', avatar: '/avatar_marcus.png' },
+  { id: 3, name: 'Fatima Nawaz', field: 'Robotics', avatar: '/avatar_sarah.png' },
 ];
 
 interface HomeFeedProps {
@@ -256,7 +256,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-sm">{post.author}</h4>
-                  <p className="text-xs text-text-secondary">{post.field} • {post.time}</p>
+                  <p className="text-xs text-text-secondary">{post.field} â€¢ {post.time}</p>
                 </div>
               </div>
               <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-text-secondary">
@@ -276,7 +276,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
                     {post.matchScore}
                   </span>
-                  <span className="text-[10px] font-bold text-text-secondary">•</span>
+                  <span className="text-[10px] font-bold text-text-secondary">â€¢</span>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-text-secondary">
                     {post.savedCount}
                   </span>
@@ -315,18 +315,20 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
 
             {/* Engagement Bar */}
             <div className="flex items-center gap-6 pt-3 border-t border-border mb-3">
-              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group">
+              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group" aria-label={`Like, ${post.likes} likes`}>
                 <ThumbsUp className="w-4 h-4 group-hover:fill-primary/10" /> 
                 <span>{post.likes}</span>
               </button>
               <button 
                 onClick={() => setActiveComments(activeComments === post.id ? null : post.id)}
                 className={`flex items-center gap-2 text-xs font-bold transition-colors group ${activeComments === post.id ? 'text-primary' : 'text-text-secondary hover:text-primary'}`}
+                aria-label={`Comments, ${post.comments} comments`}
+                aria-expanded={activeComments === post.id}
               >
                 <MessageSquare className={`w-4 h-4 group-hover:fill-primary/10 ${activeComments === post.id ? 'fill-primary/10' : ''}`} /> 
                 <span>{post.comments}</span>
               </button>
-              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group">
+              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group" aria-label="Share post">
                 <Share2 className="w-4 h-4" /> 
                 <span>Share</span>
               </button>
@@ -374,7 +376,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                   <div className="flex gap-3 items-start">
                     <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">M</div>
                     <div className="flex-1 bg-surface-alt p-2.5 rounded-2xl rounded-tl-none">
-                      <p className="text-[10px] font-black text-text-secondary mb-1">Dr. Marcus Chen <span className="font-normal text-text-secondary ml-1">• 1h ago</span></p>
+                      <p className="text-[10px] font-black text-text-secondary mb-1">Dr. Hamza Tariq <span className="font-normal text-text-secondary ml-1">â€¢ 1h ago</span></p>
                       <p className="text-xs text-text-secondary leading-relaxed">Impressive structural consistency. Have you considered the impact on cycle stability over 1000+ charges?</p>
                     </div>
                   </div>

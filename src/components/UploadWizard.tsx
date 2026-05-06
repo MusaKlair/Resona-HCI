@@ -50,7 +50,7 @@ const UploadWizard: React.FC = () => {
           
           <div 
             onClick={handleDrop}
-            className="w-full aspect-[4/3] border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] hover:bg-surface-alt transition-all cursor-pointer flex flex-col items-center justify-center text-center p-8 mb-8 shadow-sm rounded-3xl group"
+            className="w-full aspect-[4/3] border-2 border-dashed border-border bg-surface-alt hover:bg-surface-alt transition-all cursor-pointer flex flex-col items-center justify-center text-center p-8 mb-8 shadow-sm rounded-3xl group"
           >
             <div className="w-14 h-14 border border-border rounded-2xl flex items-center justify-center mb-6 bg-surface shadow-sm group-hover:scale-110 transition-transform">
               <UploadCloud className="w-7 h-7 text-text-secondary" />
@@ -68,7 +68,7 @@ const UploadWizard: React.FC = () => {
               <div className="w-full border-t border-border"></div>
             </div>
             <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest">
-              <span className="bg-[#F9FAFB] px-4 text-text-secondary">or</span>
+              <span className="bg-surface-alt px-4 text-text-secondary">or</span>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ const UploadWizard: React.FC = () => {
           
           <div className="space-y-6">
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Title</label>
+              <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Title</label>
               <input 
                 type="text" 
                 placeholder="Enter research title"
@@ -126,13 +126,13 @@ const UploadWizard: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Author List</label>
+              <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Author List</label>
               <div className="w-full p-4 bg-surface border border-border flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
                 <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
-                  Dr. Aris Thorne <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
+                  Dr. Ahmed Raza <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
                 </span>
                 <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
-                  Jane Doe <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
+                  Noor Fatima <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
                 </span>
                 <input 
                   type="text" 
@@ -143,7 +143,7 @@ const UploadWizard: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Abstract (Max 300 words)</label>
+              <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Abstract (Max 300 words)</label>
               <textarea 
                 rows={5}
                 value={formData.abstract}
@@ -153,7 +153,7 @@ const UploadWizard: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Research Tags & Disciplines</label>
+              <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Research Tags & Disciplines</label>
               <div className="w-full p-4 bg-surface border border-border flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
                 <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
                   Machine Learning <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
@@ -168,7 +168,7 @@ const UploadWizard: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Year</label>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Year</label>
                 <input 
                   type="text" 
                   placeholder="YYYY"
@@ -178,7 +178,7 @@ const UploadWizard: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">DOI</label>
+                <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">DOI</label>
                 <input 
                   type="text" 
                   placeholder="10.xxxx/xxxx"
@@ -190,7 +190,7 @@ const UploadWizard: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Visibility Setting</label>
+              <label className="block text-[10px] font-black uppercase tracking-wider text-text-secondary mb-2">Visibility Setting</label>
               <div className="flex bg-surface p-1 rounded-xl border border-border shadow-sm max-w-sm">
                 {['Public', 'Verified', 'Private'].map((option) => (
                   <button

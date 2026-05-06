@@ -5,7 +5,7 @@ const conversations = [
   { id: 1, name: 'Elias Thorne', subject: 'Mentorship Request: Architecture', time: '2h', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facepad&face=2&w=256&h=256&q=80', active: true },
   { id: 2, name: 'Sarah K. Miller', subject: 'Re: Workshop Schedule', time: '5h', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=facepad&face=2&w=256&h=256&q=80', active: false },
   { id: 3, name: 'David Vance', subject: 'Portfolio Feedback Needed', time: '1d', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facepad&face=2&w=256&h=256&q=80', active: false },
-  { id: 4, name: 'Elena Rossi', subject: 'Invitation: Networking Night', time: '3d', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facepad&face=2&w=256&h=256&q=80', active: false },
+  { id: 4, name: 'Zara Iqbal', subject: 'Invitation: Networking Night', time: '3d', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=facepad&face=2&w=256&h=256&q=80', active: false },
 ];
 
 const MentorshipFlow: React.FC = () => {
@@ -13,7 +13,7 @@ const MentorshipFlow: React.FC = () => {
     <div className="max-w-[1440px] mx-auto min-h-[calc(100vh-80px)] flex border-t border-border bg-surface animate-in fade-in duration-500">
       
       {/* Left Sidebar - Inbox List */}
-      <aside className="w-80 border-r border-border shrink-0 flex flex-col bg-[#F9FAFB]">
+      <aside className="w-80 border-r border-border shrink-0 flex flex-col bg-surface-alt">
         <div className="p-6 border-b border-border bg-surface">
           <h2 className="text-lg font-bold font-serif text-text-primary tracking-tight">Active Conversations</h2>
         </div>
@@ -45,7 +45,7 @@ const MentorshipFlow: React.FC = () => {
       </aside>
 
       {/* Main Content - Request Details */}
-      <main className="flex-1 p-10 md:p-16 overflow-y-auto bg-[#F9FAFB]">
+      <main className="flex-1 p-10 md:p-16 overflow-y-auto bg-surface-alt">
         <div className="max-w-3xl mx-auto">
           
           {/* Sender Profile Strip */}
@@ -58,7 +58,7 @@ const MentorshipFlow: React.FC = () => {
                 <Link href={`/profile/${conversations[0].id}`}>
                   <h3 className="text-lg font-black text-text-primary hover:text-primary transition-colors cursor-pointer">{conversations[0].name}</h3>
                 </Link>
-                <p className="text-xs font-bold text-text-secondary uppercase tracking-widest">Candidate for Mentorship • MIT</p>
+                <p className="text-xs font-bold text-text-secondary uppercase tracking-widest">Candidate for Mentorship â€¢ MIT</p>
               </div>
             </div>
             <button className="text-xs font-bold text-primary bg-primary/5 px-4 py-2 rounded-lg hover:bg-primary/10 transition-all active:scale-95">
@@ -67,11 +67,11 @@ const MentorshipFlow: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-surface border border-[#E5E7EB] p-8 rounded-2xl shadow-soft">
+            <div className="bg-surface border border-border p-8 rounded-2xl shadow-soft">
               <h3 className="text-xs font-bold text-text-primary mb-2">Experience Level</h3>
               <p className="text-2xl font-black text-text-primary">Beginner (0 Projects)</p>
             </div>
-            <div className="bg-surface border border-[#E5E7EB] p-8 rounded-2xl shadow-soft">
+            <div className="bg-surface border border-border p-8 rounded-2xl shadow-soft">
               <h3 className="text-xs font-bold text-text-primary mb-2">Available Weekly Hours</h3>
               <p className="text-2xl font-black text-text-primary">8 Hours / Week</p>
             </div>
@@ -90,7 +90,7 @@ const MentorshipFlow: React.FC = () => {
 
           <div className="mb-16">
             <h3 className="text-xs font-bold text-text-primary mb-4">Interest Statement</h3>
-            <div className="bg-surface border border-[#E5E7EB] p-8 md:p-12 text-[17px] text-slate-700 leading-relaxed shadow-soft rounded-xl">
+            <div className="bg-surface border border-border p-8 md:p-12 text-[17px] text-slate-700 leading-relaxed shadow-soft rounded-xl">
               I am seeking mentorship to refine my approach to automated forensic integrity. My current coursework covers basic artifact analysis, but I lack hands-on experience in detecting sophisticated anti-forensic techniques like timestomping in live environments. I want to learn how to build robust triage systems without compromising the integrity of volatile memory captures. I am prepared to commit eight hours weekly to rigorous review and practical application. I look forward to discussing how we might collaborate.
             </div>
           </div>
