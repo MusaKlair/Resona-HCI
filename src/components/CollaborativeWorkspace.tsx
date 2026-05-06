@@ -66,7 +66,7 @@ const CollaborativeWorkspace: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <LayoutGrid className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-bold">Overview</h3>
+                <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Overview</span>
               </div>
               {expandedSections.has('Overview') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>
@@ -98,7 +98,7 @@ const CollaborativeWorkspace: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <CheckSquare className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-bold">My Tasks</h3>
+                <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>My Tasks</span>
               </div>
               {expandedSections.has('My Tasks') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>
@@ -130,7 +130,7 @@ const CollaborativeWorkspace: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <Folder className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-bold">Active Projects</h3>
+                <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Active Projects</span>
               </div>
               {expandedSections.has('Active Projects') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
             </button>

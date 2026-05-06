@@ -92,15 +92,16 @@ const FundingBoard: React.FC = () => {
       <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
         <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
         
+        <nav className="flex flex-col gap-1">
         {/* Discipline Section */}
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Microscope className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Discipline</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
             </div>
             {expandedSections.has('Discipline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -108,8 +109,8 @@ const FundingBoard: React.FC = () => {
           {expandedSections.has('Discipline') && (
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {[
-                { name: 'Life Sciences', icon: <Dna className="w-4 h-4 text-primary" /> },
-                { name: 'Physical Sciences', icon: <Thermometer className="w-4 h-4 text-primary" /> },
+                { name: 'Life Sci.', icon: <Dna className="w-4 h-4 text-primary" /> },
+                { name: 'Physics', icon: <Thermometer className="w-4 h-4 text-primary" /> },
                 { name: 'Engineering', icon: <Cpu className="w-4 h-4 text-primary" /> }
               ].map(disc => (
                 <button 
@@ -136,11 +137,11 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Resource Type')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Wallet className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Resource Type</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Resources</span>
             </div>
             {expandedSections.has('Resource Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -177,11 +178,11 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Eligibility')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Eligibility</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Eligibility</span>
             </div>
             {expandedSections.has('Eligibility') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -217,11 +218,11 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Deadline')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Calendar className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Deadline</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Deadline</span>
             </div>
             {expandedSections.has('Deadline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -235,6 +236,7 @@ const FundingBoard: React.FC = () => {
             </div>
           )}
         </div>
+        </nav>
       </aside>
 
       {/* Main Content */}

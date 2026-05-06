@@ -157,15 +157,16 @@ const MatchingHub: React.FC = () => {
       <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
         <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
 
+        <nav className="flex flex-col gap-1">
         {/* Role Type Section */}
         <div>
           <button 
             onClick={() => toggleSection('Role Type')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Users className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Role Type</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Role Type</span>
             </div>
             {expandedSections.has('Role Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -175,7 +176,7 @@ const MatchingHub: React.FC = () => {
               {[
                 { name: 'Mentor', icon: <Users className="w-4 h-4 text-primary" /> },
                 { name: 'Mentee', icon: <Target className="w-4 h-4 text-primary" /> },
-                { name: 'Peer Collaborator', icon: <Network className="w-4 h-4 text-primary" /> }
+                { name: 'Peer', icon: <Network className="w-4 h-4 text-primary" /> }
               ].map(role => (
                 <button 
                   key={role.name}
@@ -201,11 +202,11 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Experience')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <BarChart className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Experience</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Experience</span>
             </div>
             {expandedSections.has('Experience') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -213,9 +214,9 @@ const MatchingHub: React.FC = () => {
           {expandedSections.has('Experience') && (
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {[
-                { name: 'Entry Level', icon: <Briefcase className="w-4 h-4 text-primary" /> },
+                { name: 'Entry', icon: <Briefcase className="w-4 h-4 text-primary" /> },
                 { name: 'Mid-Level', icon: <BarChart className="w-4 h-4 text-primary" /> },
-                { name: 'Senior / Expert', icon: <Target className="w-4 h-4 text-primary" /> }
+                { name: 'Senior', icon: <Target className="w-4 h-4 text-primary" /> }
               ].map(level => (
                 <button 
                   key={level.name}
@@ -241,11 +242,11 @@ const MatchingHub: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Institution')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <School className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Institution</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Institution</span>
             </div>
             {expandedSections.has('Institution') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -260,7 +261,7 @@ const MatchingHub: React.FC = () => {
                   className="w-full text-xs pl-9 pr-3 py-2.5 rounded-lg border border-secondary/10 bg-secondary/[0.02] outline-none focus:bg-white focus:border-primary/30 transition-all"
                 />
               </div>
-              {['Stanford University', 'MIT', 'Harvard University', 'Oxford', 'TechCorp Institute'].slice(0, showAllSections.has('Institution') ? 10 : 4).map(inst => (
+              {['Stanford', 'MIT', 'Harvard', 'Oxford', 'TechCorp'].slice(0, showAllSections.has('Institution') ? 10 : 4).map(inst => (
                 <button 
                   key={inst}
                   onClick={() => toggleFilter(inst)}
@@ -286,6 +287,7 @@ const MatchingHub: React.FC = () => {
             </div>
           )}
         </div>
+        </nav>
 
       </aside>
 

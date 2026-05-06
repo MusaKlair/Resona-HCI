@@ -113,15 +113,16 @@ const ProblemBoard: React.FC = () => {
       <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
         <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
         
+        <nav className="flex flex-col gap-1">
         {/* Discipline Section */}
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Microscope className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Discipline</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
             </div>
             {expandedSections.has('Discipline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -129,11 +130,11 @@ const ProblemBoard: React.FC = () => {
           {expandedSections.has('Discipline') && (
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {[
-                { name: 'Computer Science', icon: <Code className="w-4 h-4 text-primary" /> },
+                { name: 'CS', icon: <Code className="w-4 h-4 text-primary" /> },
                 { name: 'Biotech', icon: <Microscope className="w-4 h-4 text-primary" /> },
                 { name: 'Materials', icon: <Layers className="w-4 h-4 text-primary" /> },
                 { name: 'Physics', icon: <Atom className="w-4 h-4 text-primary" /> },
-                { name: 'Data Science', icon: <Database className="w-4 h-4 text-primary" /> }
+                { name: 'Data Sci.', icon: <Database className="w-4 h-4 text-primary" /> }
               ].map(disc => (
                 <button 
                   key={disc.name}
@@ -159,18 +160,18 @@ const ProblemBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Time Commitment')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Clock className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Time Commitment</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Duration</span>
             </div>
             {expandedSections.has('Time Commitment') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Time Commitment') && (
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
-              {['Full-time', 'Part-time', 'Contract / Bounty'].map(time => (
+              {['Full-time', 'Part-time', 'Contract'].map(time => (
                 <button 
                   key={time}
                   onClick={() => toggleFilter(time)}
@@ -195,11 +196,11 @@ const ProblemBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Compensation')}
-            className="w-full flex items-center justify-between py-2 group text-secondary/60 hover:text-secondary transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary transition-all"
           >
             <div className="flex items-center gap-3">
               <Coins className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold">Compensation</h3>
+              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Compensation</span>
             </div>
             {expandedSections.has('Compensation') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -208,7 +209,7 @@ const ProblemBoard: React.FC = () => {
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {[
                 { name: 'Equity', icon: <Coins className="w-4 h-4 text-primary" /> },
-                { name: 'Grant Funded', icon: <Wallet className="w-4 h-4 text-primary" /> },
+                { name: 'Grants', icon: <Wallet className="w-4 h-4 text-primary" /> },
                 { name: 'Salaried', icon: <CreditCard className="w-4 h-4 text-primary" /> }
               ].map(comp => (
                 <button 
@@ -230,6 +231,7 @@ const ProblemBoard: React.FC = () => {
             </div>
           )}
         </div>
+        </nav>
 
       </aside>
 
