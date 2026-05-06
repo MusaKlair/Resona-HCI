@@ -337,10 +337,10 @@ const ProblemBoard: React.FC = () => {
 
               <button 
                 onClick={() => !prob.closed && !proposedSolutionIds.has(prob.id) && handlePropose(prob.id)}
-                className={`w-full font-black text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-soft ${
+                className={`w-full border font-black text-xs uppercase tracking-widest py-4 rounded-xl transition-all ${
                   prob.closed || proposedSolutionIds.has(prob.id)
-                    ? 'bg-secondary/5 text-secondary/40 cursor-default' 
-                    : 'bg-secondary text-white hover:bg-secondary/90'
+                    ? 'border-secondary/10 bg-secondary/5 text-secondary/40 cursor-default' 
+                    : 'border-primary/40 text-primary hover:bg-primary/5'
                 }`}
               >
                 {prob.closed ? 'Closed' : (proposedSolutionIds.has(prob.id) ? 'Proposal Sent' : 'Propose Solution')}

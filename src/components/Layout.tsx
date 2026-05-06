@@ -199,58 +199,56 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* Footer */}
-      {isPublicPage && (
-        <footer className="bg-white border-t border-secondary/5 pt-12 pb-8">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-              <div className="col-span-1 md:col-span-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <OrbitalLogo className="h-6 w-6" />
-                  <span className="text-lg font-bold font-serif tracking-tight">Resona</span>
-                </div>
-                <p className="text-secondary/60 text-xs leading-relaxed">
-                  Empowering the academic world through intelligent matchmaking and seamless collaboration.
-                </p>
+      <footer className="bg-white border-t border-secondary/5 pt-12 pb-8 mt-auto">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <div className="col-span-1 md:col-span-1">
+              <div className="flex items-center gap-3 mb-4">
+                <OrbitalLogo className="h-6 w-6" />
+                <span className="text-lg font-bold font-serif tracking-tight">Resona</span>
               </div>
-              
-              <div>
-                <h4 className="font-bold mb-4 text-sm">Platform</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
-                  <li><Link href="/matching" className="hover:text-primary transition-colors">Matching Hub</Link></li>
-                  <li><Link href="/problems" className="hover:text-primary transition-colors">Research Problems</Link></li>
-                  <li><Link href="/funding" className="hover:text-primary transition-colors">Grant Directory</Link></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-bold mb-4 text-sm">Resources</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
-                  <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">API Reference</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Community</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-bold mb-4 text-sm">Company</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
-                  <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-                </ul>
-              </div>
+              <p className="text-secondary/60 text-xs leading-relaxed">
+                Empowering the academic world through intelligent matchmaking and seamless collaboration.
+              </p>
             </div>
             
-            <div className="border-t border-secondary/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-secondary/40 uppercase tracking-wider font-bold">
-              <p>© 2026 Resona Academic Platform. All rights reserved.</p>
-              <div className="flex gap-6">
-                <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
-              </div>
+            <div>
+              <h4 className="font-bold mb-4 text-sm">Platform</h4>
+              <ul className="space-y-2 text-xs text-secondary/60">
+                <li><Link href="/matching" className="hover:text-primary transition-colors">Matching Hub</Link></li>
+                <li><Link href="/problems" className="hover:text-primary transition-colors">Research Problems</Link></li>
+                <li><Link href="/funding" className="hover:text-primary transition-colors">Grant Directory</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-4 text-sm">Resources</h4>
+              <ul className="space-y-2 text-xs text-secondary/60">
+                <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">API Reference</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Community</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-4 text-sm">Company</h4>
+              <ul className="space-y-2 text-xs text-secondary/60">
+                <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+              </ul>
             </div>
           </div>
-        </footer>
-      )}
+          
+          <div className="border-t border-secondary/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-secondary/40 uppercase tracking-wider font-bold">
+            <p>© 2026 Resona Academic Platform. All rights reserved.</p>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

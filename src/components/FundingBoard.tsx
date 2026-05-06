@@ -353,7 +353,7 @@ const FundingBoard: React.FC = () => {
                           </span>
                         </div>
                       </div>
-                      <button className="px-10 py-4 bg-secondary text-white text-xs font-black uppercase tracking-widest hover:bg-secondary/90 transition-all rounded-xl shadow-soft">
+                      <button className="px-10 py-4 border border-primary/40 text-primary text-xs font-black uppercase tracking-widest hover:bg-primary/5 transition-all rounded-xl">
                         Apply Now
                       </button>
                     </div>
@@ -387,7 +387,7 @@ const FundingBoard: React.FC = () => {
                       <span className="flex items-center gap-1.5">🪙 {task.credits}</span>
                     </div>
                     
-                    <button className="w-full py-4 border border-secondary/10 text-secondary font-semibold text-sm hover:bg-secondary/5 hover:border-secondary/20 transition-all rounded-xl">
+                    <button className="w-full py-4 border border-primary/40 text-primary font-black text-xs uppercase tracking-widest hover:bg-primary/5 transition-all rounded-xl">
                       Accept Task
                     </button>
                   </div>

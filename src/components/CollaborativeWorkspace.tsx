@@ -36,7 +36,7 @@ const urgentActivity = [
 
 const CollaborativeWorkspace: React.FC = () => {
   const [expandedSections, setExpandedSections] = React.useState<Set<string>>(new Set(['Active Projects']));
-  const [activeItem, setActiveItem] = React.useState('TraceHunter Dev');
+  const [activeItem, setActiveItem] = React.useState('Dashboard');
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const toggleSection = (section: string) => {
@@ -51,11 +51,11 @@ const CollaborativeWorkspace: React.FC = () => {
   const activeProjects = ['TraceHunter Dev', 'Quantum Pipeline', 'UI Overhaul'];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
+    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
       
       {/* Left Sidebar Menu - Multi-Project Accordion */}
-      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
-        <h2 className="font-black font-serif text-lg tracking-tight mb-8">WORKSPACE</h2>
+      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
+        <h2 className="font-black font-serif text-lg tracking-tight mb-8 uppercase">Workspace</h2>
         
         <nav className="flex flex-col gap-1">
           {/* Overview Section */}
@@ -134,18 +134,11 @@ const CollaborativeWorkspace: React.FC = () => {
           </div>
         </nav>
 
-        <div className="pt-6 border-t border-secondary/5 space-y-4">
-          <a href="#" className="flex items-center gap-3 text-xs font-bold text-secondary/60 hover:text-secondary transition-colors">
-             <Archive className="w-4 h-4" /> Archive
-          </a>
-          <a href="#" className="flex items-center gap-3 text-xs font-bold text-secondary/60 hover:text-secondary transition-colors">
-             <HelpCircle className="w-4 h-4" /> Support
-          </a>
-        </div>
+
       </aside>
 
       {/* Main Content Area */}
-      <main className="lg:col-span-10 space-y-12">
+      <main className="lg:col-span-7 p-8 md:p-12 animate-in fade-in duration-700 space-y-12">
         
         {/* Header Area */}
         {activeItem === 'TraceHunter Dev' ? (
@@ -177,7 +170,7 @@ const CollaborativeWorkspace: React.FC = () => {
           </div>
         ) : (
           <div className="animate-in fade-in slide-in-from-top-4 duration-700">
-            <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2">Workspace Overview</h1>
+            <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2 uppercase">Workspace Overview</h1>
             <p className="text-sm text-secondary/50 font-semibold tracking-wide">Track progress and recent activity across all active collaborations.</p>
           </div>
         )}
@@ -214,78 +207,32 @@ const CollaborativeWorkspace: React.FC = () => {
               </div>
             </div>
 
-            {/* Split Column Layout (Bottom) */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-              {/* Left Column (Task Tracker) 60% */}
-              <div className="lg:col-span-3 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
-                <div className="p-6 border-b border-secondary/5">
-                  <h2 className="text-lg font-bold text-secondary font-serif">Upcoming Tasks</h2>
-                </div>
-                <div className="p-6 space-y-6">
-                  <div>
-                    <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">To Do</h3>
-                    <div className="space-y-3">
-                      {tasks.filter(t => t.status !== 'DONE').map(task => (
-                        <div key={task.id} className="flex items-start gap-3">
-                          <div className="w-5 h-5 rounded-full border-2 border-secondary/20 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm font-medium text-secondary">{task.title}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">Done</h3>
-                    <div className="space-y-3">
-                      {tasks.filter(t => t.status === 'DONE').map(task => (
-                        <div key={task.id} className="flex items-start gap-3">
-                          <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                          </div>
-                          <span className="text-sm font-medium text-secondary/40 line-through">{task.title}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            {/* Task Tracker */}
+            <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
+              <div className="p-6 border-b border-secondary/5">
+                <h2 className="text-lg font-bold text-secondary font-serif">Upcoming Tasks</h2>
               </div>
-
-              {/* Right Column (Recent Files & Activity) 40% */}
-              <div className="lg:col-span-2 space-y-8">
-                <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
-                  <div className="p-6 border-b border-secondary/5">
-                    <h2 className="text-lg font-bold text-secondary font-serif">Recent Files</h2>
-                  </div>
-                  <div className="p-4 space-y-2">
-                    {documents.slice(0, 3).map(doc => (
-                      <div key={doc.id} className="flex items-center gap-3 p-2 hover:bg-secondary/5 rounded-lg transition-colors cursor-pointer">
-                        <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
-                          <FileText className="w-4 h-4" />
-                        </div>
-                        <div className="overflow-hidden">
-                          <p className="text-sm font-bold text-secondary truncate">{doc.name}</p>
-                          <p className="text-xs text-secondary/40">{doc.updated}</p>
-                        </div>
+              <div className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">To Do</h3>
+                  <div className="space-y-3">
+                    {tasks.filter(t => t.status !== 'DONE').map(task => (
+                      <div key={task.id} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full border-2 border-secondary/20 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm font-medium text-secondary">{task.title}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-
-                <div className="bg-white border border-[#E5E7EB] rounded-2xl shadow-sm overflow-hidden">
-                  <div className="p-6 border-b border-secondary/5">
-                    <h2 className="text-lg font-bold text-secondary font-serif">Latest Activity</h2>
-                  </div>
-                  <div className="p-6 space-y-6">
-                    {urgentActivity.slice(0, 2).map((act, i) => (
-                      <div key={act.id} className="flex gap-3 relative">
-                        {i !== 1 && <div className="absolute top-8 bottom-[-24px] left-[15px] w-px bg-secondary/10" />}
-                        <div className="w-8 h-8 rounded-full bg-secondary/5 flex items-center justify-center shrink-0 z-10">
-                          <MessageSquare className="w-3.5 h-3.5 text-secondary/60" />
+                <div>
+                  <h3 className="text-xs font-bold text-secondary/40 uppercase tracking-widest mb-4">Done</h3>
+                  <div className="space-y-3">
+                    {tasks.filter(t => t.status === 'DONE').map(task => (
+                      <div key={task.id} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-white" />
                         </div>
-                        <div>
-                          <p className="text-sm font-bold text-secondary">{act.user}</p>
-                          <p className="text-sm text-secondary/60 mt-0.5 leading-relaxed">{act.text}</p>
-                          <p className="text-xs text-secondary/30 mt-1">{act.time}</p>
-                        </div>
+                        <span className="text-sm font-medium text-secondary/40 line-through">{task.title}</span>
                       </div>
                     ))}
                   </div>
@@ -302,7 +249,7 @@ const CollaborativeWorkspace: React.FC = () => {
                 <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-colors underline underline-offset-4">View All Projects</button>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {workspaceProjects.map(project => (
                   <div key={project.id} className="bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer" onClick={() => setActiveItem(project.name)}>
                     <div className="flex justify-between items-start mb-6">
@@ -341,7 +288,7 @@ const CollaborativeWorkspace: React.FC = () => {
             {/* Global Activity Feed */}
             <section>
               <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
-                <h2 className="text-xl font-black tracking-tight font-serif text-secondary">Urgent Tasks & Mentions</h2>
+                <h2 className="text-xl font-black tracking-tight font-serif text-secondary uppercase">Urgent Notifications</h2>
                 <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors">Mark All Read</button>
               </div>
               
@@ -377,63 +324,103 @@ const CollaborativeWorkspace: React.FC = () => {
                 ))}
               </div>
             </section>
-
-            {/* Meeting Overview Section */}
-            <section>
-              <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
-                <h2 className="text-xl font-black tracking-tight font-serif text-secondary">Upcoming Syncs</h2>
-                <button className="text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors underline underline-offset-4">Schedule New</button>
-              </div>
-              
-              <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-                {/* Calendar Mini-Widget */}
-                <div className="xl:col-span-1 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
-                  <div className="flex justify-between items-center text-center mb-6">
-                    {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
-                      const date = 28 + i > 31 ? (28 + i) - 31 : 28 + i;
-                      const active = date === 31;
-                      return (
-                        <div key={i} className="flex flex-col gap-2">
-                          <span className="text-[10px] font-black uppercase tracking-widest text-[#6B7280]">{day}</span>
-                          <div className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-bold transition-all ${active ? 'bg-secondary text-white shadow-md scale-110' : 'text-secondary/70 hover:bg-secondary/5'}`}>
-                            {date}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <p className="text-[10px] font-bold text-[#6B7280] text-center uppercase tracking-widest italic">Thursday, October 31st</p>
-                </div>
-
-                {/* Meetings List */}
-                <div className="xl:col-span-2 space-y-4">
-                  <div className="p-5 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
-                        <Clock className="w-3.5 h-3.5" /> 14:00 - 15:00
-                      </div>
-                      <span className="px-2 py-0.5 bg-primary/5 text-primary text-[9px] font-black uppercase tracking-widest rounded">TraceHunter Dev</span>
-                    </div>
-                    <h4 className="font-bold text-base text-secondary group-hover:text-primary transition-colors">Blueprint Review Sync</h4>
-                    <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Team Alpha, Lead Researcher</p>
-                  </div>
-
-                  <div className="p-5 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group opacity-60 grayscale hover:grayscale-0 hover:opacity-100">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#6B7280]">
-                        <Clock className="w-3.5 h-3.5" /> TOMORROW, 09:30
-                      </div>
-                      <span className="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-black uppercase tracking-widest rounded">General Admin</span>
-                    </div>
-                    <h4 className="font-bold text-base text-secondary">Structural Audit Q3</h4>
-                    <p className="text-xs text-[#6B7280] mt-1 font-medium">Attendees: Management Board</p>
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
         )}
       </main>
+
+      {/* Right Sidebar - Activity & Syncs */}
+      <aside className="lg:col-span-3 border-l border-secondary/5 bg-white p-8 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide space-y-12">
+        
+        {activeItem === 'TraceHunter Dev' ? (
+          <>
+            <section>
+              <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-6">Recent Files</h3>
+              <div className="space-y-2">
+                {documents.slice(0, 3).map(doc => (
+                  <div key={doc.id} className="flex items-center gap-3 p-3 hover:bg-secondary/5 rounded-xl transition-colors cursor-pointer border border-transparent hover:border-secondary/5">
+                    <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <div className="overflow-hidden">
+                      <p className="text-sm font-bold text-secondary truncate">{doc.name}</p>
+                      <p className="text-[10px] font-semibold text-secondary/40 uppercase tracking-wider">{doc.updated}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button className="w-full mt-4 py-3 border border-secondary/10 text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary hover:bg-secondary/5 transition-all rounded-xl">
+                View File Hub
+              </button>
+            </section>
+
+            <section>
+              <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-6">Latest Activity</h3>
+              <div className="space-y-6">
+                {urgentActivity.slice(0, 3).map((act, i) => (
+                  <div key={act.id} className="flex gap-4 relative">
+                    {i !== 2 && <div className="absolute top-10 bottom-[-24px] left-[19px] w-px bg-secondary/10" />}
+                    <div className="w-10 h-10 rounded-full bg-secondary/5 flex items-center justify-center shrink-0 z-10 border-4 border-white">
+                      <MessageSquare className="w-4 h-4 text-secondary/60" />
+                    </div>
+                    <div className="pt-1">
+                      <p className="text-xs font-bold text-secondary">{act.user}</p>
+                      <p className="text-xs text-secondary/60 mt-1 leading-relaxed line-clamp-2">{act.text}</p>
+                      <p className="text-[10px] font-bold text-secondary/30 mt-2">{act.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </>
+        ) : (
+          <section>
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-6">Upcoming Syncs</h3>
+            <div className="space-y-4">
+              {/* Mini Calendar */}
+              <div className="bg-white border border-secondary/10 rounded-2xl p-4 shadow-sm mb-6">
+                <div className="grid grid-cols-7 gap-1 text-center mb-4">
+                  {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
+                    <span key={i} className="text-[9px] font-black text-secondary/30">{day}</span>
+                  ))}
+                  {Array.from({ length: 7 }).map((_, i) => {
+                    const date = 28 + i > 31 ? (28 + i) - 31 : 28 + i;
+                    const active = date === 31;
+                    return (
+                      <div key={i} className={`h-8 flex items-center justify-center rounded-lg text-[10px] font-bold transition-all ${active ? 'bg-primary text-white shadow-sm' : 'text-secondary/70 hover:bg-secondary/5'}`}>
+                        {date}
+                      </div>
+                    );
+                  })}
+                </div>
+                <p className="text-[9px] font-black text-secondary/30 text-center uppercase tracking-widest">October 31st, 2024</p>
+              </div>
+
+              {/* Meetings */}
+              <div className="space-y-4">
+                <div className="p-4 bg-white border border-secondary/10 rounded-2xl shadow-sm hover:border-primary/20 transition-all cursor-pointer group">
+                  <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-secondary/40 mb-2">
+                    <Clock className="w-3 h-3" /> 14:00 - 15:00
+                  </div>
+                  <h4 className="font-bold text-sm text-secondary group-hover:text-primary transition-colors">Blueprint Review Sync</h4>
+                  <span className="inline-block mt-2 px-2 py-0.5 bg-primary/5 text-primary text-[8px] font-black uppercase tracking-widest rounded">TraceHunter Dev</span>
+                </div>
+
+                <div className="p-4 bg-white border border-secondary/10 rounded-2xl shadow-sm opacity-60 hover:opacity-100 transition-all cursor-pointer group">
+                  <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-secondary/40 mb-2">
+                    <Clock className="w-3 h-3" /> Tomorrow, 09:30
+                  </div>
+                  <h4 className="font-bold text-sm text-secondary group-hover:text-primary transition-colors">Structural Audit Q3</h4>
+                  <span className="inline-block mt-2 px-2 py-0.5 bg-secondary/5 text-secondary text-[8px] font-black uppercase tracking-widest rounded">General Admin</span>
+                </div>
+              </div>
+              
+              <button className="w-full mt-4 py-3 bg-secondary text-white text-[10px] font-black uppercase tracking-widest hover:bg-secondary/90 transition-all rounded-xl shadow-soft">
+                Schedule New
+              </button>
+            </div>
+          </section>
+        )}
+      </aside>
 
       {/* Slide-Over Chat Drawer */}
       {isDrawerOpen && (
