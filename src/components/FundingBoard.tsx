@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Search, Calendar, QrCode, X, ChevronDown, CheckCircle2, Bookmark, ChevronUp } from 'lucide-react';
+import { Search, Calendar, QrCode, X, ChevronDown, CheckCircle2, Bookmark, ChevronUp, Dna, Thermometer, Cpu, Wallet, Microscope, Database, GraduationCap, Heart, Building2, Check } from 'lucide-react';
 
 const mockGrants = [
   {
@@ -86,14 +86,14 @@ const FundingBoard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight mb-8">Feed Filters</h2>
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
         
         {/* Discipline Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Discipline')}
             className="w-full flex items-center justify-between py-2 group"
@@ -103,30 +103,34 @@ const FundingBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Discipline') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Life Sciences', 'Physical Sciences', 'Engineering'].map(disc => (
-                <label 
-                  key={disc} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(disc);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Life Sciences', icon: <Dna className="w-4 h-4 text-primary" /> },
+                { name: 'Physical Sciences', icon: <Thermometer className="w-4 h-4 text-primary" /> },
+                { name: 'Engineering', icon: <Cpu className="w-4 h-4 text-primary" /> }
+              ].map(disc => (
+                <button 
+                  key={disc.name}
+                  onClick={() => toggleFilter(disc.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(disc.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(disc) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {disc.icon}
+                    {disc.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(disc) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {disc}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(disc.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Resource Type Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Resource Type')}
             className="w-full flex items-center justify-between py-2 group"
@@ -136,30 +140,35 @@ const FundingBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Resource Type') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Grants', 'Equipment', 'Compute', 'Datasets'].map(type => (
-                <label 
-                  key={type} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(type);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Grants', icon: <Wallet className="w-4 h-4 text-primary" /> },
+                { name: 'Equipment', icon: <Microscope className="w-4 h-4 text-primary" /> },
+                { name: 'Compute', icon: <Cpu className="w-4 h-4 text-primary" /> },
+                { name: 'Datasets', icon: <Database className="w-4 h-4 text-primary" /> }
+              ].map(type => (
+                <button 
+                  key={type.name}
+                  onClick={() => toggleFilter(type.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(type.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(type) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(type) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {type.icon}
+                    {type.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(type) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {type}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(type.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(type.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Eligibility Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Eligibility')}
             className="w-full flex items-center justify-between py-2 group"
@@ -169,30 +178,34 @@ const FundingBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Eligibility') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Academic', 'Non-Profit', 'Corporate'].map(elig => (
-                <label 
-                  key={elig} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(elig);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Academic', icon: <GraduationCap className="w-4 h-4 text-primary" /> },
+                { name: 'Non-Profit', icon: <Heart className="w-4 h-4 text-primary" /> },
+                { name: 'Corporate', icon: <Building2 className="w-4 h-4 text-primary" /> }
+              ].map(elig => (
+                <button 
+                  key={elig.name}
+                  onClick={() => toggleFilter(elig.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(elig.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(elig) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(elig) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {elig.icon}
+                    {elig.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(elig) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {elig}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(elig.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(elig.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Deadline Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Deadline')}
             className="w-full flex items-center justify-between py-2 group"
@@ -202,10 +215,10 @@ const FundingBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Deadline') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="flex items-center justify-between p-3 border border-secondary/10 bg-white rounded text-xs font-bold text-secondary/60 cursor-pointer hover:border-secondary/30 transition-colors">
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200 px-2">
+              <div className="flex items-center justify-between p-3 border border-secondary/10 bg-white rounded-lg text-xs font-bold text-secondary/60 cursor-pointer hover:border-secondary/30 transition-colors shadow-sm">
                 SELECT DATE RANGE
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4 text-secondary/40" />
               </div>
             </div>
           )}
@@ -353,7 +366,7 @@ const FundingBoard: React.FC = () => {
                           </span>
                         </div>
                       </div>
-                      <button className="px-10 py-4 border border-primary/40 text-primary text-xs font-black uppercase tracking-widest hover:bg-primary/5 transition-all rounded-xl">
+                      <button className="btn-outline !px-10 !py-4 !rounded-xl">
                         Apply Now
                       </button>
                     </div>
@@ -387,7 +400,7 @@ const FundingBoard: React.FC = () => {
                       <span className="flex items-center gap-1.5">🪙 {task.credits}</span>
                     </div>
                     
-                    <button className="w-full py-4 border border-primary/40 text-primary font-black text-xs uppercase tracking-widest hover:bg-primary/5 transition-all rounded-xl">
+                    <button className="w-full btn-outline !py-4 !rounded-xl">
                       Accept Task
                     </button>
                   </div>
@@ -399,7 +412,7 @@ const FundingBoard: React.FC = () => {
       </main>
 
       {/* Right Sidebar - Stats Widgets */}
-      <aside className="lg:col-span-3 border-l border-secondary/5 bg-white p-8 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
+      <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-8">Your Activity & Stats</h3>
         
         <div className="space-y-6">

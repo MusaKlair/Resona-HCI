@@ -1,6 +1,19 @@
 import type { Metadata } from 'next';
+import { Playfair_Display, Inter } from 'next/font/google';
 import '../globals.css';
 import NavigationLayout from '../components/Layout';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Resona - Academic Platform',
@@ -16,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth ${playfair.variable} ${inter.variable}`}>
+      <body suppressHydrationWarning className="font-sans">
         <NavigationLayout>
           {children}
         </NavigationLayout>

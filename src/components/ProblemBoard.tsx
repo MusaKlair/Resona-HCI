@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Search, Bookmark, X, ChevronDown, ChevronUp, CheckCircle2 } from 'lucide-react';
+import { Search, Bookmark, X, ChevronDown, ChevronUp, CheckCircle2, Code, Microscope, Layers, Atom, Database, Clock, Coins, Wallet, CreditCard, Check } from 'lucide-react';
 
 const mockProblems = [
   {
@@ -107,14 +107,14 @@ const ProblemBoard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight mb-8">Feed Filters</h2>
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
         
         {/* Discipline Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Discipline')}
             className="w-full flex items-center justify-between py-2 group"
@@ -124,30 +124,36 @@ const ProblemBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Discipline') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Computer Science', 'Biotech', 'Materials', 'Physics', 'Data Science'].map(disc => (
-                <label 
-                  key={disc} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(disc);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Computer Science', icon: <Code className="w-4 h-4 text-primary" /> },
+                { name: 'Biotech', icon: <Microscope className="w-4 h-4 text-primary" /> },
+                { name: 'Materials', icon: <Layers className="w-4 h-4 text-primary" /> },
+                { name: 'Physics', icon: <Atom className="w-4 h-4 text-primary" /> },
+                { name: 'Data Science', icon: <Database className="w-4 h-4 text-primary" /> }
+              ].map(disc => (
+                <button 
+                  key={disc.name}
+                  onClick={() => toggleFilter(disc.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(disc.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(disc) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {disc.icon}
+                    {disc.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(disc) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {disc}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(disc.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Time Commitment Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Time Commitment')}
             className="w-full flex items-center justify-between py-2 group"
@@ -157,30 +163,30 @@ const ProblemBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Time Commitment') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {['Full-time', 'Part-time', 'Contract / Bounty'].map(time => (
-                <label 
-                  key={time} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(time);
-                  }}
+                <button 
+                  key={time}
+                  onClick={() => toggleFilter(time)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(time) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(time) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(time) && <CheckCircle2 className="w-3 h-3" />}
-                  </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(time) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-primary" />
                     {time}
-                  </span>
-                </label>
+                  </div>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(time) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(time) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Compensation Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Compensation')}
             className="w-full flex items-center justify-between py-2 group"
@@ -190,23 +196,27 @@ const ProblemBoard: React.FC = () => {
           </button>
           
           {expandedSections.has('Compensation') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Equity', 'Grant Funded', 'Salaried'].map(comp => (
-                <label 
-                  key={comp} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(comp);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Equity', icon: <Coins className="w-4 h-4 text-primary" /> },
+                { name: 'Grant Funded', icon: <Wallet className="w-4 h-4 text-primary" /> },
+                { name: 'Salaried', icon: <CreditCard className="w-4 h-4 text-primary" /> }
+              ].map(comp => (
+                <button 
+                  key={comp.name}
+                  onClick={() => toggleFilter(comp.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(comp.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(comp) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(comp) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {comp.icon}
+                    {comp.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(comp) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {comp}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(comp.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(comp.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
@@ -337,10 +347,10 @@ const ProblemBoard: React.FC = () => {
 
               <button 
                 onClick={() => !prob.closed && !proposedSolutionIds.has(prob.id) && handlePropose(prob.id)}
-                className={`w-full border font-black text-xs uppercase tracking-widest py-4 rounded-xl transition-all ${
+                className={`w-full btn-outline !rounded-xl ${
                   prob.closed || proposedSolutionIds.has(prob.id)
-                    ? 'border-secondary/10 bg-secondary/5 text-secondary/40 cursor-default' 
-                    : 'border-primary/40 text-primary hover:bg-primary/5'
+                    ? 'opacity-50 cursor-default' 
+                    : ''
                 }`}
               >
                 {prob.closed ? 'Closed' : (proposedSolutionIds.has(prob.id) ? 'Proposal Sent' : 'Propose Solution')}

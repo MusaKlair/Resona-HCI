@@ -203,7 +203,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 <Target className="w-4 h-4" /> Problem
               </button>
             </div>
-            <button className="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold hover:bg-primary/90 transition-all">
+            <button className="btn-primary">
               Post Update
             </button>
           </div>
@@ -341,7 +341,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               </div>
             )}
 
-            <button className="w-full border border-primary/40 text-primary font-bold text-sm py-2.5 rounded-md hover:bg-primary/5 transition-colors">
+            <button className="w-full btn-outline">
               {post.type === 'PUBLICATION' ? 'Read Publication' : 
                post.type === 'PROBLEM' ? 'Propose Solution' : 'View Details'}
             </button>
@@ -376,7 +376,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                     <p className="text-xs text-secondary/50">{peer.field}</p>
                   </div>
                 </div>
-                <button className="border border-primary/40 text-primary font-bold text-xs px-3 py-1 rounded-md hover:bg-primary/5 transition-colors">
+                <button className="btn-outline !px-3 !py-1 !text-xs">
                   Connect
                 </button>
               </div>

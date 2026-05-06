@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { MessageSquare, CheckSquare, Calendar, HelpCircle, Archive, FileText, CheckCircle2, Clock, ChevronDown, ChevronUp, X, Paperclip, Send } from 'lucide-react';
+import { MessageSquare, CheckSquare, Calendar, HelpCircle, Archive, FileText, CheckCircle2, Clock, ChevronDown, ChevronUp, X, Paperclip, Send, LayoutGrid, Folder } from 'lucide-react';
 
 const chatHistory = [
   { id: 1, sender: 'other', text: 'Initial draft of the malware triage protocols is ready for review.', time: '10:42 AM' },
@@ -51,15 +51,15 @@ const CollaborativeWorkspace: React.FC = () => {
   const activeProjects = ['TraceHunter Dev', 'Quantum Pipeline', 'UI Overhaul'];
 
   return (
-    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Sidebar Menu - Multi-Project Accordion */}
-      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight mb-8 uppercase">Workspace</h2>
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+        <h2 className="font-black font-serif text-lg tracking-tight uppercase">Workspace</h2>
         
         <nav className="flex flex-col gap-1">
           {/* Overview Section */}
-          <div className="border-b border-secondary/5 pb-2 mb-2">
+          <div>
             <button 
               onClick={() => toggleSection('Overview')}
               className="w-full flex items-center justify-between py-2 group"
@@ -69,13 +69,18 @@ const CollaborativeWorkspace: React.FC = () => {
             </button>
             {expandedSections.has('Overview') && (
               <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
-                {['Dashboard', 'Team Stats', 'Timeline'].map(item => (
+                {[
+                  { name: 'Dashboard', icon: <LayoutGrid className="w-4 h-4 text-primary" /> },
+                  { name: 'Team Stats', icon: <Archive className="w-4 h-4 text-primary" /> },
+                  { name: 'Timeline', icon: <Clock className="w-4 h-4 text-primary" /> }
+                ].map(item => (
                   <button
-                    key={item}
-                    onClick={() => setActiveItem(item)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all border-l-2 ${activeItem === item ? 'bg-secondary/5 text-secondary border-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary border-transparent font-medium'}`}
+                    key={item.name}
+                    onClick={() => setActiveItem(item.name)}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all ${activeItem === item.name ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'}`}
                   >
-                    {item}
+                    {item.icon}
+                    {item.name}
                   </button>
                 ))}
               </div>
@@ -83,7 +88,7 @@ const CollaborativeWorkspace: React.FC = () => {
           </div>
 
           {/* My Tasks Section */}
-          <div className="border-b border-secondary/5 pb-2 mb-2">
+          <div>
             <button 
               onClick={() => toggleSection('My Tasks')}
               className="w-full flex items-center justify-between py-2 group"
@@ -93,13 +98,18 @@ const CollaborativeWorkspace: React.FC = () => {
             </button>
             {expandedSections.has('My Tasks') && (
               <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
-                {['Assigned to Me', 'My Pending', 'Completed'].map(item => (
+                {[
+                  { name: 'Assigned to Me', icon: <CheckSquare className="w-4 h-4 text-primary" /> },
+                  { name: 'My Pending', icon: <Clock className="w-4 h-4 text-primary" /> },
+                  { name: 'Completed', icon: <CheckCircle2 className="w-4 h-4 text-primary" /> }
+                ].map(item => (
                   <button
-                    key={item}
-                    onClick={() => setActiveItem(item)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all border-l-2 ${activeItem === item ? 'bg-secondary/5 text-secondary border-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary border-transparent font-medium'}`}
+                    key={item.name}
+                    onClick={() => setActiveItem(item.name)}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all ${activeItem === item.name ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'}`}
                   >
-                    {item}
+                    {item.icon}
+                    {item.name}
                   </button>
                 ))}
               </div>
@@ -107,7 +117,7 @@ const CollaborativeWorkspace: React.FC = () => {
           </div>
 
           {/* Active Projects Section */}
-          <div className="border-b border-secondary/5 pb-2 mb-2">
+          <div>
             <button 
               onClick={() => toggleSection('Active Projects')}
               className="w-full flex items-center justify-between py-2 group"
@@ -121,12 +131,13 @@ const CollaborativeWorkspace: React.FC = () => {
                   <button
                     key={project}
                     onClick={() => setActiveItem(project)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all border-l-2 ${activeItem === project ? 'bg-secondary/5 text-secondary border-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary border-transparent font-medium'}`}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all ${activeItem === project ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'}`}
                   >
+                    <Folder className="w-4 h-4 text-primary" />
                     {project}
                   </button>
                 ))}
-                <button className="w-full text-left px-3 py-2 text-[10px] font-black text-primary hover:text-primary/80 uppercase tracking-widest transition-colors mt-2">
+                <button className="w-full text-left px-4 py-2.5 text-[10px] font-black text-primary hover:bg-primary/5 rounded-lg uppercase tracking-widest transition-colors mt-2">
                   + New Project
                 </button>
               </div>
@@ -148,7 +159,7 @@ const CollaborativeWorkspace: React.FC = () => {
                 <h1 className="text-4xl font-black font-serif tracking-tight text-secondary">TraceHunter Dev</h1>
                 <p className="text-sm text-secondary/50 font-semibold mt-2">Developing malware triage protocols and volatile memory capture methods.</p>
               </div>
-              <button className="bg-primary text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-primary/90 transition-all shadow-soft whitespace-nowrap">
+              <button className="btn-primary !px-5 !py-2.5 shadow-soft whitespace-nowrap">
                 + New Task
               </button>
             </div>
@@ -329,7 +340,7 @@ const CollaborativeWorkspace: React.FC = () => {
       </main>
 
       {/* Right Sidebar - Activity & Syncs */}
-      <aside className="lg:col-span-3 border-l border-secondary/5 bg-white p-8 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide space-y-12">
+      <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         
         {activeItem === 'TraceHunter Dev' ? (
           <>
@@ -348,7 +359,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <button className="w-full mt-4 py-3 border border-secondary/10 text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary hover:bg-secondary/5 transition-all rounded-xl">
+              <button className="w-full mt-4 btn-outline !py-3 !text-[10px] !rounded-xl !border-secondary/10 !text-secondary/40 hover:!text-secondary">
                 View File Hub
               </button>
             </section>
@@ -414,7 +425,7 @@ const CollaborativeWorkspace: React.FC = () => {
                 </div>
               </div>
               
-              <button className="w-full mt-4 py-3 bg-secondary text-white text-[10px] font-black uppercase tracking-widest hover:bg-secondary/90 transition-all rounded-xl shadow-soft">
+              <button className="w-full mt-4 btn-primary !py-3 !text-[10px] !rounded-xl !bg-secondary">
                 Schedule New
               </button>
             </div>

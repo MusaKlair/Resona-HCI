@@ -3,8 +3,8 @@
 @config "../tailwind.config.ts";
 
 @theme {
-  --font-serif: "Canela", serif;
-  --font-sans: "Inter", sans-serif;
+  --font-serif: var(--font-serif), "Playfair Display", serif;
+  --font-sans: var(--font-sans), "Inter", sans-serif;
   
   --color-primary: #EE7052;
   --color-secondary: #0A1128;
@@ -36,10 +36,10 @@
   }
   
   .btn-primary {
-    @apply bg-primary text-white px-8 py-3 rounded-md font-bold transition-all hover:bg-primary/90 hover:scale-105 active:scale-95 shadow-lg shadow-primary/20;
+    @apply bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:bg-primary/90 active:scale-95 shadow-sm hover:shadow-md;
   }
   
   .btn-outline {
-    @apply border border-primary/40 text-primary px-8 py-3 rounded-md font-bold transition-all hover:bg-primary/5 hover:scale-105 active:scale-95;
+    @apply border border-primary/40 text-primary px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-primary/5 active:scale-95;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Search, Bookmark, X, ChevronDown, CheckCircle2, Users, Target, Network, ChevronUp, Clock, School } from 'lucide-react';
+import { Search, Bookmark, X, ChevronDown, CheckCircle2, Users, Target, Network, ChevronUp, Clock, School, Briefcase, BarChart, Check, Square } from 'lucide-react';
 
 const initialMatchProfiles = [
   {
@@ -151,14 +151,14 @@ const MatchingHub: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-screen bg-background">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Filters Sidebar */}
-      <aside className="lg:col-span-2 border-r border-[#F3F4F6] bg-white p-8 space-y-2 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight mb-8">Feed Filters</h2>
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
+        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
 
         {/* Role Type Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Role Type')}
             className="w-full flex items-center justify-between py-2 group"
@@ -168,34 +168,34 @@ const MatchingHub: React.FC = () => {
           </button>
           
           {expandedSections.has('Role Type') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
               {[
-                { name: 'Mentor', icon: <Users className="w-3.5 h-3.5" /> },
-                { name: 'Mentee', icon: <Target className="w-3.5 h-3.5" /> },
-                { name: 'Peer Collaborator', icon: <Network className="w-3.5 h-3.5" /> }
+                { name: 'Mentor', icon: <Users className="w-4 h-4 text-primary" /> },
+                { name: 'Mentee', icon: <Target className="w-4 h-4 text-primary" /> },
+                { name: 'Peer Collaborator', icon: <Network className="w-4 h-4 text-primary" /> }
               ].map(role => (
-                <label 
-                  key={role.name} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(role.name);
-                  }}
+                <button 
+                  key={role.name}
+                  onClick={() => toggleFilter(role.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(role.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(role.name) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(role.name) && <CheckCircle2 className="w-3 h-3" />}
-                  </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(role.name) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
+                  <div className="flex items-center gap-3">
+                    {role.icon}
                     {role.name}
-                  </span>
-                </label>
+                  </div>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(role.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(role.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Experience Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Experience')}
             className="w-full flex items-center justify-between py-2 group"
@@ -205,30 +205,34 @@ const MatchingHub: React.FC = () => {
           </button>
           
           {expandedSections.has('Experience') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              {['Entry Level', 'Mid-Level', 'Senior / Expert'].map(level => (
-                <label 
-                  key={level} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(level);
-                  }}
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              {[
+                { name: 'Entry Level', icon: <Briefcase className="w-4 h-4 text-primary" /> },
+                { name: 'Mid-Level', icon: <BarChart className="w-4 h-4 text-primary" /> },
+                { name: 'Senior / Expert', icon: <Target className="w-4 h-4 text-primary" /> }
+              ].map(level => (
+                <button 
+                  key={level.name}
+                  onClick={() => toggleFilter(level.name)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(level.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(level) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(level) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    {level.icon}
+                    {level.name}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(level) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>
-                    {level}
-                  </span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(level.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(level.name) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
             </div>
           )}
         </div>
 
         {/* Institution Section */}
-        <div className="border-b border-[#F3F4F6] pb-4 mb-4">
+        <div>
           <button 
             onClick={() => toggleSection('Institution')}
             className="w-full flex items-center justify-between py-2 group"
@@ -238,9 +242,9 @@ const MatchingHub: React.FC = () => {
           </button>
           
           {expandedSections.has('Institution') && (
-            <div className="space-y-3 mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="relative mb-4">
-                <Search className="w-3.5 h-3.5 text-secondary/30 absolute left-3 top-1/2 -translate-y-1/2" />
+            <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              <div className="relative mb-4 px-2 mt-2">
+                <Search className="w-3.5 h-3.5 text-secondary/30 absolute left-5 top-1/2 -translate-y-1/2" />
                 <input 
                   type="text" 
                   placeholder="Search..." 
@@ -248,23 +252,25 @@ const MatchingHub: React.FC = () => {
                 />
               </div>
               {['Stanford University', 'MIT', 'Harvard University', 'Oxford', 'TechCorp Institute'].slice(0, showAllSections.has('Institution') ? 10 : 4).map(inst => (
-                <label 
-                  key={inst} 
-                  className="flex items-center gap-3 cursor-pointer group"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFilter(inst);
-                  }}
+                <button 
+                  key={inst}
+                  onClick={() => toggleFilter(inst)}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
+                    activeFilters.includes(inst) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                  }`}
                 >
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(inst) ? 'bg-primary border-primary text-white' : 'border-secondary/20 bg-white group-hover:border-primary/50'}`}>
-                    {activeFilters.includes(inst) && <CheckCircle2 className="w-3 h-3" />}
+                  <div className="flex items-center gap-3">
+                    <School className="w-4 h-4 text-primary" />
+                    {inst}
                   </div>
-                  <span className={`text-sm font-semibold transition-colors ${activeFilters.includes(inst) ? 'text-secondary' : 'text-secondary/60 group-hover:text-secondary'}`}>{inst}</span>
-                </label>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(inst) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                    {activeFilters.includes(inst) && <Check className="w-3 h-3 text-white" />}
+                  </div>
+                </button>
               ))}
               <button 
                 onClick={() => toggleShowAll('Institution')}
-                className="text-[10px] font-bold text-secondary/40 hover:text-secondary transition-colors"
+                className="w-full text-left px-4 mt-2 text-[10px] font-bold text-secondary/40 hover:text-secondary transition-colors"
               >
                 {showAllSections.has('Institution') ? '- See less' : '+ See all'}
               </button>
@@ -452,10 +458,10 @@ const MatchingHub: React.FC = () => {
 
               <button 
                 onClick={() => !sentRequestIds.has(profile.id) && handleConnect(profile.id, profile.name)}
-                className={`w-full border font-bold text-xs uppercase tracking-widest py-3 rounded-lg transition-all ${
+                className={`w-full btn-outline !rounded-xl ${
                   sentRequestIds.has(profile.id) 
-                    ? 'border-secondary/10 bg-secondary/5 text-secondary/40 cursor-default' 
-                    : 'border-primary/40 text-primary hover:bg-primary/5'
+                    ? 'opacity-50 cursor-default' 
+                    : ''
                 }`}
               >
                 {sentRequestIds.has(profile.id) 
@@ -469,7 +475,7 @@ const MatchingHub: React.FC = () => {
       </main>
 
       {/* Right Sidebar */}
-      <aside className="lg:col-span-3 border-l border-secondary/5 bg-white p-8 sticky top-20 self-start h-[calc(100vh-80px)]">
+      <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-8">Recently Viewed</h3>
         
         <div className="space-y-6 mb-12">
