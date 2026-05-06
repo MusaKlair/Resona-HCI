@@ -59,139 +59,143 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <OrbitalLogo className="h-10 w-10 transition-transform duration-700 group-hover:rotate-180" />
-            <span className="text-2xl font-bold font-serif tracking-tight text-text-primary">Resona</span>
-          </Link>
+          {/* Left Group: Logo + Main Nav */}
+          <div className="flex items-center gap-10">
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
+              <OrbitalLogo className="h-10 w-10 transition-transform duration-700 group-hover:rotate-180" />
+              <span className="text-2xl font-bold font-serif tracking-tight text-text-primary whitespace-nowrap">Resona</span>
+            </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-10">
-            {isAuthenticated ? (
-              ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace'].map((item) => {
-                const viewMap: Record<string, string> = {
-                  'Home': '/home',
-                  'Match Hub': '/matching',
-                  'Problems': '/problems',
-                  'Funding': '/funding',
-                  'Workspace': '/workspace',
-                  'Profile': '/profile'
-                };
-                const mappedPath = viewMap[item];
-                const isActive = pathname === mappedPath;
-                return (
-                  <Link 
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center gap-8">
+              {isAuthenticated ? (
+                ['Home', 'Match Hub', 'Problems', 'Funding', 'Workspace'].map((item) => {
+                  const viewMap: Record<string, string> = {
+                    'Home': '/home',
+                    'Match Hub': '/matching',
+                    'Problems': '/problems',
+                    'Funding': '/funding',
+                    'Workspace': '/workspace',
+                    'Profile': '/profile'
+                  };
+                  const mappedPath = viewMap[item];
+                  const isActive = pathname === mappedPath;
+                  return (
+                    <Link 
+                      key={item} 
+                      href={mappedPath}
+                      className={`text-sm font-bold transition-colors whitespace-nowrap ${isActive ? 'text-text-primary font-black' : 'text-text-secondary hover:text-text-primary'}`}
+                    >
+                      {item}
+                    </Link>
+                  );
+                })
+              ) : (
+                ['Platform', 'Solutions', 'Pricing', 'Resources'].map((item) => (
+                  <a 
                     key={item} 
-                    href={mappedPath}
-                    className={`text-sm font-bold transition-colors ${isActive ? 'text-text-primary font-black' : 'text-text-secondary hover:text-text-primary'}`}
+                    href={`/#${item.toLowerCase()}`}
+                    className="text-sm font-bold text-text-secondary hover:text-primary transition-colors whitespace-nowrap"
                   >
                     {item}
-                  </Link>
-                );
-              })
-            ) : (
-              ['Platform', 'Solutions', 'Pricing', 'Resources'].map((item) => (
-                <a 
-                  key={item} 
-                  href={`/#${item.toLowerCase()}`}
-                  className="text-sm font-bold text-secondary/70 hover:text-primary transition-colors"
-                >
-                  {item}
-                </a>
-              ))
-            )}
+                  </a>
+                ))
+              )}
+            </div>
           </div>
 
-          {/* Actions */}
+          {/* Right Group: Search + Actions + Avatar */}
           <div className="hidden md:flex items-center gap-4">
             {isAuthenticated ? (
               <>
-                <div className="relative group">
-                  <Search className="w-4 h-4 text-secondary/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                <div className="relative group shrink-0">
+                  <Search className="w-4 h-4 text-text-secondary/40 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input 
                     type="text" 
                     placeholder="Search..." 
-                    className="pl-9 pr-4 py-2 bg-surface border border-border rounded-full text-sm focus:outline-none focus:border-primary/30 focus:bg-background transition-all w-40 focus:w-64"
+                    className="pl-9 pr-4 py-2 bg-surface border border-border rounded-full text-sm focus:outline-none focus:border-primary/30 focus:bg-background transition-all w-40 focus:w-56"
                   />
                 </div>
-                <Link 
-                  href="/mentorship"
-                  className="p-2.5 rounded-full hover:bg-secondary/5 transition-colors relative group"
-                  title="Inbox"
-                >
-                  <Mail className="w-5 h-5 text-secondary/60 group-hover:text-primary transition-colors" />
-                  <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white" />
-                </Link>
 
-                <div className="relative">
-                  <button 
-                    onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-                    className={`p-2.5 rounded-full transition-all relative ${isNotificationsOpen ? 'bg-secondary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+                <div className="flex items-center gap-2">
+                  <Link 
+                    href="/mentorship"
+                    className="p-2.5 rounded-full hover:bg-surface border border-transparent hover:border-border transition-all relative group"
+                    title="Inbox"
                   >
-                    <Bell className="w-5 h-5" />
-                    <div className="absolute top-2 right-2.5 w-1.5 h-1.5 bg-primary rounded-full" />
-                  </button>
+                    <Mail className="w-5 h-5 text-text-secondary group-hover:text-primary transition-colors" />
+                    <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-background" />
+                  </Link>
 
-                  {/* Notification Popover */}
-                  {isNotificationsOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setIsNotificationsOpen(false)} />
-                      <div className="absolute top-full right-0 mt-3 w-80 bg-surface border border-border rounded-2xl shadow-elevated z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
-                        <div className="p-4 border-b border-secondary/5 flex items-center justify-between bg-secondary/[0.02]">
-                          <span className="text-xs font-bold text-secondary/60">Quick Alerts</span>
-                          <button className="text-[10px] font-bold text-primary hover:underline">Mark all read</button>
-                        </div>
-                        <div className="max-h-[350px] overflow-y-auto scrollbar-hide">
-                          {[
-                            { id: 1, title: 'New Peer Review', desc: 'Dr. Aris Thorne commented on your publication.', time: '2m ago', unread: true },
-                            { id: 2, title: 'Match Alert', desc: 'A new researcher aligns with your Quantum Ethics project.', time: '1h ago', unread: true },
-                            { id: 3, title: 'Grant Opportunity', desc: 'National Science Foundation released a new RFP.', time: '3h ago', unread: false },
-                            { id: 4, title: 'Citation Spike', desc: 'Your 2023 paper received 5 new citations today.', time: '5h ago', unread: false },
-                            { id: 5, title: 'Collaboration Invite', desc: 'Sarah Jenkins wants to discuss a joint paper.', time: '8h ago', unread: false },
-                          ].map((notif) => (
-                            <div key={notif.id} className={`p-4 border-b border-secondary/5 hover:bg-secondary/[0.01] transition-colors cursor-pointer group relative ${notif.unread ? 'bg-primary/[0.02]' : ''}`}>
-                              {notif.unread && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
-                              <div className="flex justify-between items-start mb-1">
-                                <h4 className="text-[11px] font-black text-secondary dark:text-text-primary uppercase tracking-wider">{notif.title}</h4>
-                                <span className="text-[9px] font-medium text-secondary/30">{notif.time}</span>
+                  <div className="relative">
+                    <button 
+                      onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+                      className={`p-2.5 rounded-full transition-all relative border border-transparent hover:border-border ${isNotificationsOpen ? 'bg-primary/10 text-primary border-primary/20' : 'hover:bg-surface text-text-secondary'}`}
+                    >
+                      <Bell className="w-5 h-5" />
+                      <div className="absolute top-2 right-2.5 w-1.5 h-1.5 bg-primary rounded-full" />
+                    </button>
+
+                    {/* Notification Popover */}
+                    {isNotificationsOpen && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setIsNotificationsOpen(false)} />
+                        <div className="absolute top-full right-0 mt-3 w-80 bg-surface border border-border rounded-2xl shadow-elevated z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
+                          <div className="p-4 border-b border-border flex items-center justify-between bg-surface/50">
+                            <span className="text-xs font-bold text-text-secondary">Quick Alerts</span>
+                            <button className="text-[10px] font-bold text-primary hover:underline">Mark all read</button>
+                          </div>
+                          <div className="max-h-[350px] overflow-y-auto scrollbar-hide">
+                            {[
+                              { id: 1, title: 'New Peer Review', desc: 'Dr. Aris Thorne commented on your publication.', time: '2m ago', unread: true },
+                              { id: 2, title: 'Match Alert', desc: 'A new researcher aligns with your Quantum Ethics project.', time: '1h ago', unread: true },
+                              { id: 3, title: 'Grant Opportunity', desc: 'National Science Foundation released a new RFP.', time: '3h ago', unread: false },
+                              { id: 4, title: 'Citation Spike', desc: 'Your 2023 paper received 5 new citations today.', time: '5h ago', unread: false },
+                              { id: 5, title: 'Collaboration Invite', desc: 'Sarah Jenkins wants to discuss a joint paper.', time: '8h ago', unread: false },
+                            ].map((notif) => (
+                              <div key={notif.id} className={`p-4 border-b border-border hover:bg-primary/[0.02] transition-colors cursor-pointer group relative ${notif.unread ? 'bg-primary/[0.01]' : ''}`}>
+                                {notif.unread && <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
+                                <div className="flex justify-between items-start mb-1">
+                                  <h4 className="text-[11px] font-black text-text-primary uppercase tracking-wider">{notif.title}</h4>
+                                  <span className="text-[9px] font-medium text-text-secondary/30">{notif.time}</span>
+                                </div>
+                                <p className="text-xs text-text-secondary/60 leading-relaxed line-clamp-2">{notif.desc}</p>
                               </div>
-                              <p className="text-xs text-secondary/60 leading-relaxed line-clamp-2">{notif.desc}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <Link 
-                          href="/mentorship" 
-                          onClick={() => setIsNotificationsOpen(false)}
-                          className="block p-4 text-center text-xs font-bold text-secondary/60 hover:text-primary hover:bg-secondary/[0.02] transition-all border-t border-secondary/5"
-                        >
-                          View all activity
+                            ))}
+                          </div>
+                          <Link 
+                            href="/mentorship" 
+                            onClick={() => setIsNotificationsOpen(false)}
+                            className="block p-4 text-center text-xs font-bold text-text-secondary hover:text-primary hover:bg-surface transition-all border-t border-border"
+                          >
+                            View all activity
                         </Link>
-                      </div>
-                    </>
-                  )}
-                </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
 
-                <ThemeToggle />
+                  <ThemeToggle />
+                </div>
 
                 <Link 
                   href="/upload"
-                  className="bg-primary text-white text-sm font-bold px-6 py-2.5 rounded-md hover:bg-primary/90 transition-colors shadow-sm mx-2 active:scale-95"
+                  className="bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-all shadow-sm shadow-primary/20 whitespace-nowrap active:scale-95"
                 >
                   Create / Post
                 </Link>
-                <Link href="/profile" className="w-10 h-10 rounded-full overflow-hidden border-2 border-transparent hover:border-primary transition-all shadow-sm">
-                  <img src="/avatar_aris.png" alt="Profile" className="w-full h-full object-cover" />
+
+                <Link href="/profile/me" className="relative shrink-0">
+                  <div className="w-10 h-10 rounded-full border-2 border-border overflow-hidden hover:border-primary transition-all p-0.5 shadow-sm">
+                    <img src="/avatar_me.png" alt="Profile" className="w-full h-full rounded-full object-cover" />
+                  </div>
                 </Link>
               </>
             ) : (
-              <>
-                <Link href="/auth" className="text-sm font-bold text-secondary hover:text-primary transition-colors">
-                  Log In
-                </Link>
-                <Link href="/auth" className="bg-primary text-white font-bold px-6 py-2.5 rounded-md hover:bg-primary/90 transition-all text-sm shadow-md shadow-primary/20">
-                  Join Resona
-                </Link>
-              </>
+              <div className="flex items-center gap-6">
+                <Link href="/auth" className="text-sm font-bold text-text-secondary hover:text-text-primary transition-colors">Log In</Link>
+                <Link href="/auth" className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-primary/90 transition-all shadow-md shadow-primary/10">Join Resona</Link>
+              </div>
             )}
           </div>
 
@@ -264,16 +268,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="col-span-1 md:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
                   <OrbitalLogo className="h-6 w-6" />
-                  <span className="text-lg font-bold font-serif tracking-tight">Resona</span>
+                  <span className="text-lg font-bold font-serif tracking-tight text-text-primary">Resona</span>
                 </div>
-                <p className="text-secondary/60 text-xs leading-relaxed">
+                <p className="text-text-secondary/60 text-xs leading-relaxed">
                   Empowering the academic world through intelligent matchmaking and seamless collaboration.
                 </p>
               </div>
               
               <div>
-                <h4 className="font-bold mb-4 text-sm">Platform</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
+                <h4 className="font-bold mb-4 text-sm text-text-primary">Platform</h4>
+                <ul className="space-y-2 text-xs text-text-secondary/60">
                   <li><Link href="/matching" className="hover:text-primary transition-colors">Matching Hub</Link></li>
                   <li><Link href="/problems" className="hover:text-primary transition-colors">Research Problems</Link></li>
                   <li><Link href="/funding" className="hover:text-primary transition-colors">Grant Directory</Link></li>
@@ -281,8 +285,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
 
               <div>
-                <h4 className="font-bold mb-4 text-sm">Resources</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
+                <h4 className="font-bold mb-4 text-sm text-text-primary">Resources</h4>
+                <ul className="space-y-2 text-xs text-text-secondary/60">
                   <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">API Reference</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Community</a></li>
@@ -290,8 +294,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
 
               <div>
-                <h4 className="font-bold mb-4 text-sm">Company</h4>
-                <ul className="space-y-2 text-xs text-secondary/60">
+                <h4 className="font-bold mb-4 text-sm text-text-primary">Company</h4>
+                <ul className="space-y-2 text-xs text-text-secondary/60">
                   <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
@@ -299,11 +303,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
             </div>
             
-            <div className="border-t border-secondary/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-secondary/40 uppercase tracking-wider font-bold">
+            <div className="border-t border-border pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-text-secondary/40 uppercase tracking-wider font-bold">
               <p>© 2026 Resona Academic Platform. All rights reserved.</p>
               <div className="flex gap-6">
-                <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
+                <a href="#" className="hover:text-text-primary transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-text-primary transition-colors">Terms of Service</a>
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ const OrbitalLogo: React.FC<OrbitalLogoProps> = ({ className }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Orbits - 4 balanced ellipses for a perfect 8-petal symmetrical look */}
-      <g stroke="#0A1128" strokeWidth="2.5" opacity="0.9">
+      <g stroke="currentColor" strokeWidth="2.5" opacity="0.9">
         {/* Horizontal */}
         <ellipse cx="50" cy="50" rx="46" ry="16" />
         {/* Vertical */}
@@ -25,7 +25,7 @@ const OrbitalLogo: React.FC<OrbitalLogoProps> = ({ className }) => {
         <ellipse cx="50" cy="50" rx="46" ry="16" transform="rotate(135 50 50)" />
       </g>
       {/* Nucleus */}
-      <circle cx="50" cy="50" r="11" fill="#EE7052" />
+      <circle cx="50" cy="50" r="11" fill="rgb(var(--brand-primary))" />
     </svg>
   );
 };

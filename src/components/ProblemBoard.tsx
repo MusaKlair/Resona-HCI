@@ -161,11 +161,11 @@ const ProblemBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Time Commitment')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Clock className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Duration</span>
+              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Duration</span>
             </div>
             {expandedSections.has('Time Commitment') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -197,11 +197,11 @@ const ProblemBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Compensation')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Coins className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Compensation</span>
+              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Compensation</span>
             </div>
             {expandedSections.has('Compensation') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -239,16 +239,16 @@ const ProblemBoard: React.FC = () => {
       {/* Main Content */}
       <main className="lg:col-span-10 p-8 md:p-12 animate-in fade-in duration-700">
         <div className="mb-8">
-          <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2 uppercase">Open Problems</h1>
-          <p className="text-sm text-secondary/50 font-semibold tracking-wide">Discover and collaborate on high-impact research challenges.</p>
+          <h1 className="text-3xl font-black font-serif tracking-tight text-text-primary mb-2 uppercase">Open Problems</h1>
+          <p className="text-sm text-text-secondary/50 font-semibold tracking-wide">Discover and collaborate on high-impact research challenges.</p>
         </div>
 
         {/* Omnibar */}
         <div className="mb-6 relative group">
           <div className="absolute inset-0 bg-primary/5 blur-2xl group-focus-within:bg-primary/10 transition-all opacity-0 group-focus-within:opacity-100" />
-          <div className="relative flex items-center bg-white border border-secondary/10 rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
-            <div className="pl-4 pr-3 flex items-center border-r border-secondary/5">
-              <Search className="w-4 h-4 text-secondary/30" />
+          <div className="relative flex items-center bg-surface border border-border rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
+            <div className="pl-4 pr-3 flex items-center border-r border-border">
+              <Search className="w-4 h-4 text-text-secondary/30" />
             </div>
             <input 
               type="text" 
@@ -281,9 +281,9 @@ const ProblemBoard: React.FC = () => {
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-secondary/40">
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-secondary/40">
             <span>Sort by:</span>
-            <button className="flex items-center gap-1.5 text-secondary hover:text-primary transition-colors">
+            <button className="flex items-center gap-1.5 text-text-primary hover:text-primary transition-colors">
               Closing Soon
               <ChevronDown className="w-3 h-3" />
             </button>
@@ -304,7 +304,7 @@ const ProblemBoard: React.FC = () => {
               return matchesSearch && (activeFilters.length > 0 ? matchesFilter : true);
             })
             .map(prob => (
-            <div key={prob.id} className={`group relative bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all flex flex-col animate-in fade-out duration-300 zoom-in-95 ${prob.closed ? 'opacity-50' : ''}`}>
+            <div key={prob.id} className={`group relative bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all flex flex-col animate-in fade-out duration-300 zoom-in-95 ${prob.closed ? 'opacity-50' : ''}`}>
               
               {/* Utility Bar */}
               <div className="absolute top-4 right-4 flex items-center gap-2">
@@ -327,34 +327,34 @@ const ProblemBoard: React.FC = () => {
               <div className="flex justify-between items-start mb-6">
                 <div className="flex gap-2">
                   {prob.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-secondary/60">
+                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-secondary/5 text-text-secondary/60">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold font-serif mb-3 leading-snug text-secondary">{prob.title}</h3>
-              <p className="text-sm text-secondary/70 leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{prob.desc}</p>
+              <h3 className="text-xl font-bold font-serif mb-3 leading-snug text-text-primary">{prob.title}</h3>
+              <p className="text-sm text-text-secondary leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{prob.desc}</p>
 
-              <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-secondary/5">
+              <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-border">
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Skills</h4>
-                  <p className="text-sm font-semibold text-secondary/80">{prob.skills}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Skills</h4>
+                  <p className="text-sm font-semibold text-text-primary/80">{prob.skills}</p>
                 </div>
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Commitment</h4>
-                  <p className="text-sm font-semibold text-secondary/80">{prob.commitment}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Commitment</h4>
+                  <p className="text-sm font-semibold text-text-primary/80">{prob.commitment}</p>
                 </div>
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-1">Deadline</h4>
-                  <p className="text-sm font-semibold text-secondary/80">{prob.deadline}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Deadline</h4>
+                  <p className="text-sm font-semibold text-text-primary/80">{prob.deadline}</p>
                 </div>
               </div>
 
               <div className="flex justify-between items-center text-sm font-bold mb-6">
-                <span className="text-secondary/70">{prob.lab}</span>
-                <span className="text-secondary">{prob.compensation}</span>
+                <span className="text-text-secondary/70">{prob.lab}</span>
+                <span className="text-text-primary">{prob.compensation}</span>
               </div>
 
               <button 

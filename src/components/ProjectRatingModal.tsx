@@ -38,7 +38,7 @@ const ProjectRatingModal: React.FC<RatingModalProps> = ({ onClose }) => {
               className={`w-6 h-6 transition-all duration-300 ${
                 star <= score 
                   ? 'fill-primary text-primary scale-110 shadow-primary/20' 
-                  : 'text-secondary/20 group-hover:text-primary/50 group-hover:scale-105'
+                  : 'text-text-secondary/20 group-hover:text-primary/50 group-hover:scale-105'
               }`}
             />
           </button>
@@ -48,7 +48,7 @@ const ProjectRatingModal: React.FC<RatingModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-secondary/90 backdrop-blur-sm animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-background/90 backdrop-blur-sm animate-in fade-in duration-300">
       
       <div className="w-full max-w-3xl bg-surface shadow-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-500">
         
@@ -56,14 +56,14 @@ const ProjectRatingModal: React.FC<RatingModalProps> = ({ onClose }) => {
         <div className="p-8 md:px-12 border-b border-secondary/10 relative shrink-0">
           <button 
             onClick={onClose}
-            className="absolute top-8 right-8 text-secondary/40 hover:text-secondary transition-colors"
+            className="absolute top-8 right-8 text-text-secondary/40 hover:text-text-primary transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
-          <h2 className="text-3xl font-bold font-serif tracking-tight mb-2">
+          <h2 className="text-3xl font-bold font-serif tracking-tight mb-2 text-text-primary">
             Project Complete: Peer Review
           </h2>
-          <p className="text-sm text-secondary/60">
+          <p className="text-sm text-text-secondary">
             Please evaluate your teammates to officially close the project.
           </p>
         </div>
@@ -86,26 +86,27 @@ const ProjectRatingModal: React.FC<RatingModalProps> = ({ onClose }) => {
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-secondary/50 mb-2">Contribution Quality</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-text-secondary/50 mb-2">Contribution Quality</p>
                     {renderStars(mate.id, 'quality')}
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-secondary/50 mb-2">Assignment Completion</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-text-secondary/50 mb-2">Assignment Completion</p>
                     {renderStars(mate.id, 'completion')}
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-secondary/50 mb-2">Overall Performance</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-text-secondary/50 mb-2">Overall Performance</p>
                     {renderStars(mate.id, 'overall')}
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary/50 mb-2">Additional Feedback (Optional)</p>
-                  <textarea 
-                    rows={6}
-                    placeholder="Provide specific observations on collaboration, technical depth, and reliability..."
-                    className="w-full p-5 text-sm bg-secondary/[0.02] border border-[#E5E7EB] outline-none focus:border-secondary/30 focus:ring-4 focus:ring-secondary/5 focus:bg-white transition-all shadow-sm resize-none rounded-xl placeholder:text-secondary/20"
-                  />
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-bold text-text-primary uppercase tracking-widest">Qualitative Feedback</h4>
+                    <textarea 
+                      className="w-full bg-background border border-border p-6 rounded-xl text-sm text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary/20 min-h-[150px] transition-all"
+                      placeholder={`What was it like working with ${mate.name.split(' ')[0]}? Mention specific technical contributions...`}
+                    />
+                  </div>
                 </div>
               </div>
 

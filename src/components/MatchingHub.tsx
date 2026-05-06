@@ -157,7 +157,7 @@ const MatchingHub: React.FC = () => {
       {/* Left Filters Sidebar */}
       {/* Left Filters Sidebar */}
       <aside className="lg:col-span-2 space-y-6 sticky top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
+        <h2 className="font-black font-serif text-lg tracking-tight text-text-primary uppercase tracking-widest">Feed Filters</h2>
 
         <nav className="flex flex-col gap-1">
         {/* Role Type Section */}
@@ -168,7 +168,7 @@ const MatchingHub: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <Users className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Role Type</span>
+              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Role Type</span>
             </div>
             {expandedSections.has('Role Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -184,14 +184,14 @@ const MatchingHub: React.FC = () => {
                   key={role.name}
                   onClick={() => toggleFilter(role.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${
-                    activeFilters.includes(role.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(role.name) ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {role.icon}
                     {role.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(role.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(role.name) ? 'bg-primary border-primary' : 'border-text-secondary/40'}`}>
                     {activeFilters.includes(role.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -208,7 +208,7 @@ const MatchingHub: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <BarChart className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Experience</span>
+              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Experience</span>
             </div>
             {expandedSections.has('Experience') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -224,14 +224,14 @@ const MatchingHub: React.FC = () => {
                   key={level.name}
                   onClick={() => toggleFilter(level.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(level.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(level.name) ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {level.icon}
                     {level.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(level.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(level.name) ? 'bg-primary border-primary' : 'border-text-secondary/40'}`}>
                     {activeFilters.includes(level.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -248,7 +248,7 @@ const MatchingHub: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <School className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Institution</span>
+              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Institution</span>
             </div>
             {expandedSections.has('Institution') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -268,14 +268,14 @@ const MatchingHub: React.FC = () => {
                   key={inst}
                   onClick={() => toggleFilter(inst)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(inst) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(inst) ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <School className="w-4 h-4 text-primary" />
                     {inst}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(inst) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(inst) ? 'bg-primary border-primary' : 'border-text-secondary/40'}`}>
                     {activeFilters.includes(inst) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -303,22 +303,22 @@ const MatchingHub: React.FC = () => {
         {/* Omnibar */}
         <div className="mb-6 relative group">
           <div className="absolute inset-0 bg-primary/5 blur-2xl group-focus-within:bg-primary/10 transition-all opacity-0 group-focus-within:opacity-100" />
-          <div className="relative flex items-center bg-white border border-secondary/10 rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
-            <div className="pl-4 pr-3 flex items-center border-r border-secondary/5">
-              <Search className="w-4 h-4 text-secondary/30" />
+          <div className="relative flex items-center bg-surface border border-border rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
+            <div className="pl-4 pr-3 flex items-center border-r border-border">
+              <Search className="w-4 h-4 text-text-secondary/30" />
             </div>
             <input 
               type="text" 
               placeholder="Search skills, methodologies, or research vectors..." 
-              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-secondary/30 font-medium h-12"
+              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-text-secondary/50 text-text-primary font-medium h-12"
             />
-            <div className="flex items-center p-1 bg-secondary/5 rounded-xl ml-2 border border-secondary/5">
+            <div className="flex items-center p-1 bg-background/40 rounded-xl ml-2 border border-border">
               <button 
                 onClick={() => setMatchType('similar')}
                 className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-all ${
                   matchType === 'similar' 
-                    ? 'bg-secondary text-white shadow-md' 
-                    : 'text-secondary/40 hover:text-secondary/60 hover:bg-secondary/5'
+                    ? 'bg-surface text-text-primary shadow-md' 
+                    : 'text-text-secondary/40 hover:text-text-secondary/60 hover:bg-surface'
                 }`}
               >
                 Similar
@@ -327,8 +327,8 @@ const MatchingHub: React.FC = () => {
                 onClick={() => setMatchType('complementary')}
                 className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-all ${
                   matchType === 'complementary' 
-                    ? 'bg-secondary text-white shadow-md' 
-                    : 'text-secondary/40 hover:text-secondary/60 hover:bg-secondary/5'
+                    ? 'bg-surface text-text-primary shadow-md' 
+                    : 'text-text-secondary/40 hover:text-text-secondary/60 hover:bg-surface'
                 }`}
               >
                 Complementary
@@ -380,7 +380,7 @@ const MatchingHub: React.FC = () => {
                 return true;
               })
               .map(profile => (
-              <div key={profile.id} className="group relative bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all flex flex-col animate-in fade-out duration-300 zoom-in-95">
+              <div key={profile.id} className="group relative bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all flex flex-col animate-in fade-out duration-300 zoom-in-95">
                 
                 {/* Utility Bar */}
                 <div className="absolute top-4 right-4 flex items-center gap-2">
@@ -402,17 +402,17 @@ const MatchingHub: React.FC = () => {
 
               <div className="flex flex-col items-center text-center mb-6">
                 <Link href={`/profile/${profile.id}`} className="relative w-20 h-20 group/avatar cursor-pointer">
-                  <div className="w-full h-full bg-secondary/5 rounded-full overflow-hidden border-2 border-white shadow-soft transition-transform group-hover/avatar:scale-105">
+                  <div className="w-full h-full bg-background rounded-full overflow-hidden border-2 border-border shadow-soft transition-transform group-hover/avatar:scale-105">
                     <img src={profile.avatar} alt={profile.name} className="w-full h-full object-cover" />
                   </div>
                   {/* Status Indicator */}
-                  <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full shadow-sm" />
+                  <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full shadow-sm" />
                 </Link>
                 
                 <div className="mt-4">
                   <div className="flex items-center justify-center gap-1.5 mb-1">
                     <Link href={`/profile/${profile.id}`}>
-                      <h3 className="text-xl font-bold font-serif text-secondary hover:text-primary transition-colors cursor-pointer">{profile.name}</h3>
+                      <h3 className="text-xl font-bold font-serif text-text-primary hover:text-primary transition-colors cursor-pointer">{profile.name}</h3>
                     </Link>
                     {profile.isVerified && (
                       <div className="bg-primary/10 p-0.5 rounded-full" title="Verified Researcher">
@@ -420,14 +420,14 @@ const MatchingHub: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  <p className="text-xs font-semibold text-secondary/40 uppercase tracking-wider mb-3">
+                  <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
                     {profile.title} • {profile.institution}
                   </p>
                   <div className="flex flex-col items-center gap-2">
-                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-secondary/60">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-primary/5 text-primary border border-primary/10">
                       {profile.role}
                     </span>
-                    <div className="flex items-center gap-1.5 text-[9px] font-semibold text-secondary/40 italic">
+                    <div className="flex items-center gap-1.5 text-[9px] font-semibold text-text-secondary italic">
                       <Clock className="w-2.5 h-2.5" />
                       {profile.status} • {profile.lastActive}
                     </div>
@@ -435,36 +435,36 @@ const MatchingHub: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-secondary/5 p-5 rounded-xl border border-secondary/5 mb-6 flex-1 relative overflow-hidden">
+              <div className="bg-background p-5 rounded-xl border border-border mb-6 flex-1 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-primary/40" />
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-secondary/5">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-secondary/60 flex items-center gap-2">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary flex items-center gap-2">
                     <Network className="w-3.5 h-3.5" />
                     Structural Alignment
                   </h4>
-                  <span className="text-[11px] font-black text-primary bg-white px-2.5 py-1 rounded shadow-sm border border-primary/10">
+                  <span className="text-[11px] font-black text-primary bg-primary/10 px-2.5 py-1 rounded shadow-sm border border-primary/20">
                     {profile.matchScore}% Match
                   </span>
                 </div>
                 
-                <p className="text-sm leading-relaxed text-secondary/70 mb-4" style={{ lineHeight: '1.7' }} dangerouslySetInnerHTML={{
-                  __html: profile.alignment.replace(/Natural Language Processing|Data Engineering pipelines|distributed systems|human-computer interaction/g, match => `<span class="text-secondary font-bold">${match}</span>`)
+                <p className="text-sm leading-relaxed text-text-secondary mb-4" style={{ lineHeight: '1.7' }} dangerouslySetInnerHTML={{
+                  __html: profile.alignment.replace(/Natural Language Processing|Data Engineering pipelines|distributed systems|human-computer interaction/g, match => `<span class="text-text-primary font-bold underline decoration-primary/30">${match}</span>`)
                 }} />
 
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {profile.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 bg-secondary/5 text-[9px] font-bold text-secondary/50 rounded uppercase tracking-wider">
+                    <span key={tag} className="px-2 py-0.5 bg-surface border border-border text-[9px] font-bold text-text-primary rounded uppercase tracking-wider">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex flex-col gap-2 pt-3 border-t border-secondary/5">
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-secondary/30">
+                <div className="flex flex-col gap-2 pt-3 border-t border-border">
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-text-secondary/40">
                     <Users className="w-3 h-3 opacity-50" />
                     <span>{profile.mutualConnections} Mutual Connections</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-secondary/30">
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-text-secondary/40">
                     <School className="w-3 h-3 opacity-50" />
                     <span>Affiliated with {profile.affiliation}</span>
                   </div>

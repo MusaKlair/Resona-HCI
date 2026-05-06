@@ -76,7 +76,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   <button
                     key={item.name}
                     onClick={() => setActiveItem(item.name)}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${activeItem === item.name ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'}`}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${activeItem === item.name ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'}`}
                   >
                     {item.icon}
                     {item.name}
@@ -108,7 +108,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   <button
                     key={item.name}
                     onClick={() => setActiveItem(item.name)}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${activeItem === item.name ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'}`}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${activeItem === item.name ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'}`}
                   >
                     {item.icon}
                     {item.name}
@@ -209,8 +209,8 @@ const CollaborativeWorkspace: React.FC = () => {
           </div>
         ) : (
           <div className="animate-in fade-in slide-in-from-top-4 duration-700">
-            <h1 className="text-3xl font-black font-serif tracking-tight text-text-primary mb-2 uppercase">Workspace Overview</h1>
-            <p className="text-sm text-text-secondary font-semibold tracking-wide">Track progress and recent activity across all active collaborations.</p>
+            <h1 className="text-3xl font-black font-serif tracking-tight text-text-primary mb-2 uppercase">WORKSPACE OVERVIEW</h1>
+            <p className="text-sm text-text-secondary/50 font-semibold tracking-wide">Manage your research assets and collaborative workflows.</p>
           </div>
         )}
 
@@ -285,6 +285,20 @@ const CollaborativeWorkspace: React.FC = () => {
             <section>
               <div className="flex items-center justify-between border-b-2 border-secondary pb-4 mb-10">
                 <h2 className="text-2xl font-bold font-serif text-text-primary">Active Projects</h2>
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div className="bg-surface border border-border p-8 rounded-2xl shadow-soft">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-text-secondary mb-3">Active Projects</h3>
+                    <p className="text-3xl font-black text-text-primary">{activeProjects.length}</p>
+                  </div>
+                  <div className="bg-surface border border-border p-8 rounded-2xl shadow-soft">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-text-secondary mb-3">Documents</h3>
+                    <p className="text-3xl font-black text-text-primary">24</p>
+                  </div>
+                  <div className="bg-surface border border-border p-8 rounded-2xl shadow-soft">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-text-secondary mb-3">Completed</h3>
+                    <p className="text-3xl font-black text-text-primary">12</p>
+                  </div>
+                </div>
                 <button className="text-[10px] font-black uppercase tracking-[0.15em] text-primary border-b border-primary pb-0.5 hover:text-primary/80 transition-all">
                   View All Projects
                 </button>
@@ -329,10 +343,36 @@ const CollaborativeWorkspace: React.FC = () => {
             {/* Global Activity Feed */}
             <section>
               <div className="flex items-center justify-between border-b-2 border-secondary pb-4 mb-10">
-                <h2 className="text-2xl font-bold font-serif text-text-primary">Urgent Notifications</h2>
-                <button className="text-[10px] font-black uppercase tracking-[0.15em] text-primary border-b border-primary pb-0.5 hover:text-primary/80 transition-all">
-                  Mark All Read
-                </button>
+                <div className="bg-surface border border-border rounded-2xl p-8 mb-8 shadow-soft">
+                  <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-xl font-black font-serif text-text-primary uppercase tracking-tight">Urgent Notifications</h2>
+                    <button className="text-xs font-bold text-primary hover:underline">Mark all read</button>
+                  </div>
+                  <div className="space-y-6">
+                    {urgentActivity.map(item => (
+                      <div key={item.id} className="flex gap-4 p-4 hover:bg-primary/5 rounded-xl transition-all border border-transparent hover:border-border cursor-pointer group">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105 ${
+                          item.type === 'MENTION' ? 'bg-blue-500/10' :
+                          item.type === 'TASK' ? 'bg-red-500/10' : 'bg-emerald-500/10'
+                        }`}>
+                          {item.type === 'MENTION' && <MessageSquare className="w-5 h-5 text-blue-500" />}
+                          {item.type === 'TASK' && <CheckSquare className="w-5 h-5 text-red-500" />}
+                          {item.type === 'FILE' && <FileText className="w-5 h-5 text-emerald-500" />}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-xs font-black text-text-primary uppercase tracking-wider">{item.user}</span>
+                            <span className="text-[10px] text-text-secondary/30 font-bold">•</span>
+                            <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{item.project}</span>
+                            <span className="text-[10px] text-text-secondary/30 font-bold">•</span>
+                            <span className="text-[10px] font-bold text-text-secondary/40">{item.time}</span>
+                          </div>
+                          <p className="text-sm text-text-secondary leading-relaxed font-medium">{item.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
               
               <div className="bg-surface border border-border rounded-2xl shadow-sm overflow-hidden">
@@ -395,6 +435,29 @@ const CollaborativeWorkspace: React.FC = () => {
                           <img src={src} alt="Team" className="w-full h-full object-cover" />
                         </div>
                       ))}
+                    </div>
+                    <div className="bg-surface border border-border rounded-2xl p-8 shadow-soft">
+                      <div className="flex justify-between items-center mb-8 pb-4 border-b border-border">
+                        <h2 className="text-xl font-black font-serif text-text-primary uppercase tracking-tight">Project Rating & Peer Review</h2>
+                        <div className="flex items-center gap-2">
+                          <Star className="w-5 h-5 text-primary fill-primary" />
+                          <span className="text-xl font-black text-text-primary">4.9</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-text-primary mb-2">Excellent Technical Merit</h3>
+                          <p className="text-sm text-text-secondary/70 leading-relaxed max-w-lg">
+                            Your contributions to the <span className="font-bold text-primary">TraceHunter Dev</span> project have been rated exceptionally high by peers. Your artifact extraction logic is now a baseline for the lab.
+                          </p>
+                        </div>
+                        <button 
+                          onClick={() => setIsRatingModalOpen(true)}
+                          className="bg-primary text-white font-bold px-8 py-3 rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95 shrink-0"
+                        >
+                          Open Detailed Review
+                        </button>
+                      </div>
                     </div>
                     <button 
                       onClick={() => setIsRatingModalOpen(true)}

@@ -154,7 +154,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               key={item.name}
               onClick={() => setFilter(item.name)}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all ${
-                filter === item.name ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                filter === item.name ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'
               }`}
             >
               {item.icon}
@@ -168,7 +168,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
       <main className="lg:col-span-7 space-y-6">
         
         {/* Start a Post Input */}
-        <div className="bg-white border border-secondary/10 rounded-2xl p-4 shadow-sm">
+        <div className="bg-surface border border-border rounded-2xl p-4 shadow-sm">
           <div className="flex gap-4 items-center">
             <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-secondary/10">
               <img src="/avatar_aris.png" alt="You" className="w-full h-full object-cover" />
@@ -181,7 +181,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 selectedPostType === 'Media' ? "Share a technical visualization or image..." :
                 "Share an update, open problem, or publication..."
               }
-              className="flex-1 bg-secondary/5 hover:bg-secondary/10 text-secondary/70 placeholder:text-secondary/40 px-5 py-2.5 rounded-full text-sm font-semibold transition-colors focus:outline-none focus:bg-white focus:ring-1 focus:ring-primary/20"
+              className="flex-1 bg-background text-text-primary placeholder:text-text-secondary/50 px-5 py-3 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 border border-border"
             />
           </div>
           <div className="flex justify-between items-center mt-4 pt-3 border-t border-secondary/5">
@@ -220,7 +220,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             return true;
           })
           .map(post => (
-          <div key={post.id} className="bg-white border border-secondary/10 rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all">
+          <div key={post.id} className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all">
             
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center gap-3">
@@ -232,11 +232,11 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                   )}
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">{post.author}</h4>
-                  <p className="text-xs text-secondary/50">{post.field} • {post.time}</p>
+                  <h4 className="font-bold text-sm text-text-primary">{post.author}</h4>
+                  <p className="text-xs text-text-secondary/50">{post.field} • {post.time}</p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-secondary/70">
+              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary/5 text-text-secondary/70 border border-border">
                 {post.type}
               </span>
             </div>
@@ -244,10 +244,10 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             <div className="cursor-pointer">
               {post.href ? (
                 <Link href={post.href}>
-                  <h2 className="text-xl md:text-2xl font-black font-serif mb-1 leading-tight hover:text-primary transition-colors">{post.title}</h2>
+                  <h2 className="text-xl md:text-2xl font-black font-serif mb-1 leading-tight text-text-primary hover:text-primary transition-colors">{post.title}</h2>
                 </Link>
               ) : (
-                <h2 className="text-xl font-bold font-serif mb-1 leading-snug" onClick={() => onViewDetail(post.id)}>{post.title}</h2>
+                <h2 className="text-xl font-bold font-serif mb-1 leading-snug text-text-primary" onClick={() => onViewDetail(post.id)}>{post.title}</h2>
               )}
                 <div className="flex items-center gap-1.5 mb-3">
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
@@ -258,7 +258,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                     {post.savedCount}
                   </span>
                 </div>
-              <p className="text-sm text-secondary/70 leading-relaxed mb-4">{post.summary}</p>
+              <p className="text-sm text-text-secondary leading-relaxed mb-4">{post.summary}</p>
               
               {post.imageUrl && (
                 <div className="w-full h-64 bg-secondary/5 rounded-xl border border-secondary/10 mb-4 flex items-center justify-center relative overflow-hidden group shadow-sm">
@@ -278,38 +278,38 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             )}
 
             {post.deadline && (
-              <div className="flex justify-between items-center p-4 bg-secondary/5 rounded-xl mb-4 border border-secondary/10">
+              <div className="flex justify-between items-center p-4 bg-background rounded-xl mb-4 border border-border">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-secondary/40">Deadline</p>
-                  <p className="font-bold text-sm">{post.deadline}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary/40">Deadline</p>
+                  <p className="font-bold text-sm text-text-primary">{post.deadline}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-secondary/40">Max Award</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary/40">Max Award</p>
                   <p className="font-bold text-base text-primary">{post.maxAward}</p>
                 </div>
               </div>
             )}
 
             {/* Engagement Bar */}
-            <div className="flex items-center gap-6 pt-3 border-t border-secondary/5 mb-3">
-              <button className="flex items-center gap-2 text-xs font-bold text-secondary/60 hover:text-primary transition-colors group">
+            <div className="flex items-center gap-6 pt-3 border-t border-border mb-3">
+              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group">
                 <ThumbsUp className="w-4 h-4 group-hover:fill-primary/10" /> 
                 <span>{post.likes}</span>
               </button>
               <button 
                 onClick={() => setActiveComments(activeComments === post.id ? null : post.id)}
-                className={`flex items-center gap-2 text-xs font-bold transition-colors group ${activeComments === post.id ? 'text-primary' : 'text-secondary/60 hover:text-primary'}`}
+                className={`flex items-center gap-2 text-xs font-bold transition-colors group ${activeComments === post.id ? 'text-primary' : 'text-text-secondary hover:text-primary'}`}
               >
                 <MessageSquare className={`w-4 h-4 group-hover:fill-primary/10 ${activeComments === post.id ? 'fill-primary/10' : ''}`} /> 
                 <span>{post.comments}</span>
               </button>
-              <button className="flex items-center gap-2 text-xs font-bold text-secondary/60 hover:text-primary transition-colors group">
+              <button className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group">
                 <Share2 className="w-4 h-4" /> 
                 <span>Share</span>
               </button>
               <button 
                 onClick={() => handleSave(post.id)}
-                className={`flex items-center gap-2 text-xs font-bold transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'text-secondary/60 hover:text-primary'}`}
+                className={`flex items-center gap-2 text-xs font-bold transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'text-text-secondary hover:text-primary'}`}
               >
                 <Bookmark className={`w-4 h-4 group-hover:fill-primary/10 ${savedPosts.has(post.id) ? 'fill-primary' : ''}`} /> 
                 <span>{savedPosts.has(post.id) ? 'Saved' : 'Save'}</span>
@@ -360,10 +360,10 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
       {/* Right Sidebar */}
       <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         <div>
-          <h3 className="font-black text-xs uppercase tracking-widest text-secondary/50 mb-4">Trending Tags</h3>
+          <h3 className="font-black text-xs uppercase tracking-widest text-text-primary mb-4">Trending Tags</h3>
           <div className="flex flex-wrap gap-2">
             {trendingTags.map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-secondary/70 hover:bg-secondary/10 transition-colors cursor-pointer">
+              <span key={tag} className="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-surface border border-border text-text-secondary hover:text-primary hover:border-primary/30 transition-all cursor-pointer shadow-sm">
                 {tag}
               </span>
             ))}
@@ -371,7 +371,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
         </div>
 
         <div>
-          <h3 className="font-black text-xs uppercase tracking-widest text-secondary/50 mb-4">Suggested Peers</h3>
+          <h3 className="font-black text-xs uppercase tracking-widest text-text-primary mb-4">Suggested Peers</h3>
           <div className="space-y-4">
             {suggestedPeers.map(peer => (
               <div key={peer.id} className="flex items-center justify-between">
@@ -380,8 +380,8 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                     <img src={peer.avatar} alt={peer.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm">{peer.name}</h4>
-                    <p className="text-xs text-secondary/50">{peer.field}</p>
+                    <h4 className="font-bold text-sm text-text-primary">{peer.name}</h4>
+                    <p className="text-xs text-text-secondary/50">{peer.field}</p>
                   </div>
                 </div>
                 <button className="btn-outline !px-3 !py-1 !text-xs">
