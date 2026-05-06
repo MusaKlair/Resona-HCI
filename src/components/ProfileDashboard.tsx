@@ -54,7 +54,7 @@ const ProfileDashboard: React.FC = () => {
                 </h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <p className="text-sm font-bold text-text-secondary">Lead Researcher, Cognitive Architecture Institute</p>
-                  <span className="hidden sm:block text-text-secondary">â€¢</span>
+                  <span className="hidden sm:block text-text-secondary">•</span>
                   <a href="#" className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:underline">
                     orcid.org/0000-0002-1825-0097
                   </a>

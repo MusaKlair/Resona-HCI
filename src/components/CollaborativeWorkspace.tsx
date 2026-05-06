@@ -295,7 +295,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   <div key={project.id} className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all group cursor-pointer" onClick={() => setActiveItem(project.name)}>
                     <div className="flex justify-between items-start mb-6">
                       <h3 className="font-bold text-lg text-text-primary group-hover:text-primary transition-colors">{project.name}</h3>
-                      <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
+                      <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
                     </div>
                     
                     <div className="space-y-4">
@@ -538,7 +538,7 @@ const CollaborativeWorkspace: React.FC = () => {
                   <div className="bg-primary/5 border border-primary/20 text-text-primary p-4 rounded-2xl rounded-tl-none text-sm shadow-sm ring-2 ring-primary/5">
                     Looks solid. Should we use the new GNN model for the next iteration to handle the larger dataset?
                   </div>
-                  <span className="text-[10px] font-bold text-text-secondary">10:46 AM â€¢ <span className="text-primary font-black">STAKED MENTION</span></span>
+                  <span className="text-[10px] font-bold text-text-secondary">10:46 AM • <span className="text-primary font-black">STAKED MENTION</span></span>
                 </div>
               </div>
             </div>

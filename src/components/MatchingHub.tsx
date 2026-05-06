@@ -421,7 +421,7 @@ const MatchingHub: React.FC = () => {
                     )}
                   </div>
                   <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
-                    {profile.title} â€¢ {profile.institution}
+                    {profile.title} • {profile.institution}
                   </p>
                   <div className="flex flex-col items-center gap-2">
                     <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-text-secondary">
@@ -429,7 +429,7 @@ const MatchingHub: React.FC = () => {
                     </span>
                     <div className="flex items-center gap-1.5 text-[9px] font-semibold text-text-secondary italic">
                       <Clock className="w-2.5 h-2.5" />
-                      {profile.status} â€¢ {profile.lastActive}
+                      {profile.status} • {profile.lastActive}
                     </div>
                   </div>
                 </div>

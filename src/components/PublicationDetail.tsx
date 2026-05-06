@@ -77,9 +77,9 @@ const PublicationDetail: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="text-[9px] font-black text-text-secondary uppercase tracking-[0.2em] flex flex-wrap items-center gap-y-2">
                 <span>Published: Oct 12, 2024</span>
-                <span className="mx-2 opacity-20 hidden md:inline">â€¢</span>
+                <span className="mx-2 opacity-20 hidden md:inline">•</span>
                 <span>DOI: 10.1038/s41586-024-0000-0</span>
-                <span className="mx-2 opacity-20 hidden md:inline">â€¢</span>
+                <span className="mx-2 opacity-20 hidden md:inline">•</span>
                 <span className="text-text-secondary">Materials Science</span>
               </div>
               <span className="px-3 py-1 bg-surface-alt text-text-secondary text-[9px] font-black uppercase tracking-widest rounded border border-border whitespace-nowrap">
@@ -156,10 +156,10 @@ const PublicationDetail: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-text-primary">Dr. Hamza Tariq</p>
-                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">MIT â€¢ 4h ago</p>
+                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">MIT • 4h ago</p>
                     </div>
                   </div>
-                  <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
+                  <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed font-medium">
                   Have you observed any degradation in cycle stability beyond 500 cycles? In our recent trials with CVD nanotube arrays, we noticed a sharp drop-off when the patterned catalyst wasn't uniform at the atomic scale. 
@@ -182,10 +182,10 @@ const PublicationDetail: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-text-primary">Fatima Nawaz</p>
-                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Oxford Materials â€¢ 8h ago</p>
+                      <p className="text-[10px] font-black text-text-secondary uppercase tracking-widest">Oxford Materials • 8h ago</p>
                     </div>
                   </div>
-                  <button className="text-text-secondary hover:text-text-primary transition-colors">â‹®</button>
+                  <button className="text-text-secondary hover:text-text-primary transition-colors">⋮</button>
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed font-medium">
                   The methodology section on CVD parameters is exceptionally detailed. This will be very helpful for our upcoming replication study on high-efficiency arrays.

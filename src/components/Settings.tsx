@@ -120,7 +120,7 @@ export default function Settings() {
                   onClick={() => {
                     sr.toggleEnabled();
                     if (!sr.isEnabled) {
-                      // Will be enabled after toggle â€” announce it
+                      // Will be enabled after toggle — announce it
                       setTimeout(() => {
                         const u = new SpeechSynthesisUtterance('Screen reader enabled. Navigate to your Home Feed to begin listening.');
                         u.rate = 0.95;

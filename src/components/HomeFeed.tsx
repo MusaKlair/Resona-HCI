@@ -256,7 +256,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-sm">{post.author}</h4>
-                  <p className="text-xs text-text-secondary">{post.field} â€¢ {post.time}</p>
+                  <p className="text-xs text-text-secondary">{post.field} • {post.time}</p>
                 </div>
               </div>
               <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-text-secondary">
@@ -276,7 +276,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
                     {post.matchScore}
                   </span>
-                  <span className="text-[10px] font-bold text-text-secondary">â€¢</span>
+                  <span className="text-[10px] font-bold text-text-secondary">•</span>
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-text-secondary">
                     {post.savedCount}
                   </span>
@@ -376,7 +376,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                   <div className="flex gap-3 items-start">
                     <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">M</div>
                     <div className="flex-1 bg-surface-alt p-2.5 rounded-2xl rounded-tl-none">
-                      <p className="text-[10px] font-black text-text-secondary mb-1">Dr. Hamza Tariq <span className="font-normal text-text-secondary ml-1">â€¢ 1h ago</span></p>
+                      <p className="text-[10px] font-black text-text-secondary mb-1">Dr. Hamza Tariq <span className="font-normal text-text-secondary ml-1">• 1h ago</span></p>
                       <p className="text-xs text-text-secondary leading-relaxed">Impressive structural consistency. Have you considered the impact on cycle stability over 1000+ charges?</p>
                     </div>
                   </div>

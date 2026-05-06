@@ -58,7 +58,7 @@ const MentorshipFlow: React.FC = () => {
                 <Link href={`/profile/${conversations[0].id}`}>
                   <h3 className="text-lg font-black text-text-primary hover:text-primary transition-colors cursor-pointer">{conversations[0].name}</h3>
                 </Link>
-                <p className="text-xs font-bold text-text-secondary uppercase tracking-widest">Candidate for Mentorship â€¢ MIT</p>
+                <p className="text-xs font-bold text-text-secondary uppercase tracking-widest">Candidate for Mentorship • MIT</p>
               </div>
             </div>
             <button className="text-xs font-bold text-primary bg-primary/5 px-4 py-2 rounded-lg hover:bg-primary/10 transition-all active:scale-95">
