@@ -25,7 +25,7 @@ const OrbitalLogo: React.FC<OrbitalLogoProps> = ({ className }) => {
         <ellipse cx="50" cy="50" rx="46" ry="16" transform="rotate(135 50 50)" />
       </g>
       {/* Nucleus */}
-      <circle cx="50" cy="50" r="11" fill="rgb(var(--brand-primary))" />
+      <circle cx="50" cy="50" r="11" fill="#EE7052" />
     </svg>
   );
 };

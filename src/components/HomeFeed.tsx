@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { ThumbsUp, MessageSquare, Bookmark, CheckCircle2, LayoutGrid, FileText, Target, Wallet, Share2, Image as ImageIcon, Send } from 'lucide-react';
+import { ThumbsUp, MessageSquare, Bookmark, CheckCircle2, LayoutGrid, FileText, Target, Wallet, Share2, Image as ImageIcon, Send, Volume2, VolumeX, Play, Pause, SkipForward, SkipBack, Square } from 'lucide-react';
+import { useScreenReader } from '../hooks/useScreenReader';
 
 const mockFeed = [
   {
@@ -122,6 +123,35 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
   const [selectedPostType, setSelectedPostType] = useState('Update');
   const [savedPosts, setSavedPosts] = useState<Set<number>>(new Set());
   const [showSaveToast, setShowSaveToast] = useState(false);
+  const [readerCurrentIdx, setReaderCurrentIdx] = useState(0);
+
+  const sr = useScreenReader({ rate: 0.95, pitch: 1.05 });
+
+  const filteredPosts = useMemo(() => mockFeed.filter(post => {
+    if (filter === 'All Content') return true;
+    if (filter === 'Publications') return post.type === 'PUBLICATION';
+    if (filter === 'Problems') return post.type === 'PROBLEM';
+    if (filter === 'Grants') return post.type === 'GRANT';
+    return true;
+  }), [filter]);
+
+  // Load the filtered posts into the screen reader queue whenever filter or enablement changes
+  useEffect(() => {
+    if (sr.isEnabled) {
+      sr.loadQueue(filteredPosts);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sr.isEnabled, filteredPosts]);
+
+  // Track the current index for highlighting
+  useEffect(() => {
+    if (sr.isSpeaking) {
+      const interval = setInterval(() => {
+        setReaderCurrentIdx(sr.getCurrentIndex());
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, [sr.isSpeaking, sr.getCurrentIndex]);
 
   const handleSave = (id: number) => {
     setSavedPosts(prev => {
@@ -141,8 +171,8 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 animate-in fade-in duration-500">
       
       {/* Left Sidebar - Filters */}
-      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start">
-        <h3 className="font-black font-serif text-lg tracking-tight">Feed Filters</h3>
+      <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide">
+        <h2 className="font-bold font-serif text-lg tracking-tight text-text-primary">Feed Filters</h2>
         <nav className="flex flex-col gap-1">
           {[
             { name: 'All Content', icon: <LayoutGrid className="w-4 h-4 text-primary" /> },
@@ -154,7 +184,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               key={item.name}
               onClick={() => setFilter(item.name)}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all ${
-                filter === item.name ? 'bg-primary/10 text-text-primary font-bold' : 'text-text-secondary hover:bg-surface hover:text-text-primary font-semibold'
+                filter === item.name ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
               }`}
             >
               {item.icon}
@@ -170,7 +200,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
         {/* Start a Post Input */}
         <div className="bg-surface border border-border rounded-2xl p-4 shadow-sm">
           <div className="flex gap-4 items-center">
-            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-secondary/10">
+            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-border">
               <img src="/avatar_aris.png" alt="You" className="w-full h-full object-cover" />
             </div>
             <input 
@@ -181,26 +211,26 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 selectedPostType === 'Media' ? "Share a technical visualization or image..." :
                 "Share an update, open problem, or publication..."
               }
-              className="flex-1 bg-background text-text-primary placeholder:text-text-secondary/50 px-5 py-3 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 border border-border"
+              className="flex-1 bg-surface-alt hover:bg-surface-alt text-text-secondary placeholder:text-text-secondary px-5 py-2.5 rounded-full text-sm font-semibold transition-colors focus:outline-none focus:bg-surface focus:ring-1 focus:ring-primary/20"
             />
           </div>
-          <div className="flex justify-between items-center mt-4 pt-3 border-t border-secondary/5">
+          <div className="flex justify-between items-center mt-4 pt-3 border-t border-border">
             <div className="flex gap-1">
               <button 
                 onClick={() => setSelectedPostType(selectedPostType === 'Media' ? 'Update' : 'Media')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Media' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Media' ? 'bg-primary/10 text-primary' : 'hover:bg-surface-alt text-text-secondary'}`}
               >
                 <ImageIcon className="w-4 h-4" /> Media
               </button>
               <button 
                 onClick={() => setSelectedPostType(selectedPostType === 'Paper' ? 'Update' : 'Paper')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Paper' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Paper' ? 'bg-primary/10 text-primary' : 'hover:bg-surface-alt text-text-secondary'}`}
               >
                 <FileText className="w-4 h-4" /> Paper
               </button>
               <button 
                 onClick={() => setSelectedPostType(selectedPostType === 'Problem' ? 'Update' : 'Problem')}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Problem' ? 'bg-primary/10 text-primary' : 'hover:bg-secondary/5 text-secondary/60'}`}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-xs font-bold ${selectedPostType === 'Problem' ? 'bg-primary/10 text-primary' : 'hover:bg-surface-alt text-text-secondary'}`}
               >
                 <Target className="w-4 h-4" /> Problem
               </button>
@@ -211,32 +241,25 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
           </div>
         </div>
 
-        {mockFeed
-          .filter(post => {
-            if (filter === 'All Content') return true;
-            if (filter === 'Publications') return post.type === 'PUBLICATION';
-            if (filter === 'Problems') return post.type === 'PROBLEM';
-            if (filter === 'Grants') return post.type === 'GRANT';
-            return true;
-          })
-          .map(post => (
-          <div key={post.id} className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all">
+        {filteredPosts
+          .map((post, postIndex) => (
+          <div key={post.id} className={`bg-surface border rounded-2xl p-6 shadow-sm hover:shadow-soft transition-all ${sr.isEnabled && sr.isSpeaking && readerCurrentIdx === postIndex ? 'border-primary ring-2 ring-primary/20' : 'border-border'}`}>
             
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-secondary/5 rounded-lg overflow-hidden flex items-center justify-center border border-secondary/10">
+                <div className="w-10 h-10 bg-surface-alt rounded-lg overflow-hidden flex items-center justify-center border border-border">
                   {post.avatar ? (
                     <img src={post.avatar} alt={post.author} className="w-full h-full object-cover" />
                   ) : (
-                    <span className="font-bold text-secondary/40 text-xs">{post.author.charAt(0)}</span>
+                    <span className="font-bold text-text-secondary text-xs">{post.author.charAt(0)}</span>
                   )}
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-text-primary">{post.author}</h4>
-                  <p className="text-xs text-text-secondary/50">{post.field} • {post.time}</p>
+                  <h4 className="font-bold text-sm">{post.author}</h4>
+                  <p className="text-xs text-text-secondary">{post.field} • {post.time}</p>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary/5 text-text-secondary/70 border border-border">
+              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-text-secondary">
                 {post.type}
               </span>
             </div>
@@ -244,24 +267,24 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             <div className="cursor-pointer">
               {post.href ? (
                 <Link href={post.href}>
-                  <h2 className="text-xl md:text-2xl font-black font-serif mb-1 leading-tight text-text-primary hover:text-primary transition-colors">{post.title}</h2>
+                  <h2 className="text-xl md:text-2xl font-black font-serif mb-1 leading-tight hover:text-primary transition-colors">{post.title}</h2>
                 </Link>
               ) : (
-                <h2 className="text-xl font-bold font-serif mb-1 leading-snug text-text-primary" onClick={() => onViewDetail(post.id)}>{post.title}</h2>
+                <h2 className="text-xl font-bold font-serif mb-1 leading-snug" onClick={() => onViewDetail(post.id)}>{post.title}</h2>
               )}
                 <div className="flex items-center gap-1.5 mb-3">
                   <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary/5 px-2 py-0.5 rounded">
                     {post.matchScore}
                   </span>
-                  <span className="text-[10px] font-bold text-secondary/20">•</span>
-                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-secondary/30">
+                  <span className="text-[10px] font-bold text-text-secondary">•</span>
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-text-secondary">
                     {post.savedCount}
                   </span>
                 </div>
               <p className="text-sm text-text-secondary leading-relaxed mb-4">{post.summary}</p>
               
               {post.imageUrl && (
-                <div className="w-full h-64 bg-secondary/5 rounded-xl border border-secondary/10 mb-4 flex items-center justify-center relative overflow-hidden group shadow-sm">
+                <div className="w-full h-64 bg-surface-alt rounded-xl border border-border mb-4 flex items-center justify-center relative overflow-hidden group shadow-sm">
                   <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
               )}
@@ -270,7 +293,7 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             {post.tags && (
               <div className="flex gap-2 mb-4">
                 {post.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-secondary/70">
+                  <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-text-secondary">
                     {tag}
                   </span>
                 ))}
@@ -278,13 +301,13 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             )}
 
             {post.deadline && (
-              <div className="flex justify-between items-center p-4 bg-background rounded-xl mb-4 border border-border">
+              <div className="flex justify-between items-center p-4 bg-surface-alt rounded-xl mb-4 border border-border">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary/40">Deadline</p>
-                  <p className="font-bold text-sm text-text-primary">{post.deadline}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary">Deadline</p>
+                  <p className="font-bold text-sm">{post.deadline}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary/40">Max Award</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-text-secondary">Max Award</p>
                   <p className="font-bold text-base text-primary">{post.maxAward}</p>
                 </div>
               </div>
@@ -307,6 +330,16 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 <Share2 className="w-4 h-4" /> 
                 <span>Share</span>
               </button>
+              {sr.isEnabled && (
+                <button 
+                  onClick={() => sr.speakFeedItem(post)}
+                  className="flex items-center gap-2 text-xs font-bold text-text-secondary hover:text-primary transition-colors group"
+                  title="Read this post aloud"
+                >
+                  <Volume2 className="w-4 h-4" />
+                  <span>Read</span>
+                </button>
+              )}
               <button 
                 onClick={() => handleSave(post.id)}
                 className={`flex items-center gap-2 text-xs font-bold transition-colors group ml-auto ${savedPosts.has(post.id) ? 'text-primary' : 'text-text-secondary hover:text-primary'}`}
@@ -319,8 +352,8 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
             {/* Comment Section */}
             {activeComments === post.id && (
               <div className="space-y-4 mb-4 animate-in slide-in-from-top-2 duration-300">
-                <div className="flex gap-3 items-start bg-secondary/[0.02] p-3 rounded-xl border border-secondary/5">
-                  <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-secondary/10">
+                <div className="flex gap-3 items-start bg-surface-alt p-3 rounded-xl border border-border">
+                  <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-border">
                     <img src="/avatar_aris.png" alt="You" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 relative">
@@ -340,9 +373,9 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
                 <div className="space-y-3 pl-2">
                   <div className="flex gap-3 items-start">
                     <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">M</div>
-                    <div className="flex-1 bg-secondary/5 p-2.5 rounded-2xl rounded-tl-none">
-                      <p className="text-[10px] font-black text-secondary/80 mb-1">Dr. Marcus Chen <span className="font-normal text-secondary/40 ml-1">• 1h ago</span></p>
-                      <p className="text-xs text-secondary/70 leading-relaxed">Impressive structural consistency. Have you considered the impact on cycle stability over 1000+ charges?</p>
+                    <div className="flex-1 bg-surface-alt p-2.5 rounded-2xl rounded-tl-none">
+                      <p className="text-[10px] font-black text-text-secondary mb-1">Dr. Marcus Chen <span className="font-normal text-text-secondary ml-1">• 1h ago</span></p>
+                      <p className="text-xs text-text-secondary leading-relaxed">Impressive structural consistency. Have you considered the impact on cycle stability over 1000+ charges?</p>
                     </div>
                   </div>
                 </div>
@@ -360,10 +393,10 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
       {/* Right Sidebar */}
       <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
         <div>
-          <h3 className="font-black text-xs uppercase tracking-widest text-text-primary mb-4">Trending Tags</h3>
+          <h3 className="font-black text-xs uppercase tracking-widest text-text-secondary mb-4">Trending Tags</h3>
           <div className="flex flex-wrap gap-2">
             {trendingTags.map(tag => (
-              <span key={tag} className="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-surface border border-border text-text-secondary hover:text-primary hover:border-primary/30 transition-all cursor-pointer shadow-sm">
+              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-muted text-text-secondary hover:bg-surface-alt transition-colors cursor-pointer">
                 {tag}
               </span>
             ))}
@@ -371,17 +404,17 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
         </div>
 
         <div>
-          <h3 className="font-black text-xs uppercase tracking-widest text-text-primary mb-4">Suggested Peers</h3>
+          <h3 className="font-black text-xs uppercase tracking-widest text-text-secondary mb-4">Suggested Peers</h3>
           <div className="space-y-4">
             {suggestedPeers.map(peer => (
               <div key={peer.id} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-secondary/5 rounded-lg overflow-hidden flex items-center justify-center border border-secondary/10">
+                  <div className="w-10 h-10 bg-surface-alt rounded-lg overflow-hidden flex items-center justify-center border border-border">
                     <img src={peer.avatar} alt={peer.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-text-primary">{peer.name}</h4>
-                    <p className="text-xs text-text-secondary/50">{peer.field}</p>
+                    <h4 className="font-bold text-sm">{peer.name}</h4>
+                    <p className="text-xs text-text-secondary">{peer.field}</p>
                   </div>
                 </div>
                 <button className="btn-outline !px-3 !py-1 !text-xs">
@@ -401,6 +434,69 @@ const HomeFeed: React.FC<HomeFeedProps> = ({ onViewDetail }) => {
               <CheckCircle2 className="w-3 h-3 text-white" />
             </div>
             <span className="text-[11px] font-black uppercase tracking-widest">Saved to Workspace</span>
+          </div>
+        </div>
+      )}
+
+      {/* Screen Reader Floating Control Bar */}
+      {sr.isEnabled && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] animate-in slide-in-from-bottom-4 fade-in duration-500">
+          <div className="bg-surface border border-border rounded-2xl shadow-elevated px-6 py-3 flex items-center gap-4">
+            <div className="flex items-center gap-2 pr-4 border-r border-border">
+              <Volume2 className="w-4 h-4 text-primary" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Screen Reader</span>
+            </div>
+            <button
+              onClick={sr.prevInQueue}
+              className="p-2 rounded-full hover:bg-surface-alt text-text-secondary hover:text-text-primary transition-all"
+              title="Previous post"
+            >
+              <SkipBack className="w-4 h-4" />
+            </button>
+            {sr.isSpeaking && !sr.isPaused ? (
+              <button
+                onClick={sr.pause}
+                className="p-2.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-all shadow-sm"
+                title="Pause"
+              >
+                <Pause className="w-4 h-4" />
+              </button>
+            ) : sr.isPaused ? (
+              <button
+                onClick={sr.resume}
+                className="p-2.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-all shadow-sm"
+                title="Resume"
+              >
+                <Play className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                onClick={sr.playQueue}
+                className="p-2.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-all shadow-sm"
+                title="Read all posts"
+              >
+                <Play className="w-4 h-4" />
+              </button>
+            )}
+            <button
+              onClick={sr.nextInQueue}
+              className="p-2 rounded-full hover:bg-surface-alt text-text-secondary hover:text-text-primary transition-all"
+              title="Next post"
+            >
+              <SkipForward className="w-4 h-4" />
+            </button>
+            <button
+              onClick={sr.stop}
+              className="p-2 rounded-full hover:bg-surface-alt text-text-secondary hover:text-text-primary transition-all"
+              title="Stop"
+            >
+              <Square className="w-3.5 h-3.5" />
+            </button>
+            <div className="pl-4 border-l border-border">
+              <span className="text-[10px] font-bold text-text-secondary">
+                {sr.isSpeaking || sr.isPaused ? `Post ${readerCurrentIdx + 1} of ${filteredPosts.length}` : `${filteredPosts.length} posts`}
+              </span>
+            </div>
           </div>
         </div>
       )}

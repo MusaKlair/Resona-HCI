@@ -112,18 +112,18 @@ const ProblemBoard: React.FC = () => {
       {/* Left Filters Sidebar */}
       {/* Left Filters Sidebar */}
       <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
+        <h2 className="font-bold font-serif text-lg tracking-tight text-text-primary">Feed Filters</h2>
         
         <nav className="flex flex-col gap-1">
         {/* Discipline Section */}
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Microscope className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
             </div>
             {expandedSections.has('Discipline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -141,14 +141,14 @@ const ProblemBoard: React.FC = () => {
                   key={disc.name}
                   onClick={() => toggleFilter(disc.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${
-                    activeFilters.includes(disc.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(disc.name) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {disc.icon}
                     {disc.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(disc.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -165,7 +165,7 @@ const ProblemBoard: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <Clock className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Duration</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Duration</span>
             </div>
             {expandedSections.has('Time Commitment') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -177,14 +177,14 @@ const ProblemBoard: React.FC = () => {
                   key={time}
                   onClick={() => toggleFilter(time)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(time) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(time) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <Clock className="w-4 h-4 text-primary" />
                     {time}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(time) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(time) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(time) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -201,7 +201,7 @@ const ProblemBoard: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <Coins className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-text-primary/80" style={{fontFamily: 'var(--font-sans)'}}>Compensation</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Compensation</span>
             </div>
             {expandedSections.has('Compensation') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -217,14 +217,14 @@ const ProblemBoard: React.FC = () => {
                   key={comp.name}
                   onClick={() => toggleFilter(comp.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(comp.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(comp.name) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {comp.icon}
                     {comp.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(comp.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(comp.name) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(comp.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -240,7 +240,7 @@ const ProblemBoard: React.FC = () => {
       <main className="lg:col-span-10 p-8 md:p-12 animate-in fade-in duration-700">
         <div className="mb-8">
           <h1 className="text-3xl font-black font-serif tracking-tight text-text-primary mb-2 uppercase">Open Problems</h1>
-          <p className="text-sm text-text-secondary/50 font-semibold tracking-wide">Discover and collaborate on high-impact research challenges.</p>
+          <p className="text-sm text-text-secondary font-semibold tracking-wide">Discover and collaborate on high-impact research challenges.</p>
         </div>
 
         {/* Omnibar */}
@@ -248,14 +248,14 @@ const ProblemBoard: React.FC = () => {
           <div className="absolute inset-0 bg-primary/5 blur-2xl group-focus-within:bg-primary/10 transition-all opacity-0 group-focus-within:opacity-100" />
           <div className="relative flex items-center bg-surface border border-border rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
             <div className="pl-4 pr-3 flex items-center border-r border-border">
-              <Search className="w-4 h-4 text-text-secondary/30" />
+              <Search className="w-4 h-4 text-text-secondary" />
             </div>
             <input 
               type="text" 
               placeholder="Search problem scopes, keywords, or required skills..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-secondary/30 font-medium h-12"
+              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-text-secondary font-medium h-12"
             />
           </div>
         </div>
@@ -274,14 +274,14 @@ const ProblemBoard: React.FC = () => {
             {activeFilters.length > 0 && (
               <button 
                 onClick={() => setActiveFilters([])}
-                className="text-[10px] font-bold text-secondary/40 hover:text-secondary transition-colors ml-2"
+                className="text-[10px] font-bold text-text-secondary hover:text-text-primary transition-colors ml-2"
               >
                 Clear All
               </button>
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-secondary/40">
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-secondary">
             <span>Sort by:</span>
             <button className="flex items-center gap-1.5 text-text-primary hover:text-primary transition-colors">
               Closing Soon
@@ -310,14 +310,14 @@ const ProblemBoard: React.FC = () => {
               <div className="absolute top-4 right-4 flex items-center gap-2">
                 <button 
                   onClick={() => toggleBookmark(prob.id)}
-                  className={`p-1.5 rounded-full transition-all ${bookmarkedIds.has(prob.id) ? 'text-primary bg-primary/5' : 'text-secondary/20 hover:text-primary hover:bg-primary/5'}`} 
+                  className={`p-1.5 rounded-full transition-all ${bookmarkedIds.has(prob.id) ? 'text-primary bg-primary/5' : 'text-text-secondary hover:text-primary hover:bg-primary/5'}`} 
                   title="Save to Shortlist"
                 >
                   <Bookmark className={`w-4 h-4 ${bookmarkedIds.has(prob.id) ? 'fill-primary' : ''}`} />
                 </button>
                 <button 
                   onClick={() => handleDismiss(prob.id)}
-                  className="p-1.5 rounded-full text-secondary/20 hover:text-primary hover:bg-primary/5 transition-all" 
+                  className="p-1.5 rounded-full text-text-secondary hover:text-primary hover:bg-primary/5 transition-all" 
                   title="Dismiss"
                 >
                   <X className="w-4 h-4" />
@@ -327,7 +327,7 @@ const ProblemBoard: React.FC = () => {
               <div className="flex justify-between items-start mb-6">
                 <div className="flex gap-2">
                   {prob.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-secondary/5 text-text-secondary/60">
+                    <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-text-secondary">
                       {tag}
                     </span>
                   ))}
@@ -339,21 +339,21 @@ const ProblemBoard: React.FC = () => {
 
               <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-border">
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Skills</h4>
-                  <p className="text-sm font-semibold text-text-primary/80">{prob.skills}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Skills</h4>
+                  <p className="text-sm font-semibold text-text-secondary">{prob.skills}</p>
                 </div>
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Commitment</h4>
-                  <p className="text-sm font-semibold text-text-primary/80">{prob.commitment}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Commitment</h4>
+                  <p className="text-sm font-semibold text-text-secondary">{prob.commitment}</p>
                 </div>
                 <div>
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary/40 mb-1">Deadline</h4>
-                  <p className="text-sm font-semibold text-text-primary/80">{prob.deadline}</p>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Deadline</h4>
+                  <p className="text-sm font-semibold text-text-secondary">{prob.deadline}</p>
                 </div>
               </div>
 
               <div className="flex justify-between items-center text-sm font-bold mb-6">
-                <span className="text-text-secondary/70">{prob.lab}</span>
+                <span className="text-text-secondary">{prob.lab}</span>
                 <span className="text-text-primary">{prob.compensation}</span>
               </div>
 

@@ -75,7 +75,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
       {/* Progress Bar */}
       <div className="flex justify-between items-center mb-10 relative">
         {/* Background Track */}
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-secondary/5 -z-10 rounded-full" />
+        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-surface-alt -z-10 rounded-full" />
         {/* Highlighted Track */}
         <div 
           className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-primary -z-10 rounded-full transition-all duration-700 ease-out"
@@ -85,7 +85,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
           <div 
             key={s}
             className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all duration-500 border-2 ${
-              s <= currentStep ? 'bg-primary border-primary text-white scale-110 shadow-lg shadow-primary/20' : 'bg-white border-secondary/10 text-secondary/40'
+              s <= currentStep ? 'bg-primary border-primary text-white scale-110 shadow-lg shadow-primary/20' : 'bg-surface border-border text-text-secondary'
             }`}
           >
             {s < currentStep ? <Check className="w-5 h-5" /> : s}
@@ -105,8 +105,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                 <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent">
                   <Sparkles className="w-8 h-8" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-black font-serif text-secondary tracking-tight">Welcome to the Resona Circle</h1>
-                <p className="text-lg text-secondary/60 leading-relaxed">
+                <h1 className="text-4xl md:text-5xl font-black font-serif text-text-primary tracking-tight">Welcome to the Resona Circle</h1>
+                <p className="text-lg text-text-secondary leading-relaxed">
                   You're just a few parameters away from a tailored academic collaboration environment. 
                   Let's define your research focus to get started.
                 </p>
@@ -115,17 +115,17 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
 
             {currentStep === 2 && (
               <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Define your research focus</h1>
-                <p className="text-sm text-secondary/60">Select areas that match your expertise or interest.</p>
+                <h1 className="text-3xl font-black font-serif text-text-primary tracking-tight">Define your research focus</h1>
+                <p className="text-sm text-text-secondary">Select areas that match your expertise or interest.</p>
                 
                 <div className="space-y-4 pt-4">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-secondary/40">Thematic Tags</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Thematic Tags</label>
                   <div className="relative shadow-sm rounded-2xl group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary/40 transition-colors group-focus-within:text-secondary" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary transition-colors group-focus-within:text-text-primary" />
                     <input 
                       type="text" 
                       placeholder="Search areas of interest..." 
-                      className="w-full bg-white border border-secondary/10 rounded-2xl pl-12 pr-4 py-4 focus:border-secondary/20 focus:ring-4 focus:ring-secondary/5 outline-none transition-all font-semibold text-secondary placeholder:text-secondary/40"
+                      className="w-full bg-surface border border-border rounded-2xl pl-12 pr-4 py-4 focus:border-border focus:ring-4 focus:ring-secondary/5 outline-none transition-all font-semibold text-text-primary placeholder:text-text-secondary"
                     />
                   </div>
                   <div className="flex flex-wrap gap-2 pt-2">
@@ -136,7 +136,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                         className={`px-4 py-2.5 rounded-full text-xs font-bold border transition-all duration-200 flex items-center gap-1.5 ${
                           formData.tags.includes(tag) 
                             ? 'bg-secondary border-secondary text-white shadow-md scale-105' 
-                            : 'bg-white border-secondary/10 text-secondary/60 hover:bg-[#F3F4F6] hover:text-secondary hover:border-secondary/20'
+                            : 'bg-surface border-border text-text-secondary hover:bg-[#F3F4F6] hover:text-text-primary hover:border-border'
                         }`}
                       >
                         {tag} {formData.tags.includes(tag) && <X className="w-3.5 h-3.5" />}
@@ -149,8 +149,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
 
             {currentStep === 3 && (
               <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Select your academic level</h1>
-                <p className="text-sm text-secondary/60">This helps us customize your feed and network.</p>
+                <h1 className="text-3xl font-black font-serif text-text-primary tracking-tight">Select your academic level</h1>
+                <p className="text-sm text-text-secondary">This helps us customize your feed and network.</p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                   {academicLevels.map(level => (
@@ -159,20 +159,20 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                       onClick={() => setFormData({ ...formData, level: level.id })}
                       className={`relative p-4 rounded-2xl border-2 text-left transition-all duration-300 ${
                         formData.level === level.id 
-                          ? 'bg-secondary/5 border-secondary shadow-md scale-[1.02]' 
-                          : 'bg-white border-secondary/10 hover:border-secondary/30 hover:bg-[#F3F4F6]'
+                          ? 'bg-surface-alt border-secondary shadow-md scale-[1.02]' 
+                          : 'bg-surface border-border hover:border-border hover:bg-[#F3F4F6]'
                       }`}
                     >
                       {formData.level === level.id && (
-                        <div className="absolute top-4 right-4 text-secondary">
+                        <div className="absolute top-4 right-4 text-text-primary">
                           <Check className="w-5 h-5" />
                         </div>
                       )}
-                      <div className={`w-8 h-8 rounded-lg mb-3 flex items-center justify-center transition-colors ${formData.level === level.id ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
+                      <div className={`w-8 h-8 rounded-lg mb-3 flex items-center justify-center transition-colors ${formData.level === level.id ? 'bg-secondary text-white' : 'bg-surface-alt text-text-secondary'}`}>
                         <GraduationCap className="w-4 h-4" />
                       </div>
-                      <h4 className="font-bold text-secondary">{level.label}</h4>
-                      <p className="text-xs text-secondary/60">{level.sub}</p>
+                      <h4 className="font-bold text-text-primary">{level.label}</h4>
+                      <p className="text-xs text-text-secondary">{level.sub}</p>
                     </button>
                   ))}
                 </div>
@@ -181,8 +181,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
 
             {currentStep === 4 && (
               <div className="space-y-4 animate-in fade-in slide-in-from-left-4">
-                <h1 className="text-3xl font-black font-serif text-secondary tracking-tight">Collaboration preferences</h1>
-                <p className="text-sm text-secondary/60">How would you like to contribute to the community?</p>
+                <h1 className="text-3xl font-black font-serif text-text-primary tracking-tight">Collaboration preferences</h1>
+                <p className="text-sm text-text-secondary">How would you like to contribute to the community?</p>
                 
                 <div className="space-y-4 pt-4">
                   {modalities.map(m => {
@@ -194,8 +194,8 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                         key={m.id}
                         className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                           isSelected 
-                            ? 'bg-secondary/5 border-secondary shadow-md scale-[1.01]' 
-                            : 'bg-white border-secondary/10 hover:border-secondary/30 hover:bg-[#F3F4F6]'
+                            ? 'bg-surface-alt border-secondary shadow-md scale-[1.01]' 
+                            : 'bg-surface border-border hover:border-border hover:bg-[#F3F4F6]'
                         }`}
                       >
                         <input 
@@ -209,15 +209,15 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                               : [...formData.modalities, m.id]
                           })}
                         />
-                        <div className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center transition-colors ${isSelected ? 'bg-secondary text-white' : 'bg-secondary/5 text-secondary/40'}`}>
+                        <div className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center transition-colors ${isSelected ? 'bg-secondary text-white' : 'bg-surface-alt text-text-secondary'}`}>
                           <Icon className="w-5 h-5" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-secondary">{m.title}</h4>
-                          <p className="text-sm text-secondary/60">{m.desc}</p>
+                          <h4 className="font-bold text-text-primary">{m.title}</h4>
+                          <p className="text-sm text-text-secondary">{m.desc}</p>
                         </div>
                         {isSelected && (
-                          <div className="text-secondary shrink-0">
+                          <div className="text-text-primary shrink-0">
                             <Check className="w-6 h-6" />
                           </div>
                         )}
@@ -233,32 +233,32 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                 <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
                   <Sparkles className={`w-8 h-8 ${isProcessing ? 'animate-pulse' : ''}`} />
                 </div>
-                <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">Architecting your workspace</h1>
-                <p className="text-lg text-secondary/60 leading-relaxed">
+                <h1 className="text-4xl font-black font-serif text-text-primary tracking-tight">Architecting your workspace</h1>
+                <p className="text-lg text-text-secondary leading-relaxed">
                   {isProcessing ? 'Aligning your focus with 14,000+ active research vectors...' : 'Configuration complete. Your Match Hub is ready.'}
                 </p>
                 
                 {/* Match Hub Card Skeleton */}
-                <div className={`p-6 rounded-3xl border border-secondary/10 shadow-sm transition-all duration-1000 ${isProcessing ? 'bg-secondary/5' : 'bg-white'}`}>
+                <div className={`p-6 rounded-3xl border border-border shadow-sm transition-all duration-1000 ${isProcessing ? 'bg-surface-alt' : 'bg-surface'}`}>
                   <div className="flex items-start gap-4 mb-6">
-                    <div className={`w-12 h-12 rounded-full ${isProcessing ? 'bg-secondary/10 animate-pulse' : 'bg-primary/20'}`} />
+                    <div className={`w-12 h-12 rounded-full ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-primary/20'}`} />
                     <div className="space-y-2 flex-1 pt-1">
-                      <div className={`h-4 w-1/3 rounded-full ${isProcessing ? 'bg-secondary/10 animate-pulse' : 'bg-secondary/20'}`} />
-                      <div className={`h-3 w-1/4 rounded-full ${isProcessing ? 'bg-secondary/5 animate-pulse' : 'bg-secondary/10'}`} />
+                      <div className={`h-4 w-1/3 rounded-full ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-surface-alt'}`} />
+                      <div className={`h-3 w-1/4 rounded-full ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-surface-alt'}`} />
                     </div>
                     {/* Structural Alignment Box Skeleton */}
-                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${isProcessing ? 'bg-secondary/10 animate-pulse' : 'bg-primary/5 border border-primary/20'}`}>
+                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-primary/5 border border-primary/20'}`}>
                        {!isProcessing && <div className="text-xs font-black text-primary">98%</div>}
                     </div>
                   </div>
                   
                   <div className="space-y-2 mb-6">
-                    <div className={`h-2 w-full rounded-full ${isProcessing ? 'bg-secondary/5 animate-pulse' : 'bg-secondary/10'}`} />
-                    <div className={`h-2 w-5/6 rounded-full ${isProcessing ? 'bg-secondary/5 animate-pulse' : 'bg-secondary/10'}`} />
+                    <div className={`h-2 w-full rounded-full ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-surface-alt'}`} />
+                    <div className={`h-2 w-5/6 rounded-full ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-surface-alt'}`} />
                   </div>
 
                   {/* Primary Connect Button Skeleton */}
-                  <div className={`h-12 w-full rounded-xl ${isProcessing ? 'bg-secondary/10 animate-pulse' : 'bg-secondary'} transition-colors duration-1000 flex items-center justify-center`}>
+                  <div className={`h-12 w-full rounded-xl ${isProcessing ? 'bg-surface-alt animate-pulse' : 'bg-secondary'} transition-colors duration-1000 flex items-center justify-center`}>
                      {!isProcessing && <span className="text-white text-xs font-bold tracking-widest uppercase">Connect</span>}
                   </div>
                 </div>
@@ -267,10 +267,10 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between pt-8 border-t border-secondary/5 mt-8">
+          <div className="flex items-center justify-between pt-8 border-t border-border mt-8">
             <button 
               onClick={prevStep}
-              className={`flex items-center gap-2 font-bold text-secondary/40 hover:text-secondary transition-colors ${currentStep === 1 ? 'invisible' : ''}`}
+              className={`flex items-center gap-2 font-bold text-text-secondary hover:text-text-primary transition-colors ${currentStep === 1 ? 'invisible' : ''}`}
             >
               <ArrowLeft className="w-5 h-5" />
               Back
@@ -281,7 +281,7 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                 disabled={isProcessing}
                 className={`font-bold px-8 py-3.5 rounded-md transition-all flex items-center gap-2 text-sm shadow-lg ${
                   isProcessing 
-                    ? 'bg-secondary/10 text-secondary/40 cursor-not-allowed opacity-0 translate-y-4' 
+                    ? 'bg-surface-alt text-text-secondary cursor-not-allowed opacity-0 translate-y-4' 
                     : 'bg-primary text-white hover:bg-primary/90 shadow-primary/30 opacity-100 translate-y-0 animate-in fade-in slide-in-from-bottom-4 duration-700'
                 }`}
               >
@@ -301,23 +301,23 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
         </div>
 
         {/* Preview Side (only for steps 2-4) */}
-        <div className="hidden lg:block w-[400px] bg-secondary/5 border-l border-secondary/5 p-12 overflow-hidden relative">
+        <div className="hidden lg:block w-[400px] bg-surface-alt border-l border-border p-12 overflow-hidden relative">
            <div className="space-y-8 animate-in fade-in duration-1000">
-             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/30">Live Configuration Preview</h4>
+             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary">Live Configuration Preview</h4>
              
-             <div className="card-premium scale-90 -translate-x-4 border border-secondary/10 shadow-elevated bg-white">
+             <div className="card-premium scale-90 -translate-x-4 border border-border shadow-elevated bg-surface">
                 {/* Simplified Match Hub Header */}
-                <div className="flex items-center gap-2 border-b border-secondary/5 pb-3 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-secondary/5 flex items-center justify-center">
-                    <Search className="w-4 h-4 text-secondary/30" />
+                <div className="flex items-center gap-2 border-b border-border pb-3 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-surface-alt flex items-center justify-center">
+                    <Search className="w-4 h-4 text-text-secondary" />
                   </div>
-                  <div className="h-4 w-32 bg-secondary/5 rounded-md" />
+                  <div className="h-4 w-32 bg-surface-alt rounded-md" />
                 </div>
                 
                 {/* Dynamic Content Area */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="h-3 w-24 bg-secondary/10 rounded-full" />
+                    <div className="h-3 w-24 bg-surface-alt rounded-full" />
                     {formData.level && (
                       <div className="px-2 py-0.5 rounded bg-secondary text-[8px] font-bold text-white uppercase tracking-widest">
                         {academicLevels.find(l => l.id === formData.level)?.label}
@@ -325,22 +325,22 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
                     )}
                   </div>
                   
-                  <div className="h-2 w-full bg-secondary/5 rounded-full" />
-                  <div className="h-2 w-3/4 bg-secondary/5 rounded-full" />
+                  <div className="h-2 w-full bg-surface-alt rounded-full" />
+                  <div className="h-2 w-3/4 bg-surface-alt rounded-full" />
                   
                   <div className="flex flex-wrap gap-1.5 pt-2">
                     {formData.tags.map(t => (
                       <div key={t} className="px-3 py-1.5 rounded-full bg-primary/10 text-[9px] font-black text-primary tracking-wider">{t}</div>
                     ))}
-                    {formData.tags.length === 0 && <div className="h-6 w-24 bg-secondary/5 rounded-full" />}
+                    {formData.tags.length === 0 && <div className="h-6 w-24 bg-surface-alt rounded-full" />}
                   </div>
 
                   {formData.modalities.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-secondary/5 space-y-2">
-                      <div className="text-[8px] font-black uppercase text-secondary/30 tracking-widest">Seeking</div>
+                    <div className="mt-4 pt-4 border-t border-border space-y-2">
+                      <div className="text-[8px] font-black uppercase text-text-secondary tracking-widest">Seeking</div>
                       <div className="flex flex-wrap gap-1">
                         {formData.modalities.map(m => (
-                          <div key={m} className="px-2 py-1 bg-secondary/5 text-secondary text-[8px] font-bold rounded">
+                          <div key={m} className="px-2 py-1 bg-surface-alt text-text-primary text-[8px] font-bold rounded">
                             {modalities.find(mod => mod.id === m)?.title}
                           </div>
                         ))}
@@ -352,13 +352,13 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
 
              <div className="card-premium scale-90 translate-x-4 bg-secondary text-white border-none">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-white/20" />
+                  <div className="w-8 h-8 rounded-full bg-surface/20" />
                   <div className="space-y-1">
-                    <div className="h-2 w-20 bg-white/20 rounded-full" />
-                    <div className="h-2 w-12 bg-white/10 rounded-full" />
+                    <div className="h-2 w-20 bg-surface/20 rounded-full" />
+                    <div className="h-2 w-12 bg-surface/10 rounded-full" />
                   </div>
                 </div>
-                <div className="h-24 w-full bg-white/5 rounded-2xl" />
+                <div className="h-24 w-full bg-surface/5 rounded-2xl" />
              </div>
            </div>
            

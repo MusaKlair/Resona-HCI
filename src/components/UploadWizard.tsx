@@ -37,27 +37,27 @@ const UploadWizard: React.FC = () => {
   }, [isExtracting, progress]);
 
   return (
-    <div className="max-w-[1200px] mx-auto min-h-[calc(100vh-100px)] flex flex-col bg-white animate-in fade-in duration-500">
+    <div className="max-w-[1200px] mx-auto min-h-[calc(100vh-100px)] flex flex-col bg-surface animate-in fade-in duration-500">
       
-      <header className="p-8 md:px-12 border-b border-secondary/10">
+      <header className="p-8 md:px-12 border-b border-border">
         <h1 className="text-3xl font-black font-serif tracking-tight">Upload Research Content</h1>
       </header>
 
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 bg-secondary/[0.02]">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 bg-surface-alt">
         
         {/* Left Side - Dropzone */}
-        <div className="p-8 md:p-16 flex flex-col justify-center border-r border-secondary/10">
+        <div className="p-8 md:p-16 flex flex-col justify-center border-r border-border">
           
           <div 
             onClick={handleDrop}
-            className="w-full aspect-[4/3] border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] hover:bg-secondary/5 transition-all cursor-pointer flex flex-col items-center justify-center text-center p-8 mb-8 shadow-sm rounded-3xl group"
+            className="w-full aspect-[4/3] border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] hover:bg-surface-alt transition-all cursor-pointer flex flex-col items-center justify-center text-center p-8 mb-8 shadow-sm rounded-3xl group"
           >
-            <div className="w-14 h-14 border border-secondary/10 rounded-2xl flex items-center justify-center mb-6 bg-white shadow-sm group-hover:scale-110 transition-transform">
-              <UploadCloud className="w-7 h-7 text-secondary/40" />
+            <div className="w-14 h-14 border border-border rounded-2xl flex items-center justify-center mb-6 bg-surface shadow-sm group-hover:scale-110 transition-transform">
+              <UploadCloud className="w-7 h-7 text-text-secondary" />
             </div>
-            <h3 className="text-xl font-bold mb-2 font-sans text-secondary">Drag & Drop PDF Here</h3>
-            <p className="text-xs text-secondary/40 font-semibold mb-6">Max file size: 50MB</p>
-            <button className="px-6 py-3 border-2 border-secondary text-secondary text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-secondary hover:text-white transition-all active:scale-95">
+            <h3 className="text-xl font-bold mb-2 font-sans text-text-primary">Drag & Drop PDF Here</h3>
+            <p className="text-xs text-text-secondary font-semibold mb-6">Max file size: 50MB</p>
+            <button className="px-6 py-3 border-2 border-secondary text-text-primary text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-secondary hover:text-white transition-all active:scale-95">
               Browse Files
             </button>
           </div>
@@ -65,25 +65,25 @@ const UploadWizard: React.FC = () => {
           {/* OR Divider */}
           <div className="relative mb-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-secondary/10"></div>
+              <div className="w-full border-t border-border"></div>
             </div>
             <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest">
-              <span className="bg-[#F9FAFB] px-4 text-secondary/30">or</span>
+              <span className="bg-[#F9FAFB] px-4 text-text-secondary">or</span>
             </div>
           </div>
 
           {/* DOI Input */}
           <div className="space-y-3 mb-10">
-              <label className="text-[10px] font-black uppercase tracking-widest text-secondary/40 ml-1">Import via DOI</label>
+              <label className="text-[10px] font-black uppercase tracking-widest text-text-secondary ml-1">Import via DOI</label>
               <div className="flex gap-2">
                 <input 
                   type="text" 
                   placeholder="e.g. 10.1038/s41586-024-0000-0"
-                  className="flex-1 bg-white border border-secondary/10 rounded-xl px-4 py-4 text-sm outline-none focus:border-secondary/30 transition-all shadow-sm font-semibold text-secondary"
+                  className="flex-1 bg-surface border border-border rounded-xl px-4 py-4 text-sm outline-none focus:border-border transition-all shadow-sm font-semibold text-text-primary"
                 />
                 <button 
                   onClick={handleDrop}
-                  className="bg-secondary text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-secondary/90 active:scale-95 transition-all shadow-lg shadow-secondary/20 whitespace-nowrap"
+                  className="bg-secondary text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-surface-alt active:scale-95 transition-all shadow-lg shadow-secondary/20 whitespace-nowrap"
                 >
                   Auto-Fill
                 </button>
@@ -94,12 +94,12 @@ const UploadWizard: React.FC = () => {
           {(isExtracting || progress === 100) && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
               <div className="flex justify-between items-end mb-2">
-                <span className="text-[10px] font-black uppercase tracking-widest text-secondary/70">
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">
                   {progress < 100 ? 'Extracting Metadata...' : 'Extraction Complete'}
                 </span>
                 <span className="text-[10px] font-black">{progress}%</span>
               </div>
-              <div className="w-full h-2 bg-secondary/10 overflow-hidden rounded-full">
+              <div className="w-full h-2 bg-surface-alt overflow-hidden rounded-full">
                 <div 
                   className="h-full bg-primary transition-all duration-300 ease-out" 
                   style={{ width: `${progress}%` }} 
@@ -110,8 +110,8 @@ const UploadWizard: React.FC = () => {
         </div>
 
         {/* Right Side - Form */}
-        <div className="p-8 md:p-16 bg-secondary/[0.03]">
-          <h2 className="text-2xl font-black font-sans text-secondary mb-8">Publication Details</h2>
+        <div className="p-8 md:p-16 bg-surface-alt">
+          <h2 className="text-2xl font-black font-sans text-text-primary mb-8">Publication Details</h2>
           
           <div className="space-y-6">
             <div>
@@ -121,17 +121,17 @@ const UploadWizard: React.FC = () => {
                 placeholder="Enter research title"
                 value={formData.title}
                 onChange={e => setFormData({...formData, title: e.target.value})}
-                className="w-full p-4 text-sm bg-white border border-secondary/10 outline-none focus:border-secondary/30 transition-all shadow-sm rounded-xl font-semibold text-secondary"
+                className="w-full p-4 text-sm bg-surface border border-border outline-none focus:border-border transition-all shadow-sm rounded-xl font-semibold text-text-primary"
               />
             </div>
 
             <div>
               <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Author List</label>
-              <div className="w-full p-4 bg-white border border-secondary/10 flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
-                <span className="flex items-center gap-2 px-3 py-1.5 bg-secondary/5 border border-secondary/5 rounded-full text-[10px] font-bold text-secondary tracking-wider">
+              <div className="w-full p-4 bg-surface border border-border flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
+                <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
                   Dr. Aris Thorne <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
                 </span>
-                <span className="flex items-center gap-2 px-3 py-1.5 bg-secondary/5 border border-secondary/5 rounded-full text-[10px] font-bold text-secondary tracking-wider">
+                <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
                   Jane Doe <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
                 </span>
                 <input 
@@ -148,14 +148,14 @@ const UploadWizard: React.FC = () => {
                 rows={5}
                 value={formData.abstract}
                 onChange={e => setFormData({...formData, abstract: e.target.value})}
-                className="w-full p-4 text-sm bg-white border border-secondary/10 outline-none focus:border-secondary/30 transition-all shadow-sm resize-none rounded-xl font-medium text-secondary leading-relaxed"
+                className="w-full p-4 text-sm bg-surface border border-border outline-none focus:border-border transition-all shadow-sm resize-none rounded-xl font-medium text-text-primary leading-relaxed"
               />
             </div>
 
             <div>
               <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Research Tags & Disciplines</label>
-              <div className="w-full p-4 bg-white border border-secondary/10 flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
-                <span className="flex items-center gap-2 px-3 py-1.5 bg-secondary/5 border border-secondary/5 rounded-full text-[10px] font-bold text-secondary tracking-wider">
+              <div className="w-full p-4 bg-surface border border-border flex flex-wrap gap-2 items-center shadow-sm rounded-xl">
+                <span className="flex items-center gap-2 px-3 py-1.5 bg-surface-alt border border-border rounded-full text-[10px] font-bold text-text-primary tracking-wider">
                   Machine Learning <X className="w-3 h-3 cursor-pointer opacity-40 hover:opacity-100" />
                 </span>
                 <input 
@@ -174,7 +174,7 @@ const UploadWizard: React.FC = () => {
                   placeholder="YYYY"
                   value={formData.year}
                   onChange={e => setFormData({...formData, year: e.target.value})}
-                  className="w-full p-4 text-sm bg-white border border-secondary/10 outline-none focus:border-secondary/30 transition-all shadow-sm rounded-xl font-semibold text-secondary"
+                  className="w-full p-4 text-sm bg-surface border border-border outline-none focus:border-border transition-all shadow-sm rounded-xl font-semibold text-text-primary"
                 />
               </div>
               <div>
@@ -184,14 +184,14 @@ const UploadWizard: React.FC = () => {
                   placeholder="10.xxxx/xxxx"
                   value={formData.doi}
                   onChange={e => setFormData({...formData, doi: e.target.value})}
-                  className="w-full p-4 text-sm bg-white border border-secondary/10 outline-none focus:border-secondary/30 transition-all shadow-sm rounded-xl font-semibold text-secondary"
+                  className="w-full p-4 text-sm bg-surface border border-border outline-none focus:border-border transition-all shadow-sm rounded-xl font-semibold text-text-primary"
                 />
               </div>
             </div>
 
             <div>
               <label className="block text-[10px] font-black uppercase tracking-wider text-[#6B7280] mb-2">Visibility Setting</label>
-              <div className="flex bg-white p-1 rounded-xl border border-secondary/10 shadow-sm max-w-sm">
+              <div className="flex bg-surface p-1 rounded-xl border border-border shadow-sm max-w-sm">
                 {['Public', 'Verified', 'Private'].map((option) => (
                   <button
                     key={option}
@@ -199,7 +199,7 @@ const UploadWizard: React.FC = () => {
                     className={`flex-1 py-2 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${
                       visibility === option 
                         ? 'bg-secondary text-white shadow-md' 
-                        : 'text-secondary/40 hover:text-secondary'
+                        : 'text-text-secondary hover:text-text-primary'
                     }`}
                   >
                     {option}
@@ -211,8 +211,8 @@ const UploadWizard: React.FC = () => {
         </div>
       </div>
 
-      <footer className="p-6 px-12 border-t border-secondary/10 bg-white flex justify-end items-center gap-6">
-        <button className="px-5 py-2.5 text-sm font-bold text-secondary/40 hover:text-secondary hover:bg-secondary/5 rounded-xl transition-all">
+      <footer className="p-6 px-12 border-t border-border bg-surface flex justify-end items-center gap-6">
+        <button className="px-5 py-2.5 text-sm font-bold text-text-secondary hover:text-text-primary hover:bg-surface-alt rounded-xl transition-all">
           Cancel
         </button>
         <button className="px-6 py-3 bg-primary text-white text-sm font-bold rounded-xl flex items-center gap-2 hover:bg-primary/90 active:scale-95 transition-all shadow-lg shadow-primary/20">

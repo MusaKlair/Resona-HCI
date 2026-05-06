@@ -91,18 +91,18 @@ const FundingBoard: React.FC = () => {
       {/* Left Filters Sidebar */}
       {/* Left Filters Sidebar */}
       <aside className="lg:col-span-2 space-y-6 sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide">
-        <h2 className="font-black font-serif text-lg tracking-tight">Feed Filters</h2>
+        <h2 className="font-bold font-serif text-lg tracking-tight text-text-primary">Feed Filters</h2>
         
         <nav className="flex flex-col gap-1">
         {/* Discipline Section */}
         <div>
           <button 
             onClick={() => toggleSection('Discipline')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Microscope className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Discipline</span>
             </div>
             {expandedSections.has('Discipline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -118,14 +118,14 @@ const FundingBoard: React.FC = () => {
                   key={disc.name}
                   onClick={() => toggleFilter(disc.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm active:scale-[0.97] transition-all ${
-                    activeFilters.includes(disc.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(disc.name) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {disc.icon}
                     {disc.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(disc.name) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(disc.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -138,11 +138,11 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Resource Type')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Wallet className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Resources</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Resources</span>
             </div>
             {expandedSections.has('Resource Type') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -159,14 +159,14 @@ const FundingBoard: React.FC = () => {
                   key={type.name}
                   onClick={() => toggleFilter(type.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(type.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(type.name) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {type.icon}
                     {type.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(type.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(type.name) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(type.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -179,11 +179,11 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Eligibility')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Eligibility</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Eligibility</span>
             </div>
             {expandedSections.has('Eligibility') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
@@ -199,14 +199,14 @@ const FundingBoard: React.FC = () => {
                   key={elig.name}
                   onClick={() => toggleFilter(elig.name)}
                   className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-all ${
-                    activeFilters.includes(elig.name) ? 'bg-secondary/10 text-secondary font-bold' : 'text-secondary/60 hover:bg-secondary/5 hover:text-secondary font-semibold'
+                    activeFilters.includes(elig.name) ? 'bg-surface-alt text-text-primary font-bold' : 'text-text-secondary hover:bg-surface-alt hover:text-text-primary font-semibold'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {elig.icon}
                     {elig.name}
                   </div>
-                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(elig.name) ? 'bg-primary border-primary' : 'border-secondary/20'}`}>
+                  <div className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${activeFilters.includes(elig.name) ? 'bg-primary border-primary' : 'border-border'}`}>
                     {activeFilters.includes(elig.name) && <Check className="w-3 h-3 text-white" />}
                   </div>
                 </button>
@@ -219,20 +219,20 @@ const FundingBoard: React.FC = () => {
         <div>
           <button 
             onClick={() => toggleSection('Deadline')}
-            className="w-full flex items-center justify-between px-1 py-2.5 group text-secondary/60 hover:text-secondary active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-between px-1 py-2.5 group text-text-secondary hover:text-text-primary active:scale-[0.98] transition-all"
           >
             <div className="flex items-center gap-3">
               <Calendar className="w-4 h-4 text-primary" />
-              <span className="text-sm font-semibold text-secondary/80" style={{fontFamily: 'var(--font-sans)'}}>Deadline</span>
+              <span className="text-sm font-semibold text-text-secondary" style={{fontFamily: 'var(--font-sans)'}}>Deadline</span>
             </div>
             {expandedSections.has('Deadline') ? <ChevronUp className="w-4 h-4 transition-colors" /> : <ChevronDown className="w-4 h-4 transition-colors" />}
           </button>
           
           {expandedSections.has('Deadline') && (
             <div className="space-y-1 mt-2 animate-in fade-in slide-in-from-top-1 duration-200 px-2">
-              <div className="flex items-center justify-between p-3 border border-secondary/10 bg-white rounded-lg text-xs font-bold text-secondary/60 cursor-pointer hover:border-secondary/30 transition-colors shadow-sm">
+              <div className="flex items-center justify-between p-3 border border-border bg-surface rounded-lg text-xs font-bold text-text-secondary cursor-pointer hover:border-border transition-colors shadow-sm">
                 SELECT DATE RANGE
-                <Calendar className="w-4 h-4 text-secondary/40" />
+                <Calendar className="w-4 h-4 text-text-secondary" />
               </div>
             </div>
           )}
@@ -243,31 +243,31 @@ const FundingBoard: React.FC = () => {
       {/* Main Content */}
       <main className="lg:col-span-7 p-8 md:p-12 animate-in fade-in duration-700">
         <div className="mb-8">
-          <h1 className="text-3xl font-black font-serif tracking-tight text-secondary mb-2 uppercase">Funding & Resources</h1>
-          <p className="text-sm text-secondary/50 font-semibold tracking-wide">Discover grants, compute credits, and research tasks.</p>
+          <h1 className="text-3xl font-black font-serif tracking-tight text-text-primary mb-2 uppercase">Funding & Resources</h1>
+          <p className="text-sm text-text-secondary font-semibold tracking-wide">Discover grants, compute credits, and research tasks.</p>
         </div>
 
         {/* Omnibar */}
         <div className="mb-6 relative group">
           <div className="absolute inset-0 bg-primary/5 blur-2xl group-focus-within:bg-primary/10 transition-all opacity-0 group-focus-within:opacity-100" />
-          <div className="relative flex items-center bg-white border border-secondary/10 rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
-            <div className="pl-4 pr-3 flex items-center border-r border-secondary/5">
-              <Search className="w-4 h-4 text-secondary/30" />
+          <div className="relative flex items-center bg-surface border border-border rounded-2xl shadow-soft p-1.5 focus-within:border-primary/30 transition-all">
+            <div className="pl-4 pr-3 flex items-center border-r border-border">
+              <Search className="w-4 h-4 text-text-secondary" />
             </div>
             <input 
               type="text" 
               placeholder="Search grants, compute credits, datasets..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-secondary/30 font-medium h-12"
+              className="flex-1 bg-transparent text-sm px-4 outline-none placeholder:text-text-secondary font-medium h-12"
             />
-            <div className="flex items-center p-1 bg-secondary/5 rounded-xl ml-2 border border-secondary/5">
+            <div className="flex items-center p-1 bg-surface-alt rounded-xl ml-2 border border-border">
               <button 
                 onClick={() => setActiveTab('grants')}
                 className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-all ${
                   activeTab === 'grants' 
                     ? 'bg-secondary text-white shadow-md' 
-                    : 'text-secondary/40 hover:text-secondary/60 hover:bg-secondary/5'
+                    : 'text-text-secondary hover:text-text-secondary hover:bg-surface-alt'
                 }`}
               >
                 Grants & Resources
@@ -277,7 +277,7 @@ const FundingBoard: React.FC = () => {
                 className={`px-4 py-2 text-[9px] font-black uppercase tracking-widest rounded-lg transition-all ${
                   activeTab === 'tasks' 
                     ? 'bg-secondary text-white shadow-md' 
-                    : 'text-secondary/40 hover:text-secondary/60 hover:bg-secondary/5'
+                    : 'text-text-secondary hover:text-text-secondary hover:bg-surface-alt'
                 }`}
               >
                 Micro-Tasks
@@ -300,16 +300,16 @@ const FundingBoard: React.FC = () => {
             {activeFilters.length > 0 && (
               <button 
                 onClick={() => setActiveFilters([])}
-                className="text-[10px] font-bold text-secondary/40 hover:text-secondary transition-colors ml-2"
+                className="text-[10px] font-bold text-text-secondary hover:text-text-primary transition-colors ml-2"
               >
                 Clear All
               </button>
             )}
           </div>
 
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-secondary/40">
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-secondary">
             <span>Sort by:</span>
-            <button className="flex items-center gap-1.5 text-secondary hover:text-primary transition-colors">
+            <button className="flex items-center gap-1.5 text-text-primary hover:text-primary transition-colors">
               Closing Soon
               <ChevronDown className="w-3 h-3" />
             </button>
@@ -322,24 +322,24 @@ const FundingBoard: React.FC = () => {
             <section className="animate-in fade-in duration-500">
               <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
                 <h2 className="text-xl font-black uppercase tracking-tight">Active Grants & Resources</h2>
-                <span className="text-[10px] font-black uppercase tracking-widest text-secondary/50">128 Results Found</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">128 Results Found</span>
               </div>
 
               <div className="space-y-6">
                 {mockGrants.map(grant => (
-                  <div key={grant.id} className="group relative bg-white border border-secondary/10 rounded-2xl p-8 hover:shadow-soft transition-all flex flex-col">
+                  <div key={grant.id} className="group relative bg-surface border border-border rounded-2xl p-8 hover:shadow-soft transition-all flex flex-col">
                     
                     {/* Utility Bar */}
                     <div className="absolute top-6 right-6 flex items-center gap-3">
                       <div className="flex flex-col items-end">
-                        <span className="text-[9px] font-black uppercase tracking-widest text-secondary/30 mb-0.5">Eligibility</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-text-secondary mb-0.5">Eligibility</span>
                         <span className="px-2 py-0.5 bg-primary/5 text-primary rounded-full text-[10px] font-black border border-primary/10">
                           {grant.match}% Match
                         </span>
                       </div>
                       <button 
                         onClick={() => toggleBookmark(grant.id)}
-                        className={`p-2 rounded-full transition-all ${bookmarkedIds.has(grant.id) ? 'text-primary bg-primary/5' : 'text-secondary/20 hover:text-primary hover:bg-primary/5'}`}
+                        className={`p-2 rounded-full transition-all ${bookmarkedIds.has(grant.id) ? 'text-primary bg-primary/5' : 'text-text-secondary hover:text-primary hover:bg-primary/5'}`}
                       >
                         <Bookmark className={`w-4 h-4 ${bookmarkedIds.has(grant.id) ? 'fill-primary' : ''}`} />
                       </button>
@@ -347,36 +347,36 @@ const FundingBoard: React.FC = () => {
 
                     <div className="mb-8">
                       <div className="flex gap-2 mb-4">
-                        <span className="px-3 py-1 bg-muted rounded-full text-[10px] font-bold uppercase tracking-wider text-secondary/70">
+                        <span className="px-3 py-1 bg-muted rounded-full text-[10px] font-bold uppercase tracking-wider text-text-secondary">
                           {grant.type}
                         </span>
                       </div>
-                      <h3 className="text-2xl font-bold font-serif text-secondary mb-2 group-hover:text-primary transition-colors leading-tight max-w-[80%]">
+                      <h3 className="text-2xl font-bold font-serif text-text-primary mb-2 group-hover:text-primary transition-colors leading-tight max-w-[80%]">
                         {grant.title}
                       </h3>
-                      <p className="text-sm font-semibold text-secondary/50 tracking-wide">{grant.issuer}</p>
+                      <p className="text-sm font-semibold text-text-secondary tracking-wide">{grant.issuer}</p>
                     </div>
 
                     <div className="flex gap-2 mb-10">
                       {grant.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-secondary/60">
+                        <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-muted text-text-secondary">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 pt-8 border-t border-secondary/5">
+                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 pt-8 border-t border-border">
                       <div className="flex gap-12">
                         <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase tracking-widest text-secondary/30 mb-1">Deadline</span>
-                          <span className="text-sm font-bold text-secondary flex items-center gap-2">
-                            <Calendar className="w-3.5 h-3.5 text-secondary/40" />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Deadline</span>
+                          <span className="text-sm font-bold text-text-primary flex items-center gap-2">
+                            <Calendar className="w-3.5 h-3.5 text-text-secondary" />
                             {grant.deadline}
                           </span>
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[10px] font-black uppercase tracking-widest text-secondary/30 mb-1">Value</span>
-                          <span className="text-sm font-bold text-secondary flex items-center gap-2">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-1">Value</span>
+                          <span className="text-sm font-bold text-text-primary flex items-center gap-2">
                             💰 {grant.value}
                           </span>
                         </div>
@@ -396,21 +396,21 @@ const FundingBoard: React.FC = () => {
             <section className="animate-in fade-in duration-500">
               <div className="flex justify-between items-end border-b-2 border-secondary pb-4 mb-8">
                 <h2 className="text-xl font-black uppercase tracking-tight">Urgent Micro-Tasks</h2>
-                <button className="text-[10px] font-black uppercase tracking-widest text-secondary/50 hover:text-secondary transition-colors">VIEW ALL TASKS</button>
+                <button className="text-[10px] font-black uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors">VIEW ALL TASKS</button>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
                 {mockMicroTasks.map(task => (
-                  <div key={task.id} className="group bg-white border border-secondary/10 rounded-2xl p-8 hover:shadow-soft transition-all flex flex-col">
+                  <div key={task.id} className="group bg-surface border border-border rounded-2xl p-8 hover:shadow-soft transition-all flex flex-col">
                     <div className="flex justify-between items-start gap-4 mb-6">
-                      <h3 className="text-lg font-bold font-serif text-secondary leading-snug">{task.title}</h3>
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shrink-0 ${task.status === 'Urgent' ? 'bg-primary text-white' : 'bg-muted text-secondary/70'}`}>
+                      <h3 className="text-lg font-bold font-serif text-text-primary leading-snug">{task.title}</h3>
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shrink-0 ${task.status === 'Urgent' ? 'bg-primary text-white' : 'bg-muted text-text-secondary'}`}>
                         {task.status}
                       </span>
                     </div>
-                    <p className="text-sm text-secondary/70 leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{task.desc}</p>
+                    <p className="text-sm text-text-secondary leading-relaxed mb-8 flex-1" style={{ lineHeight: '1.7' }}>{task.desc}</p>
                     
-                    <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-10 pb-6 border-b border-secondary/5">
+                    <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-text-secondary mb-10 pb-6 border-b border-border">
                       <span className="flex items-center gap-1.5">⏱ {task.time}</span>
                       <span className="flex items-center gap-1.5">🪙 {task.credits}</span>
                     </div>
@@ -428,30 +428,30 @@ const FundingBoard: React.FC = () => {
 
       {/* Right Sidebar - Stats Widgets */}
       <aside className="lg:col-span-3 space-y-10 sticky top-28 self-start">
-        <h3 className="text-[10px] font-black uppercase tracking-widest text-secondary/40 mb-8">Your Activity & Stats</h3>
+        <h3 className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-8">Your Activity & Stats</h3>
         
         <div className="space-y-6">
-          <div className="bg-white border border-secondary/10 p-6 rounded-2xl flex flex-col justify-between shadow-soft">
+          <div className="bg-surface border border-border p-6 rounded-2xl flex flex-col justify-between shadow-soft">
              <div>
-               <p className="text-[10px] font-black uppercase tracking-widest text-secondary/30 mb-2">Total Managed</p>
-               <div className="text-2xl font-bold font-serif tracking-tighter text-secondary">$4.2M</div>
+               <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-2">Total Managed</p>
+               <div className="text-2xl font-bold font-serif tracking-tighter text-text-primary">$4.2M</div>
              </div>
-             <p className="text-[9px] font-semibold text-secondary/40 mt-4 leading-relaxed">Total funding volume distributed across Resona network partners.</p>
+             <p className="text-[9px] font-semibold text-text-secondary mt-4 leading-relaxed">Total funding volume distributed across Resona network partners.</p>
           </div>
           
-          <div className="bg-white border border-secondary/10 p-6 rounded-2xl flex flex-col justify-between shadow-soft">
+          <div className="bg-surface border border-border p-6 rounded-2xl flex flex-col justify-between shadow-soft">
              <div>
-               <p className="text-[10px] font-black uppercase tracking-widest text-secondary/30 mb-2">Active Proposals</p>
-               <div className="text-2xl font-bold font-serif tracking-tighter text-secondary">18</div>
+               <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-2">Active Proposals</p>
+               <div className="text-2xl font-bold font-serif tracking-tighter text-text-primary">18</div>
              </div>
-             <p className="text-[9px] font-semibold text-secondary/40 mt-4 leading-relaxed">Proposals currently under review by institutional partners.</p>
+             <p className="text-[9px] font-semibold text-text-secondary mt-4 leading-relaxed">Proposals currently under review by institutional partners.</p>
           </div>
 
-          <div className="bg-white border border-secondary/10 p-6 rounded-2xl flex flex-col justify-between shadow-soft">
+          <div className="bg-surface border border-border p-6 rounded-2xl flex flex-col justify-between shadow-soft">
              <div>
-               <p className="text-[10px] font-black uppercase tracking-widest text-secondary/30 mb-2">Your Credits</p>
-               <div className="text-2xl font-bold font-serif tracking-tighter text-secondary flex items-baseline gap-2">
-                 1,240 <span className="text-[10px] font-black tracking-widest text-secondary/20 font-sans">RESC</span>
+               <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary mb-2">Your Credits</p>
+               <div className="text-2xl font-bold font-serif tracking-tighter text-text-primary flex items-baseline gap-2">
+                 1,240 <span className="text-[10px] font-black tracking-widest text-text-secondary font-sans">RESC</span>
                </div>
              </div>
              <button className="text-[9px] font-black uppercase tracking-widest underline underline-offset-4 text-primary hover:text-primary/80 text-left mt-6">
@@ -459,9 +459,9 @@ const FundingBoard: React.FC = () => {
              </button>
           </div>
 
-          <div className="bg-white border border-secondary/10 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-primary/5 hover:border-primary/20 cursor-pointer transition-all group shadow-soft py-10">
-             <QrCode className="w-8 h-8 text-secondary/20 group-hover:text-primary transition-colors" />
-             <span className="text-[9px] font-black uppercase tracking-widest text-secondary/40 group-hover:text-primary transition-colors">Unified Identity</span>
+          <div className="bg-surface border border-border rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-primary/5 hover:border-primary/20 cursor-pointer transition-all group shadow-soft py-10">
+             <QrCode className="w-8 h-8 text-text-secondary group-hover:text-primary transition-colors" />
+             <span className="text-[9px] font-black uppercase tracking-widest text-text-secondary group-hover:text-primary transition-colors">Unified Identity</span>
           </div>
         </div>
       </aside>

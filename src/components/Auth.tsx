@@ -71,18 +71,18 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="min-h-[90vh] flex items-center justify-center p-6 bg-white">
+    <div className="min-h-[90vh] flex items-center justify-center p-6 bg-surface">
       <div className="max-w-md w-full space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <div className="text-center space-y-4 flex flex-col items-center">
           {step === 'otp' && (
-            <div className="w-16 h-16 bg-secondary/5 border border-secondary/10 rounded-2xl flex items-center justify-center text-secondary/60 mb-2">
+            <div className="w-16 h-16 bg-surface-alt border border-border rounded-2xl flex items-center justify-center text-text-secondary mb-2">
               <Mail className="w-8 h-8" />
             </div>
           )}
-          <h1 className="text-4xl font-black font-serif text-secondary tracking-tight">
+          <h1 className="text-4xl font-black font-serif text-text-primary tracking-tight">
             {step === 'otp' ? 'Check your email' : (mode === 'login' ? 'Welcome back' : 'Create your Resona account')}
           </h1>
-          <p className="text-secondary/60 text-sm leading-relaxed max-w-[280px] mx-auto">
+          <p className="text-text-secondary text-sm leading-relaxed max-w-[280px] mx-auto">
             {step === 'otp' 
               ? `We've sent a 6-digit code to ${email}` 
               : mode === 'login'
@@ -95,16 +95,16 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
           <div className="space-y-8">
             {/* SSO Options */}
             <div className="space-y-3">
-              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-border rounded-xl font-bold text-sm text-text-primary hover:bg-surface-alt transition-all">
                 <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" className="w-5 h-5" alt="ORCID" />
                 Continue with ORCID
               </button>
-              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-border rounded-xl font-bold text-sm text-text-primary hover:bg-surface-alt transition-all">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
                 Continue with Google
               </button>
-              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-secondary/10 rounded-xl font-bold text-sm text-secondary hover:bg-secondary/5 transition-all">
-                <ShieldCheck className="w-5 h-5 text-secondary/40" />
+              <button className="w-full flex items-center justify-center gap-3 px-6 py-3.5 border-2 border-border rounded-xl font-bold text-sm text-text-primary hover:bg-surface-alt transition-all">
+                <ShieldCheck className="w-5 h-5 text-text-secondary" />
                 Continue with Institution
               </button>
             </div>
@@ -112,16 +112,16 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             {/* OR Divider */}
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-secondary/10"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest">
-                <span className="bg-white px-4 text-secondary/30">or</span>
+                <span className="bg-surface px-4 text-text-secondary">or</span>
               </div>
             </div>
 
             <form onSubmit={handleSendOTP} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary/40 ml-1">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary ml-1">
                   Institutional Email Address
                 </label>
                 <div className="relative group">
@@ -129,7 +129,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                     type="email"
                     required
                     placeholder="name@university.edu"
-                    className="w-full bg-secondary/5 border-2 border-transparent rounded-2xl px-6 py-4 outline-none focus:border-primary/30 focus:bg-white transition-all text-secondary font-bold"
+                    className="w-full bg-surface-alt border-2 border-transparent rounded-2xl px-6 py-4 outline-none focus:border-primary/30 focus:bg-surface transition-all text-text-primary font-bold"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -147,7 +147,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             <div className="text-center pt-4">
               <button 
                 onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
-                className="text-sm font-bold text-secondary/60 hover:text-primary transition-colors"
+                className="text-sm font-bold text-text-secondary hover:text-primary transition-colors"
               >
                 {mode === 'login' ? "New to Resona? Create an account" : "Already have an account? Log in"}
               </button>
@@ -156,7 +156,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
         ) : (
           <div className="space-y-8">
             <div className="flex justify-between items-center px-1">
-              <label className="text-[10px] font-black uppercase tracking-widest text-secondary/40">
+              <label className="text-[10px] font-black uppercase tracking-widest text-text-secondary">
                 Enter 6-Digit Code
               </label>
             </div>
@@ -168,7 +168,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
                   id={`otp-${i}`}
                   type="text"
                   maxLength={1}
-                  className="w-14 h-14 bg-white border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"
+                  className="w-14 h-14 bg-surface border border-[#E5E7EB] rounded-xl text-center text-2xl font-semibold text-text-primary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"
                   value={digit}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                 />
@@ -176,11 +176,11 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
             </div>
 
             <div className="text-center">
-              <span className="text-[11px] font-bold text-secondary/40">
+              <span className="text-[11px] font-bold text-text-secondary">
                 {timer > 0 ? `Resend code in ${formatTime(timer)}` : (
                   <button 
                     onClick={() => { setTimer(59); setIsResending(true); setTimeout(() => setIsResending(false), 1000); }}
-                    className="flex items-center justify-center gap-1.5 mx-auto hover:text-secondary transition-colors"
+                    className="flex items-center justify-center gap-1.5 mx-auto hover:text-text-primary transition-colors"
                   >
                     <RefreshCw className={`w-3 h-3 ${isResending ? 'animate-spin' : ''}`} />
                     Resend Code
@@ -200,7 +200,7 @@ const Auth: React.FC<AuthProps> = ({ onSuccess }) => {
 
             <button 
               onClick={() => setStep('email')}
-              className="w-full text-[10px] font-black uppercase tracking-widest text-secondary/40 hover:text-secondary transition-colors"
+              className="w-full text-[10px] font-black uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors"
             >
               Back to Email
             </button>

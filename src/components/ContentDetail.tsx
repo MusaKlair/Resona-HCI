@@ -10,11 +10,11 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 animate-in fade-in slide-in-from-bottom-8 duration-700 bg-white">
+    <div className="max-w-4xl mx-auto px-6 md:px-12 py-12 animate-in fade-in slide-in-from-bottom-8 duration-700 bg-surface">
       
       <button 
         onClick={onBack}
-        className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-secondary/50 hover:text-secondary transition-colors mb-12"
+        className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors mb-12"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Feed
@@ -34,9 +34,9 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
             { name: 'Hasnat Ahmed', status: 'VERIFIED RESEARCHER' }
           ].map(author => (
             <div key={author.name} className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-secondary/5 rounded-full border border-secondary/10 flex items-center justify-center relative">
-                <span className="font-bold text-secondary/40 text-xs">{author.name.charAt(0)}</span>
-                <div className="absolute -bottom-1 -right-1 bg-white rounded-full">
+              <div className="w-12 h-12 bg-surface-alt rounded-full border border-border flex items-center justify-center relative">
+                <span className="font-bold text-text-secondary text-xs">{author.name.charAt(0)}</span>
+                <div className="absolute -bottom-1 -right-1 bg-surface rounded-full">
                   <ShieldCheck className="w-5 h-5 text-green-600" />
                 </div>
               </div>
@@ -44,7 +44,7 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
                 <h4 className="font-bold text-sm flex items-center gap-1">
                   {author.name}
                 </h4>
-                <p className="text-[10px] font-bold tracking-widest uppercase text-secondary/50">{author.status}</p>
+                <p className="text-[10px] font-bold tracking-widest uppercase text-text-secondary">{author.status}</p>
               </div>
             </div>
           ))}
@@ -52,7 +52,7 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
 
         <div className="flex flex-wrap gap-2">
           {['DIGITAL FORENSICS', 'INCIDENT RESPONSE', 'MALWARE ANALYSIS'].map(tag => (
-            <span key={tag} className="px-3 py-1 bg-muted rounded-full text-[10px] font-bold tracking-wider uppercase text-secondary/70">
+            <span key={tag} className="px-3 py-1 bg-muted rounded-full text-[10px] font-bold tracking-wider uppercase text-text-secondary">
               {tag}
             </span>
           ))}
@@ -62,12 +62,12 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
       <div className="space-y-12 relative">
         <div className="flex items-center gap-4">
           <div className="h-0.5 w-8 bg-secondary" />
-          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">Plain-Language Summary</h3>
+          <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-text-primary">Plain-Language Summary</h3>
         </div>
 
-        <div className="p-8 md:p-12 bg-secondary/5 rounded-3xl relative">
+        <div className="p-8 md:p-12 bg-surface-alt rounded-3xl relative">
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-primary rounded-l-3xl" />
-          <p className="text-lg leading-relaxed font-medium text-secondary/80">
+          <p className="text-lg leading-relaxed font-medium text-text-secondary">
             Current incident response workflows struggle to detect sophisticated anti-forensic techniques, such as timestomping, during live system analysis. This paper introduces TraceHunter, an automated triage pipeline designed to analyze volatile memory captures without compromising evidence integrity. By automating artifact extraction, this system allows entry-level analysts to quickly identify manipulated file timestamps and hidden malware payloads, significantly reducing the time required to secure a compromised network.
           </p>
         </div>
@@ -99,10 +99,10 @@ const ContentDetail: React.FC<ContentDetailProps> = ({ onBack }) => {
               Our approach leverages a hypervisor-level introspection technique to dump the memory pages of targeted processes without triggering standard user-mode hooks...
             </p>
             
-            <div className="bg-secondary/5 p-6 rounded-2xl border border-secondary/10 my-8">
+            <div className="bg-surface-alt p-6 rounded-2xl border border-border my-8">
                <h4 className="text-sm font-bold uppercase tracking-widest mb-4">Figure 1: TraceHunter Pipeline</h4>
-               <div className="aspect-video bg-secondary/10 rounded-xl flex items-center justify-center border border-secondary/20">
-                 <span className="text-secondary/40 font-bold">Architecture Diagram Placeholder</span>
+               <div className="aspect-video bg-surface-alt rounded-xl flex items-center justify-center border border-border">
+                 <span className="text-text-secondary font-bold">Architecture Diagram Placeholder</span>
                </div>
             </div>
 

@@ -6,15 +6,18 @@
   --font-serif: var(--font-serif), "Playfair Display", serif;
   --font-sans: var(--font-sans), "Inter", sans-serif;
   
-  --color-primary: rgb(var(--brand-primary));
-  --color-secondary: rgb(var(--brand-navy));
+  --color-primary: var(--brand-coral);
+  --color-secondary: var(--brand-navy);
   
-  --color-background: rgb(var(--background));
-  --color-surface: rgb(var(--surface));
-  --color-border: rgb(var(--surface-border));
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
   
-  --color-text-primary: rgb(var(--text-primary));
-  --color-text-secondary: rgb(var(--text-secondary));
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-inverse: var(--text-inverse);
+  
+  --color-border: var(--border);
   
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;
@@ -25,37 +28,42 @@
 
 @layer base {
   :root {
-    /* LIGHT MODE (Default) */
-    --background: 255 255 255; 
-    --surface: 249 250 251; 
-    --surface-border: 229 231 235; 
+    /* BACKGROUNDS */
+    --background: #FFFFFF;
+    --surface: #FFFFFF;
+    --surface-alt: #F9FAFB;
     
-    --text-primary: 10 17 40; 
-    --text-secondary: 71 85 105; 
+    /* TEXT */
+    --text-primary: #0A1128;
+    --text-secondary: #475569;
+    --text-inverse: #FFFFFF;
     
-    --brand-primary: 238 112 82; 
-    --brand-navy: 10 17 40; 
+    /* BORDERS & ACCENTS */
+    --border: #E5E7EB;
+    --brand-coral: #EE7052;
+    --brand-navy: #0A1128;
   }
 
   .dark {
-    /* DARK MODE */
-    --background: 10 15 30; 
-    --surface: 17 24 39; 
-    --surface-border: 31 41 55;
+    /* BACKGROUNDS */
+    --background: #0A1128;
+    --surface: #121C3A;
+    --surface-alt: #1A2649;
     
-    --text-primary: 249 250 251; 
-    --text-secondary: 156 163 175; 
+    /* TEXT */
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-inverse: #0A1128;
     
-    --brand-primary: 255 140 100; 
-    --brand-navy: 147 197 253; 
+    /* BORDERS & ACCENTS */
+    --border: #1E293B;
+    --brand-coral: #EE7052;
+    --brand-navy: #60A5FA;
   }
 
   body {
-    background-color: rgb(var(--background));
-    color: rgb(var(--text-primary));
-    @apply antialiased min-h-screen;
+    @apply bg-background text-text-primary antialiased min-h-screen transition-colors duration-300;
     font-family: var(--font-sans);
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -66,18 +74,15 @@
 
 @layer components {
   .card-premium {
-    background-color: rgb(var(--surface));
-    @apply rounded-4xl border border-border shadow-soft p-8 transition-all hover:shadow-elevated hover:scale-[1.01];
+    @apply bg-surface rounded-4xl border border-border shadow-soft p-8 transition-all hover:shadow-elevated hover:scale-[1.01];
   }
   
   .btn-primary {
-    @apply bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:bg-primary/90 active:scale-95 shadow-sm hover:shadow-md;
+    @apply bg-primary text-text-inverse px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:bg-primary/90 active:scale-95 shadow-sm hover:shadow-md;
   }
   
   .btn-outline {
-    border: 1px solid rgba(var(--brand-primary), 0.4);
-    color: rgb(var(--brand-primary));
-    @apply px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-primary/5 active:scale-95;
+    @apply border border-primary/40 text-primary px-6 py-2.5 rounded-md text-sm font-bold transition-all hover:bg-primary/5 active:scale-95;
   }
   
   .scrollbar-hide {
@@ -88,4 +93,17 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Custom Dyslexic Font support */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@2.0.1/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+.font-dyslexic, .font-dyslexic * {
+  font-family: 'OpenDyslexic', sans-serif !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.02em !important;
 }

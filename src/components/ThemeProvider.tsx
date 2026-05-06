@@ -1,46 +1,76 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light' | 'system';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-  defaultTheme?: Theme;
-}
+type Theme = "light" | "dark" | "system";
 
-const ThemeContext = createContext<{
+interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-}>({ theme: 'system', setTheme: () => null });
+  toggleTheme: () => void;
+}
 
-export function ThemeProvider({ children, defaultTheme = 'system' }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setThemeState] = useState<Theme>("system");
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      root.classList.add(systemTheme);
-      return;
+    const stored = localStorage.getItem("resona-theme") as Theme | null;
+    if (stored) {
+      setThemeState(stored);
     }
-
-    root.classList.add(theme);
-    localStorage.setItem('resona-theme', theme);
-  }, [theme]);
-
-  // Load saved theme on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('resona-theme') as Theme;
-    if (saved) setTheme(saved);
   }, []);
 
+  useEffect(() => {
+    const applyTheme = (t: Theme) => {
+      const root = document.documentElement;
+      if (t === "dark") {
+        root.classList.add("dark");
+      } else if (t === "light") {
+        root.classList.remove("dark");
+      } else {
+        // system
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          root.classList.add("dark");
+        } else {
+          root.classList.remove("dark");
+        }
+      }
+    };
+    applyTheme(theme);
+
+    // Optional listener for system changes if they are in system mode
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = () => {
+      if (theme === "system") {
+        applyTheme("system");
+      }
+    };
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, [theme]);
+
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem("resona-theme", newTheme);
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-export const useTheme = () => useContext(ThemeContext);
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+}
